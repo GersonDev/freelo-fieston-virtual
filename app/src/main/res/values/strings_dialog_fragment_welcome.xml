@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="welcomeDialogFragment_howFunctionality">¿Cómo funciona?</string>
+    <string name="welcomeDialogFragment_DescriptionTwo">Participa de los juegos y podras ganar:</string>
+</resources>

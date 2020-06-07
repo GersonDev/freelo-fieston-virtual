@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import com.bumptech.glide.Glide
 import com.spydevs.fiestonvirtual.R
 import kotlinx.android.synthetic.main.dialog_fragment_welcome.*
 
@@ -38,10 +39,10 @@ class WelcomeDialogFragment : DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let { bundle ->
-            title = bundle.getString(TITLE)
-            description = bundle.getString(DESCRIPTION)
-            subtitle = bundle.getString(SUBTITLE)
-            urlImage = bundle.getString(URL_IMAGE)
+            this.title = bundle.getString(TITLE)
+            this.description = bundle.getString(DESCRIPTION)
+            this.subtitle = bundle.getString(SUBTITLE)
+            this.urlImage = bundle.getString(URL_IMAGE)
 
         }
     }
@@ -56,9 +57,13 @@ class WelcomeDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //TODO add refactor...
         welcome_tv_title.text = title
         welcome_tv_description.text = description
         welcome_tv_subtitle.text = subtitle
+        Glide.with(this).load(urlImage).into(welcome_iv_logo2)
+        welcome_tv_howFunctionality.setOnClickListener { dismiss() }
+        welcome_iv_close.setOnClickListener { dismiss() }
     }
 
     companion object {
@@ -67,6 +72,7 @@ class WelcomeDialogFragment : DialogFragment() {
         const val DESCRIPTION = "DESCRIPTION"
         const val SUBTITLE = "SUBTITLE"
         const val URL_IMAGE = "URL_IMAGE"
+
         fun newInstance(
             title: String,
             description: String,
