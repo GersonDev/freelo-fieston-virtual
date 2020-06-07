@@ -1,7 +1,8 @@
-package com.spydevs.fiestonvirtual
+package com.spydevs.fiestonvirtual.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.spydevs.fiestonvirtual.R
 
 class MainActivity : AppCompatActivity() {
 
