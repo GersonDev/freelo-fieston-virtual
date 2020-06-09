@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:background="@color/deep_purple_700"
+    android:background="@color/colorPrimaryDark"
     tools:context=".ui.code_verification.CodeVerificationActivity">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -65,6 +65,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        app:srcCompat="@drawable/ic_logo_fieston_virtual" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
