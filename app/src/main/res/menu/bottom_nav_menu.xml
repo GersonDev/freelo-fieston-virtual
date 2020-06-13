@@ -7,14 +7,23 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_user"
-        android:icon="@drawable/ic_notes"
-        android:title="@string/title_user" />
+        android:id="@+id/navigation_gallery"
+        android:icon="@drawable/ic_gallery"
+        android:title="@string/title_gallery" />
 
     <item
-        android:id="@+id/navigation_cart"
-        android:icon="@drawable/ic_ask"
-        android:title="@string/title_cart" />
+        android:id="@+id/navigation_photos"
+        android:icon="@drawable/ic_add_photo"
+        android:title="@string/title_photo" />
 
+    <item
+        android:id="@+id/navigation_chat"
+        android:icon="@drawable/ic_chat"
+        android:title="@string/title_chat" />
+
+    <item
+        android:id="@+id/navigation_trivia"
+        android:icon="@drawable/ic_trivia"
+        android:title="@string/title_trivia" />
 
 </menu>
