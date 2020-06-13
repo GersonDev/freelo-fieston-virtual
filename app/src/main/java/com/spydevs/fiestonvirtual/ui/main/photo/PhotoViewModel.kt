@@ -1,10 +1,10 @@
-package com.spydevs.fiestonvirtual.ui.main.cart
+package com.spydevs.fiestonvirtual.ui.main.photo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class CartViewModel : ViewModel() {
+class PhotoViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is cart Fragment"

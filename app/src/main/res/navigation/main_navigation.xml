@@ -12,15 +12,27 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_user"
-        android:name="com.spydevs.fiestonvirtual.ui.main.user.UserFragment"
-        android:label="@string/title_user"
-        tools:layout="@layout/fragment_user" />
+        android:id="@+id/navigation_gallery"
+        android:name="com.spydevs.fiestonvirtual.ui.main.chat.GalleryFragment"
+        android:label="@string/title_gallery"
+        tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/navigation_cart"
-        android:name="com.spydevs.fiestonvirtual.ui.main.cart.CartFragment"
-        android:label="@string/title_cart"
-        tools:layout="@layout/fragment_cart" />
+        android:id="@+id/navigation_photos"
+        android:name="com.spydevs.fiestonvirtual.ui.main.photo.PhotoFragment"
+        android:label="@string/title_photo"
+        tools:layout="@layout/fragment_photo" />
+
+    <fragment
+        android:id="@+id/navigation_chat"
+        android:name="com.spydevs.fiestonvirtual.ui.main.chat.ChatFragment"
+        android:label="@string/title_chat"
+        tools:layout="@layout/fragment_chat" />
+
+    <fragment
+        android:id="@+id/navigation_trivia"
+        android:name="com.spydevs.fiestonvirtual.ui.main.chat.TriviaFragment"
+        android:label="@string/title_trivia"
+        tools:layout="@layout/fragment_trivia" />
 
 </navigation>

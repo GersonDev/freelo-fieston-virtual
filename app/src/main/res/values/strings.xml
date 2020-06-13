@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">freelo-fieston-virtual</string>
+    <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_user">User</string>
-    <string name="title_search">Search</string>
-    <string name="title_cart">Cart</string>
-    <string name="title_order">Order</string>
+    <string name="title_gallery">Gallery</string>
+    <string name="title_photo">Photo</string>
+    <string name="title_chat">Chat</string>
+    <string name="title_trivia">Trivia</string>
 </resources>
