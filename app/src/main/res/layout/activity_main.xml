@@ -23,9 +23,6 @@
 
         <include layout="@layout/content_main" />
 
-        <!--DESIGN-->
-        <include layout="@layout/linear_layout_total_price" />
-
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/mainBottomNavigationView"
             style="@style/Widget.Design.BottomNavigationView"
@@ -39,7 +36,7 @@
     <com.google.android.material.navigation.NavigationView
         android:layout_width="320dp"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
+        android:layout_gravity="end"
         android:fitsSystemWindows="true">
 
         <FrameLayout

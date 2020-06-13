@@ -41,7 +41,9 @@ class CategoryAdapter(
 
         fun bind(category: Category) {
             this.categoryModel = category
-            itemView.nameTextView.text = category.name
+            itemView.categoryNameTextView.text = category.name
+            itemView.descriptionTextView.text = category.description
+            itemView.moreDescriptionTextView.text = category.subDescription
         }
     }
 

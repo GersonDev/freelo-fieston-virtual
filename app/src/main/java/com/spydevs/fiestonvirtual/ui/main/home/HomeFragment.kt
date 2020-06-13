@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.spydevs.fiestonvirtual.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.ext.android.inject
@@ -34,15 +35,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun subscribeToCategories() {
         homeViewModel.categories.observe(viewLifecycleOwner, Observer {
-//            categoryAdapter.clearAllData()
-//            categoryAdapter.addData(it)
+            categoryAdapter.clearAllData()
+            categoryAdapter.addData(it)
         })
     }
 
     private fun setupViews() {
-        (categoryRecyclerView.layoutManager as GridLayoutManager).spanCount = 3
+        (categoryRecyclerView.layoutManager as StaggeredGridLayoutManager).spanCount = 2
         categoryRecyclerView.adapter = categoryAdapter
-
     }
 
     private fun setupViewListeners() {

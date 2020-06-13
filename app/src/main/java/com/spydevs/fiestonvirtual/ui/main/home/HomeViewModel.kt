@@ -3,31 +3,37 @@ package com.spydevs.fiestonvirtual.ui.main.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.domain.models.Category
+import kotlinx.android.synthetic.main.toolbar_main.view.*
 
 class HomeViewModel : ViewModel() {
 
     private val _categories = MutableLiveData<List<Category>>().apply {
         value = mutableListOf(
             Category(
-                "category2",
-                "https://chefsmandala.com/wp-content/uploads/2018/03/Mango-200x200.jpg"
+                "FOTOS",
+                R.drawable.mango,
+                "GALERIA DE FOTOS Y",
+                "VIDEOS"
             ),
             Category(
-                "category2",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSwdjWanvnOBGKzEkHzrxp5Yd2hmW3wKeNZjBYSc8u_MP7kK1Bj&usqp=CAU"
+                "CHAT",
+                R.drawable.mango,
+                "Participa de la fiesta",
+                "PIDE UNA CANCION"
             ),
             Category(
-                "category2",
-                "https://chefsmandala.com/wp-content/uploads/2018/03/Mango-200x200.jpg"
+                "PLAY LIST",
+                R.drawable.mango,
+                "CHATEAR AHORA",
+                "ARMA LA CONVERSA"
             ),
             Category(
-                "category2",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSwdjWanvnOBGKzEkHzrxp5Yd2hmW3wKeNZjBYSc8u_MP7kK1Bj&usqp=CAU"
-            ),
-            Category(
-                "category2",
-                "https://chefsmandala.com/wp-content/uploads/2018/03/Mango-200x200.jpg"
+                "TRIVIAS",
+                R.drawable.mango,
+                "GANA PUNTOS CON LAS TRIVIAS AHORA",
+                "JUGAR AHORA"
             )
         )
     }
