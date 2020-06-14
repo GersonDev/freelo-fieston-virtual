@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/navigation_trivia"
-        android:name="com.spydevs.fiestonvirtual.ui.main.chat.TriviaFragment"
+        android:name="com.spydevs.fiestonvirtual.ui.main.trivia.TriviaFragment"
         android:label="@string/title_trivia"
         tools:layout="@layout/fragment_trivia" />
 
