@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.model.trivia.TriviaModel
 import com.spydevs.fiestonvirtual.model.trivia.AnswerModel
+import com.spydevs.fiestonvirtual.util.ZoomOutPageTransformer
 import kotlinx.android.synthetic.main.fragment_trivia.*
 
 class TriviaFragment : Fragment(R.layout.fragment_trivia) {
@@ -14,6 +15,7 @@ class TriviaFragment : Fragment(R.layout.fragment_trivia) {
         super.onViewCreated(view, savedInstanceState)
         val fa = TriviaPagerAdapter(this)
         triviaFragment_vp.adapter = fa
+        triviaFragment_vp.setPageTransformer(ZoomOutPageTransformer())
         val triviaModelList = listOf(
             TriviaModel(
                 "¿Cuantos tiempo estudias?",
