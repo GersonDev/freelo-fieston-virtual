@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.model.trivia.TriviaModel
-import com.spydevs.fiestonvirtual.ui.main.trivia.option.OptionAdapter
+import com.spydevs.fiestonvirtual.ui.main.trivia.answer.AnswerAdapter
 import kotlinx.android.synthetic.main.fragment_page_trivia.*
 
 class TriviaPageFragment(
@@ -17,8 +17,8 @@ class TriviaPageFragment(
         super.onViewCreated(view, savedInstanceState)
         triviaPageFragment_tv_title.text = triviaModel.title
         triviaPageFragment_tv_points.text = triviaModel.point
-        triviaPageFragment_rv_options.adapter = OptionAdapter().apply {
-            triviaModel.options?.let {
+        triviaPageFragment_rv_options.adapter = AnswerAdapter().apply {
+            triviaModel.answers?.let {
                 addData(it)
             }
         }

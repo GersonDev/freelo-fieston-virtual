@@ -1,27 +1,27 @@
-package com.spydevs.fiestonvirtual.ui.main.trivia.option
+package com.spydevs.fiestonvirtual.ui.main.trivia.answer
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.spydevs.fiestonvirtual.R
-import com.spydevs.fiestonvirtual.model.trivia.OptionModel
-import kotlinx.android.synthetic.main.layout_item_trivia_option.view.*
+import com.spydevs.fiestonvirtual.model.trivia.AnswerModel
+import kotlinx.android.synthetic.main.layout_item_trivia_answer.view.*
 
-class OptionViewHolder(
+class AnswerViewHolder(
     private val view: View,
     private val onOptionClickListener: (position: Int) -> Unit
 ) : RecyclerView.ViewHolder(view) {
 
-    private lateinit var optionModel: OptionModel
+    private lateinit var answerModel: AnswerModel
 
     init {
-        this.view.itemTriviaOption_btn.setOnClickListener {
+        this.view.itemTriviaAnswer_btn.setOnClickListener {
             onOptionClickListener(adapterPosition)
         }
     }
 
-    fun bind(optionModel: OptionModel) {
-        this.optionModel = optionModel
-        this.view.itemTriviaOption_btn.apply {
+    fun bind(optionModel: AnswerModel) {
+        this.answerModel = optionModel
+        this.view.itemTriviaAnswer_btn.apply {
             text = optionModel.text
             if (optionModel.checked) {
                 setBackgroundColor(

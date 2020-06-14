@@ -1,6 +1,6 @@
 package com.spydevs.fiestonvirtual.model.trivia
 
-data class OptionModel(
-    val text: String? = null,
+data class AnswerModel(
+    var text: String? = null,
     var checked: Boolean = false
 )

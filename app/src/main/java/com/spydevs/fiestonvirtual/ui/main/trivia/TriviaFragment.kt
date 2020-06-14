@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.model.trivia.TriviaModel
-import com.spydevs.fiestonvirtual.model.trivia.OptionModel
+import com.spydevs.fiestonvirtual.model.trivia.AnswerModel
 import kotlinx.android.synthetic.main.fragment_trivia.*
 
 class TriviaFragment : Fragment(R.layout.fragment_trivia) {
@@ -19,18 +19,18 @@ class TriviaFragment : Fragment(R.layout.fragment_trivia) {
                 "¿Cuantos tiempo estudias?",
                 "son 10 puntos",
                 mutableListOf(
-                    OptionModel("1 hora"),
-                    OptionModel("2 horas"),
-                    OptionModel("3 horas")
+                    AnswerModel("1 hora"),
+                    AnswerModel("2 horas"),
+                    AnswerModel("3 horas")
                 )
             ),
             TriviaModel(
                 "¿Cuantos años tienes?",
                 "son 20 puntos",
                 mutableListOf(
-                    OptionModel("10 años"),
-                    OptionModel("15 años"),
-                    OptionModel("30 años")
+                    AnswerModel("10 años"),
+                    AnswerModel("15 años"),
+                    AnswerModel("30 años")
                 )
             ),
             TriviaModel(
@@ -38,17 +38,17 @@ class TriviaFragment : Fragment(R.layout.fragment_trivia) {
                 "son 30 puntos"
                 ,
                 mutableListOf(
-                    OptionModel("si"),
-                    OptionModel("No"),
-                    OptionModel("a veces")
+                    AnswerModel("si"),
+                    AnswerModel("No"),
+                    AnswerModel("a veces")
                 )
             ),
             TriviaModel(
                 "¿Te gusta el chocolate?",
                 "son 40 puntos",
                 mutableListOf(
-                    OptionModel("si"),
-                    OptionModel("no")
+                    AnswerModel("si"),
+                    AnswerModel("no")
                 )
             )
         )
