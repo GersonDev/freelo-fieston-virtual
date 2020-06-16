@@ -3,10 +3,10 @@ package com.spydevs.fiestonvirtual.framework.datasource
 import com.spydevs.fiestonvirtual.data.datasource.UsersDataSource
 import com.spydevs.fiestonvirtual.domain.models.User
 import com.spydevs.fiestonvirtual.framework.database.dao.UsersDao
-import com.spydevs.fiestonvirtual.framework.mapper.from_initial.UsersMapperFromInitial
+import com.spydevs.fiestonvirtual.framework.mapper.from_initial.UsersMapper
 
 class UsersDataSourceImpl(private val usersDao: UsersDao): UsersDataSource {
     override suspend fun getUsers(): List<User> {
-        return UsersMapperFromInitial.convertFromInitial(usersDao.getUsers())
+        return UsersMapper.convertFromInitial(usersDao.getUsers())
     }
 }
