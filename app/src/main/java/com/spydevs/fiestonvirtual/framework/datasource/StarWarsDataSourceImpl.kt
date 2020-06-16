@@ -4,7 +4,7 @@ import android.util.Log
 import com.spydevs.fiestonvirtual.data.datasource.StarWarsDataSource
 import com.spydevs.fiestonvirtual.domain.models.StarWars
 import com.spydevs.fiestonvirtual.framework.api.StarWarsApi
-import com.spydevs.fiestonvirtual.framework.mapper.StarWarsMapper
+import com.spydevs.fiestonvirtual.framework.mapper.from_initial.StarWarsMapperFromInitial
 import com.spydevs.fiestonvirtual.framework.response.StarWarsResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,7 +30,7 @@ class StarWarsDataSourceImpl(private val starWarsApi: StarWarsApi) :
                 response: Response<StarWarsResponse>
             ) {
                 if (response.isSuccessful) {
-                    starWars = StarWarsMapper.convertFromInitial(response.body())
+                    starWars = StarWarsMapperFromInitial.convertFromInitial(response.body())
                 } else {
                     Log.e("ERROR", "Error: ${response.code()} ${response.message()}")
                 }
