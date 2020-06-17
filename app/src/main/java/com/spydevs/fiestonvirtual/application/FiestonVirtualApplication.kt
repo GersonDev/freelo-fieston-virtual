@@ -17,6 +17,7 @@ class FiestonVirtualApplication : Application() {
             modules(
                 listOf(
                     retrofitApiModule,
+                    databaseModule,
                     dataSourcesModule,
                     repositoryModule,
                     useCasesModule,

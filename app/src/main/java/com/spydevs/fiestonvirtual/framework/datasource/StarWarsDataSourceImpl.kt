@@ -4,7 +4,7 @@ import android.util.Log
 import com.spydevs.fiestonvirtual.data.datasource.StarWarsDataSource
 import com.spydevs.fiestonvirtual.domain.models.StarWars
 import com.spydevs.fiestonvirtual.framework.api.StarWarsApi
-import com.spydevs.fiestonvirtual.framework.mapper.StarWarsMapper
+import com.spydevs.fiestonvirtual.framework.mapper.frominitial.StarWarsMapper
 import com.spydevs.fiestonvirtual.framework.response.StarWarsResponse
 import retrofit2.Call
 import retrofit2.Callback

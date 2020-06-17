@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.spydevs.fiestonvirtual.R
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -25,18 +24,27 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribeToCategories()
+        subscribeToUser()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupViews()
         setupViewListeners()
+
+        homeViewModel.getUsers()
     }
 
     private fun subscribeToCategories() {
         homeViewModel.categories.observe(viewLifecycleOwner, Observer {
             categoryAdapter.clearAllData()
             categoryAdapter.addData(it)
+        })
+    }
+
+    private fun subscribeToUser() {
+        homeViewModel.userLiveData.observe(viewLifecycleOwner, Observer {
+            //TODO populate the user ui
         })
     }
 
@@ -49,7 +57,4 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
-    private fun refreshCarousel() {
-
-    }
 }
