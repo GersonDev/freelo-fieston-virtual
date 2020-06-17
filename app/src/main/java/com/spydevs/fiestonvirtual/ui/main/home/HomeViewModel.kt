@@ -45,8 +45,6 @@ class HomeViewModel(private val usersRepository: UsersRepository) : ViewModel() 
 
     val categories: LiveData<List<Category>> = _categories
 
-
-
     private val _userMutableLiveData = MutableLiveData<List<User>>()
     val userLiveData: LiveData<List<User>>
         get() = _userMutableLiveData
@@ -56,6 +54,5 @@ class HomeViewModel(private val usersRepository: UsersRepository) : ViewModel() 
             _userMutableLiveData.value = usersRepository.getUser()
         }
     }
-
 
 }

@@ -44,7 +44,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun subscribeToUser() {
         homeViewModel.userLiveData.observe(viewLifecycleOwner, Observer {
-            print(it)
+            //TODO populate the user ui
         })
     }
 

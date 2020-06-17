@@ -7,7 +7,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:background="@color/colorPrimaryDark"
-    tools:context=".ui.code_verification.CodeVerificationActivity">
+    tools:context=".ui.codeverification.CodeVerificationActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/client_id_input_layout"

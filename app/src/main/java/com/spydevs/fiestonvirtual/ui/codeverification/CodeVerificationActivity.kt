@@ -1,11 +1,10 @@
-package com.spydevs.fiestonvirtual.ui.code_verification
+package com.spydevs.fiestonvirtual.ui.codeverification
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.ui.main.MainActivity
-import com.spydevs.fiestonvirtual.ui.welcome.WelcomeDialogFragment
 import kotlinx.android.synthetic.main.activity_code_verification.*
 
 class CodeVerificationActivity : AppCompatActivity() {

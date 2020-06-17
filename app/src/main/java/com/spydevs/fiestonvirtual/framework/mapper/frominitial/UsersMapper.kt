@@ -1,4 +1,4 @@
-package com.spydevs.fiestonvirtual.framework.mapper.from_initial
+package com.spydevs.fiestonvirtual.framework.mapper.frominitial
 
 import com.spydevs.fiestonvirtual.domain.models.User
 import com.spydevs.fiestonvirtual.framework.database.entities.UserEntity
