@@ -8,4 +8,5 @@ import com.spydevs.fiestonvirtual.domain.models.User
  */
 interface UsersRepository {
     suspend fun getUser(): List<User>
+    suspend fun insertUser(user: User)
 }
