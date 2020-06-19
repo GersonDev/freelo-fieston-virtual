@@ -1,5 +1,6 @@
 package com.spydevs.fiestonvirtual.di
 
+import com.spydevs.fiestonvirtual.ui.codeverification.CodeVerificationViewModel
 import com.spydevs.fiestonvirtual.ui.main.home.HomeViewModel
 import com.spydevs.fiestonvirtual.ui.main.photo.PhotoViewModel
 
@@ -12,5 +13,6 @@ val viewModelsModule = module {
     viewModel { HomeViewModel(get()) }
     viewModel { PhotoViewModel() }
     viewModel { GalleryViewModel() }
+    viewModel { CodeVerificationViewModel(get()) }
 
 }

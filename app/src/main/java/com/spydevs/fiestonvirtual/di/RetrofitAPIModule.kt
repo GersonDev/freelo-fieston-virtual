@@ -1,6 +1,7 @@
 package com.spydevs.fiestonvirtual.di
 
 import com.google.gson.GsonBuilder
+import com.spydevs.fiestonvirtual.framework.api.CodeApi
 import com.spydevs.fiestonvirtual.framework.api.StarWarsApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -40,6 +41,15 @@ val retrofitApiModule = module {
             .addConverterFactory(GsonConverterFactory.create(get()))
             .build()
             .create(StarWarsApi::class.java)
+    }
+
+    single {
+        Retrofit.Builder()
+            .baseUrl(" http://arpanetapp.com/fieston-virtual/api/")
+            .client(get())
+            .addConverterFactory(GsonConverterFactory.create(get()))
+            .build()
+            .create(CodeApi::class.java)
     }
 
 }
