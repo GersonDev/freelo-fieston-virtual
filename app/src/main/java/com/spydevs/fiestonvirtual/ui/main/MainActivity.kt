@@ -1,15 +1,23 @@
 package com.spydevs.fiestonvirtual.ui.main
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.spydevs.fiestonvirtual.R
+import com.spydevs.fiestonvirtual.ui.main.camera.CameraActivity
 import com.spydevs.fiestonvirtual.ui.welcome.WelcomeDialogFragment
 import kotlinx.android.synthetic.main.toolbar_main.*
 
+
+
 class MainActivity : AppCompatActivity() {
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         showWelcomeScreen()
+        setupViewListeners()
     }
 
     private fun showWelcomeScreen() {
@@ -43,5 +52,11 @@ class MainActivity : AppCompatActivity() {
             "Un viaje para dos personas a Cancun",
             "https://image.freepik.com/vector-gratis/caja-regalo-sorpresa-abierta_3446-340.jpg"
         ).show(supportFragmentManager, WelcomeDialogFragment.TAG)
+    }
+
+    private fun setupViewListeners() {
+        cameraImageButton.setOnClickListener {
+            startActivity(Intent(this, CameraActivity::class.java))
+        }
     }
 }

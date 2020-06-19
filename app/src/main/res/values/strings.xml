@@ -6,4 +6,15 @@
     <string name="title_photo">Photo</string>
     <string name="title_chat">Chat</string>
     <string name="title_trivia">Trivia</string>
+    <string name="open_settings_tap_permissions">Open Settings, then tap Permissions and turn on %1$s.</string>
+    <string name="select_an_image_at_least">Select an image at least.</string>
+    <string name="title_activity_camera">CameraActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="material_image_cropper_content_description">A simple view</string>
+
 </resources>
