@@ -6,6 +6,6 @@ interface UsersDataSource {
 
     suspend fun getUsers(): List<User>
 
-    suspend fun insertUser(user: User)
+    suspend fun setLoggedInUser(user: User)
 
 }

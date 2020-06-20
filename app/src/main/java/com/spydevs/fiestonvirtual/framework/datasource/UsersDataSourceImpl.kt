@@ -6,13 +6,15 @@ import com.spydevs.fiestonvirtual.framework.database.dao.UsersDao
 import com.spydevs.fiestonvirtual.framework.mapper.frominitial.UserMapper
 import com.spydevs.fiestonvirtual.framework.mapper.frominitial.UsersMapper
 
-class UsersDataSourceImpl(private val usersDao: UsersDao) : UsersDataSource {
+class UsersDataSourceImpl(
+    private val usersDao: UsersDao
+) : UsersDataSource {
     override suspend fun getUsers(): List<User> {
         return UsersMapper.convertFromInitial(usersDao.getUsers())
     }
 
     //TODO refactor when service is correct.
-    override suspend fun insertUser(user: User) {
+    override suspend fun setLoggedInUser(user: User) {
         usersDao.setLoggedInUser(UserMapper.convertFromInitial(user))
     }
 }
