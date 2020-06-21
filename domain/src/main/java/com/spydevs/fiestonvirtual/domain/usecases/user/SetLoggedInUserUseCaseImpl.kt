@@ -7,7 +7,7 @@ class SetLoggedInUserUseCaseImpl(
     private val usersRepository: UsersRepository
 ) : SetLoggedInUserUseCase {
 
-    override suspend fun setLoggedInUser(user: User) {
+    override suspend fun invoke(user: User) {
         usersRepository.setLoggedInUser(user)
     }
 

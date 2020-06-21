@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.spydevs.fiestonvirtual.domain.models.User
-import com.spydevs.fiestonvirtual.domain.usecases.code.VerifyCodeUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.code.VerifyEventCodeUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.user.SetLoggedInUserUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CodeVerificationViewModel(
-    private val verifyCodeUseCase: VerifyCodeUseCase,
+    private val verifyEventCodeUseCase: VerifyEventCodeUseCase,
     private val setLoggedInUserUseCase: SetLoggedInUserUseCase
 ) : ViewModel() {
     private val _isSuccessCode = MutableLiveData<Boolean>()
@@ -19,14 +19,14 @@ class CodeVerificationViewModel(
     val isSuccessCode: LiveData<Boolean>
         get() = _isSuccessCode
 
-    //TODO refactor when service is correct.
+    //TODO refactor when service is correct, this method must be tested.
     fun verifyCode(code: String?) {
         viewModelScope.launch(Dispatchers.Main) {
             if (!code.isNullOrEmpty()) {
-                val codeResponse = verifyCodeUseCase.verifyCode(code)
+                val codeResponse = verifyEventCodeUseCase.invoke(code)
                 if (codeResponse[1].mensaje == "success") {
                     codeResponse[0].let { codeResponseItem ->
-                        setLoggedInUserUseCase.setLoggedInUser(User().apply {
+                        setLoggedInUserUseCase.invoke(User().apply {
                             name = codeResponseItem.nomUs
                             lastName = codeResponseItem.apePat
                         })

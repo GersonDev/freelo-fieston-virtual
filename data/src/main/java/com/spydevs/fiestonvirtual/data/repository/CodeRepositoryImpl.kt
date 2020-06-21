@@ -8,8 +8,8 @@ class CodeRepositoryImpl(
     private val codeDataSource: CodeDataSource
 ) : CodeRepository {
 
-    override suspend fun verifyCode(code: String): CodeResponse {
-        return codeDataSource.verifyCode(code)
+    override suspend fun verifyCode(eventCode: String): CodeResponse {
+        return codeDataSource.verifyCode(eventCode)
     }
 
 }

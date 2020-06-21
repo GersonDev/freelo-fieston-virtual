@@ -3,13 +3,14 @@ package com.spydevs.fiestonvirtual.domain.repository
 import com.spydevs.fiestonvirtual.domain.models.code.CodeResponse
 
 /**
- * This interface is used to verify the code of the event.
+ * This repository is used to verify the code of the event.
  */
 interface CodeRepository {
 
     /**
-     * This gets the validation and data of the user.
+     * @param [eventCode] this is the event code to enter the application.
+     * @return the data of the registered user.
      */
-    suspend fun verifyCode(code: String): CodeResponse
+    suspend fun verifyCode(eventCode: String): CodeResponse
 
 }

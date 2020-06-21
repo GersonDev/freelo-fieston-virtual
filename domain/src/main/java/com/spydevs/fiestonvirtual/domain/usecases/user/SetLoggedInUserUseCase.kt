@@ -2,10 +2,14 @@ package com.spydevs.fiestonvirtual.domain.usecases.user
 
 import com.spydevs.fiestonvirtual.domain.models.User
 
+/**
+ * This use case set logged user to the application.
+ */
 interface SetLoggedInUserUseCase {
+
     /**
-     * This method set logged in user to application.
+     * @param [user] contains the data of the logged user.
      */
-    suspend fun setLoggedInUser(user: User)
+    suspend fun invoke(user: User)
 
 }
