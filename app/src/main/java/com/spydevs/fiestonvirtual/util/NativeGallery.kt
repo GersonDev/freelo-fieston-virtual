@@ -10,20 +10,19 @@ import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
-import android.media.ExifInterface
 import android.media.MediaMetadataRetriever
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
-import android.provider.Settings
 import android.util.Log
 import android.webkit.MimeTypeMap
+import androidx.exifinterface.media.ExifInterface
 import java.io.*
 import java.util.*
 
 object NativeGallery {
-    fun SaveMedia(
+    fun saveMedia(
         context: Context,
         mediaType: Int,
         filePath: String,
@@ -162,22 +161,12 @@ object NativeGallery {
     }
 
     @TargetApi(Build.VERSION_CODES.M)
-    fun CheckPermission(context: Context, readPermissionOnly: Boolean): Int {
+    fun checkPermission(context: Context, readPermissionOnly: Boolean): Int {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return 1
         if (context.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             if (readPermissionOnly || context.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) return 1
         }
         return 0
-    }
-
-    // Credit: https://stackoverflow.com/a/35456817/2373034
-    fun OpenSettings(context: Context) {
-        val uri =
-            Uri.fromParts("package", context.packageName, null)
-        val intent = Intent()
-        intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-        intent.data = uri
-        context.startActivity(intent)
     }
 
     fun CanSelectMultipleMedia(): Boolean {
@@ -197,7 +186,7 @@ object NativeGallery {
     }
 
     // Credit: https://stackoverflow.com/a/30572852/2373034
-    private fun GetImageOrientation(context: Context, path: String?): Int {
+    private fun getImageOrientation(context: Context, path: String): Int {
         try {
             val exif = ExifInterface(path)
             val orientationEXIF = exif.getAttributeInt(
@@ -230,8 +219,7 @@ object NativeGallery {
         return ExifInterface.ORIENTATION_UNDEFINED
     }
 
-    // Credit: https://gist.github.com/aviadmini/4be34097dfdb842ae066fae48501ed41
-    private fun GetImageOrientationCorrectionMatrix(
+    private fun getImageOrientationCorrectionMatrix(
         orientation: Int,
         scale: Float
     ): Matrix {
@@ -270,10 +258,10 @@ object NativeGallery {
         return matrix
     }
 
-    fun LoadImageAtPath(
+    fun loadImageAtPath(
         context: Context,
-        path: String?,
-        temporaryFilePath: String?,
+        path: String,
+        temporaryFilePath: String,
         maxSize: Int
     ): String? {
         var path = path
@@ -283,7 +271,7 @@ object NativeGallery {
             true
         if (metadata.outMimeType != null && metadata.outMimeType != "image/jpeg" && metadata.outMimeType != "image/png") shouldCreateNewBitmap =
             true
-        val orientation = GetImageOrientation(context, path)
+        val orientation = getImageOrientation(context, path)
         if (orientation != ExifInterface.ORIENTATION_NORMAL && orientation != ExifInterface.ORIENTATION_UNDEFINED) shouldCreateNewBitmap =
             true
         if (shouldCreateNewBitmap) {
@@ -310,7 +298,7 @@ object NativeGallery {
                 val scale = if (scaleX < scaleY) scaleX else scaleY
                 if (scale < 1f || orientation != ExifInterface.ORIENTATION_NORMAL && orientation != ExifInterface.ORIENTATION_UNDEFINED) {
                     val transformationMatrix =
-                        GetImageOrientationCorrectionMatrix(orientation, scale)
+                        getImageOrientationCorrectionMatrix(orientation, scale)
                     val transformedBitmap = Bitmap.createBitmap(
                         bitmap,
                         0,
@@ -350,14 +338,14 @@ object NativeGallery {
         return path
     }
 
-    fun GetImageProperties(context: Context, path: String?): String {
+    fun getImageProperties(context: Context, path: String): String {
         val metadata = GetImageMetadata(path) ?: return ""
         var width = metadata.outWidth
         var height = metadata.outHeight
         var mimeType = metadata.outMimeType
         if (mimeType == null) mimeType = ""
         val orientationUnity: Int
-        val orientation = GetImageOrientation(context, path)
+        val orientation = getImageOrientation(context, path)
         orientationUnity =
             if (orientation == ExifInterface.ORIENTATION_UNDEFINED) -1 else if (orientation == ExifInterface.ORIENTATION_NORMAL) 0 else if (orientation == ExifInterface.ORIENTATION_ROTATE_90) 1 else if (orientation == ExifInterface.ORIENTATION_ROTATE_180) 2 else if (orientation == ExifInterface.ORIENTATION_ROTATE_270) 3 else if (orientation == ExifInterface.ORIENTATION_FLIP_HORIZONTAL) 4 else if (orientation == ExifInterface.ORIENTATION_TRANSPOSE) 5 else if (orientation == ExifInterface.ORIENTATION_FLIP_VERTICAL) 6 else if (orientation == ExifInterface.ORIENTATION_TRANSVERSE) 7 else -1
         if (orientation == ExifInterface.ORIENTATION_ROTATE_90 || orientation == ExifInterface.ORIENTATION_ROTATE_270 || orientation == ExifInterface.ORIENTATION_TRANSPOSE || orientation == ExifInterface.ORIENTATION_TRANSVERSE
