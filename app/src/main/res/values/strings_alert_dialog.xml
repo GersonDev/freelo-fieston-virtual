@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="alertDialog_loading">Cargando…</string>
+    <string name="alertDialog_ok">Aceptar</string>
+    <string name="alertDialog_cancel">Cancelar</string>
+</resources>

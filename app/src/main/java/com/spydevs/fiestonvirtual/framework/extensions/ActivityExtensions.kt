@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.provider.MediaStore
 import androidx.appcompat.app.AlertDialog
+import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.ui.main.MainActivity.Companion.REQUEST_TO_MEDIA
 import com.spydevs.fiestonvirtual.ui.main.camera.CameraActivity
 
@@ -28,3 +29,11 @@ fun Activity.openGalleryExternalApp() {
     }
     startActivityForResult(intent, REQUEST_TO_MEDIA)
 }
+
+fun Activity.setupLoadingAlertDialog(
+    cancelable: Boolean = false
+) =
+    AlertDialog.Builder(this)
+        .setCancelable(cancelable)
+        .setView(R.layout.layout_loading_dialog)
+        .create()

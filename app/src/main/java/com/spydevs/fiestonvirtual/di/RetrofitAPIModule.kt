@@ -1,10 +1,10 @@
 package com.spydevs.fiestonvirtual.di
 
 import com.google.gson.GsonBuilder
-import com.spydevs.fiestonvirtual.framework.api.StarWarsApi
+import com.spydevs.fiestonvirtual.framework.api.FiestonVirtualApi
+import com.spydevs.fiestonvirtual.framework.api.NetworkResponseAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -35,11 +35,12 @@ val retrofitApiModule = module {
 
     single {
         Retrofit.Builder()
-            .baseUrl("http://swapi.dev/api/")
+            .baseUrl("http://arpanetapp.com/fieston-virtual/api/")
             .client(get())
+            .addCallAdapterFactory(NetworkResponseAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create(get()))
             .build()
-            .create(StarWarsApi::class.java)
+            .create(FiestonVirtualApi::class.java)
     }
 
 }

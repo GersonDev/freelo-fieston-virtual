@@ -31,6 +31,17 @@
         android:layout_gravity="bottom"
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@color/blue_500"
-        app:srcCompat="@drawable/ic_camera" />
+        app:srcCompat="@drawable/ic_baseline_camera_alt_24"
+        app:tint="@color/white"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabUploadCameraPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@color/green_500"
+        app:srcCompat="@drawable/ic_baseline_publish_24"
+        app:tint="@color/white"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

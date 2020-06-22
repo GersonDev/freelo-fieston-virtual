@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -21,11 +22,16 @@ import com.spydevs.fiestonvirtual.util.ImagesUtil
 import com.spydevs.fiestonvirtual.util.NativeGallery
 import kotlinx.android.synthetic.main.activity_camera.*
 import kotlinx.android.synthetic.main.content_camera.*
+import org.koin.android.ext.android.inject
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 class CameraActivity : AppCompatActivity() {
+
+    private val cameraViewModel: CameraViewModel by inject()
+
+    private var rotatedBitmap: Bitmap? = null
 
     companion object {
         const val REQUEST_PERMISSION_WRITE_EXTERNAL_STORAGE: Int = 1
@@ -45,16 +51,27 @@ class CameraActivity : AppCompatActivity() {
         setContentView(R.layout.activity_camera)
         setSupportActionBar(toolbar)
 
+        setUpView()
         setUpViewListeners()
     }
 
+    private fun setUpView() {
+        fabUploadCameraPhoto.isEnabled = false
+    }
+
     private fun setUpViewListeners() {
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
+
         fabCamera.setOnClickListener {
             validatePermission(permissionsList[INDEX_WRITE_PERMISSION])
         }
 
-        toolbar.setNavigationOnClickListener {
-            finish()
+        fabUploadCameraPhoto.setOnClickListener {
+            rotatedBitmap?.let {
+                cameraViewModel.uploadImage(it)
+            }
         }
     }
 
@@ -170,6 +187,7 @@ class CameraActivity : AppCompatActivity() {
             val imageOrientation = ImagesUtil.getImageAngleRotation(currentPhotoPath)
             val rotatedBitmap = ImagesUtil.getRotatedBitmap(bitmap, imageOrientation)
             imgPhoto.setImageBitmap(rotatedBitmap)
+            this.rotatedBitmap = rotatedBitmap
             galleryAddPic()
         }
     }

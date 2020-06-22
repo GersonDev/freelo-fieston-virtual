@@ -1,6 +1,11 @@
 package com.spydevs.fiestonvirtual.framework.database.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
+import androidx.room.Delete
+import androidx.room.Transaction
 import com.spydevs.fiestonvirtual.framework.database.entities.UserEntity
 
 @Dao
@@ -19,7 +24,7 @@ interface UsersDao {
     suspend fun deleteUser(user: UserEntity)
 
     @Transaction
-    open suspend fun setLoggedInUser(loggedInUser: UserEntity) {
+    suspend fun setLoggedInUser(loggedInUser: UserEntity) {
         deleteUser(loggedInUser)
         insertUser(loggedInUser)
     }
