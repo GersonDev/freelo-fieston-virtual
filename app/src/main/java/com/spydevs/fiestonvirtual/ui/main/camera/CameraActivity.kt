@@ -153,14 +153,8 @@ class CameraActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             REQUEST_TAKE_PHOTO -> if (resultCode == Activity.RESULT_OK) {
-
-                //Get the thumbnail
-//                val imageBitmap = data?.extras?.get("data") as Bitmap
-//                imgPhoto.setImageBitmap(imageBitmap)
-
                 //Save the full-size photo
                 setPic()
-
             } else {
                 Toast.makeText(
                     this,

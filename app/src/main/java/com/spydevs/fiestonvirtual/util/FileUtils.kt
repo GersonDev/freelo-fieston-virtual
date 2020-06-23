@@ -16,6 +16,7 @@ class FileUtils {
                 "${Environment.getExternalStorageDirectory().absolutePath}/${Environment.DIRECTORY_DCIM}/ImageCropperImages"
 
 
+        //TODO USING THIS METHOD INSTEAD OF DEFINING IT ON CAMERA ACTIVITY
         fun saveToFile(bitmap: Bitmap): String {
             val imageFile: File
 

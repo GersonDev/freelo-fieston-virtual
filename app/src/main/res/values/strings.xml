@@ -1,4 +1,6 @@
 <resources>
+
+    <!-- TODO CHANGE LANGUAGE TO SPANISH-->
     <string name="app_name">freelo-fieston-virtual</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
@@ -16,9 +18,4 @@
     <string name="previous">Previous</string>
 
     <string name="material_image_cropper_content_description">A simple view</string>
-
-    <string name="alertDialog_loading">Cargando…</string>
-    <string name="alertDialog_ok">Aceptar</string>
-    <string name="alertDialog_cancel">Cancelar</string>
-
 </resources>
