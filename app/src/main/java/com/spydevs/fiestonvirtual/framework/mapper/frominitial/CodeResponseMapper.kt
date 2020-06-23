@@ -2,7 +2,7 @@ package com.spydevs.fiestonvirtual.framework.mapper.frominitial
 
 import com.spydevs.fiestonvirtual.domain.models.code.CodeResponse
 import com.spydevs.fiestonvirtual.framework.mapper.Mapper
-import com.spydevs.fiestonvirtual.framework.response.code.CodeResponseEntity
+import com.spydevs.fiestonvirtual.data.entities.response.CodeResponseEntity
 
 object CodeResponseMapper : Mapper<CodeResponseEntity, CodeResponse>() {
 

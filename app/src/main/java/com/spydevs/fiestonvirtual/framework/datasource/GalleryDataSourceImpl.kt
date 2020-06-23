@@ -1,29 +1,31 @@
 package com.spydevs.fiestonvirtual.framework.datasource
 
 import com.spydevs.fiestonvirtual.data.datasource.GalleryDataSource
-import com.spydevs.fiestonvirtual.domain.models.GalleryImage
-import com.spydevs.fiestonvirtual.domain.models.GalleryImageRequest
-import com.spydevs.fiestonvirtual.domain.resource.Resource
+import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImage
+import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
+import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.framework.api.FiestonVirtualApi
 import com.spydevs.fiestonvirtual.framework.api.NetworkResponse
 import com.spydevs.fiestonvirtual.framework.mapper.frominitial.GalleryImageMapper
 
 class GalleryDataSourceImpl(private val fiestonVirtualApi: FiestonVirtualApi): GalleryDataSource {
-    override suspend fun uploadImage(image: String, galleryImageRequest: GalleryImageRequest): Resource<GalleryImage> {
+    override suspend fun uploadImage(
+        userId: Int,
+        galleryImageRequest: GalleryImageRequest
+    ): ResultType<GalleryImage, String> {
         return when (val uploadImageNetworkResponse = fiestonVirtualApi.uploadImage(1, galleryImageRequest)) {
             is NetworkResponse.Success -> {
-                //We use mapper un data sources
                 val galleryImage = GalleryImageMapper.convertFromInitial(uploadImageNetworkResponse.body)
-                Resource.success(galleryImage)
+                ResultType.Success(galleryImage)
             }
             is NetworkResponse.ApiError -> {
-                Resource.error(uploadImageNetworkResponse.body, null)
+                ResultType.Error(uploadImageNetworkResponse.body)
             }
             is NetworkResponse.NetworkError -> {
-                Resource.error(uploadImageNetworkResponse.error.message!!, null)
+                ResultType.Error(uploadImageNetworkResponse.error.message!!)
             }
             is NetworkResponse.UnknownError -> {
-                Resource.error(uploadImageNetworkResponse.error.message!!, null)
+                ResultType.Error(uploadImageNetworkResponse.error.message!!)
             }
         }
     }

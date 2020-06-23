@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
+import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.UploadImageUseCase
 import com.spydevs.fiestonvirtual.util.formatter.ImageFormattingStrategy
 import kotlinx.coroutines.Dispatchers
@@ -20,11 +22,25 @@ class CameraViewModel(
     val uploadedImage: LiveData<String>
         get() = _uploadedImage
 
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String>
+        get() = _error
+
     fun uploadImage(bitmap: Bitmap) {
         viewModelScope.launch(Dispatchers.Main) {
-            val formattedImage = convertImage(bitmap)
-            val uploadedImageResponse = uploadImageUseCase(formattedImage)
-            _uploadedImage.value = uploadedImageResponse
+            val formattedImageString = convertImage(bitmap)
+            val galleryRequestImage =
+                GalleryImageRequest(
+                    formattedImageString
+                )
+            when (val result = uploadImageUseCase(galleryRequestImage)) {
+                is ResultType.Success -> {
+                    _uploadedImage.value = result.value.imageUrl
+                }
+                is ResultType.Error -> {
+                    _error.value = result.value
+                }
+            }
         }
     }
 

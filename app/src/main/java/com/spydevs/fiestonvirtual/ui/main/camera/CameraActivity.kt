@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.lifecycle.Observer
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.framework.extensions.openSettings
 import com.spydevs.fiestonvirtual.framework.extensions.setupAlertDialog
@@ -53,6 +54,7 @@ class CameraActivity : AppCompatActivity() {
 
         setUpView()
         setUpViewListeners()
+        subscribeToUploadImage()
     }
 
     private fun setUpView() {
@@ -73,6 +75,13 @@ class CameraActivity : AppCompatActivity() {
                 cameraViewModel.uploadImage(it)
             }
         }
+    }
+
+    private fun subscribeToUploadImage() {
+        cameraViewModel.uploadedImage.observe(this, Observer {
+            //TODO USE PICASSO TO LOAD THE IMAGE
+            //photoImageView
+        })
     }
 
     /**
@@ -165,8 +174,8 @@ class CameraActivity : AppCompatActivity() {
     //Decode a scaled image
     private fun setPic() {
         // Get the dimensions of the View
-        val targetW: Int = imgPhoto.width
-        val targetH: Int = imgPhoto.height
+        val targetW: Int = photoImageView.width
+        val targetH: Int = photoImageView.height
 
         val bmOptions = BitmapFactory.Options().apply {
             // Get the dimensions of the bitmap
@@ -186,7 +195,7 @@ class CameraActivity : AppCompatActivity() {
         BitmapFactory.decodeFile(currentPhotoPath, bmOptions)?.also { bitmap ->
             val imageOrientation = ImagesUtil.getImageAngleRotation(currentPhotoPath)
             val rotatedBitmap = ImagesUtil.getRotatedBitmap(bitmap, imageOrientation)
-            imgPhoto.setImageBitmap(rotatedBitmap)
+            photoImageView.setImageBitmap(rotatedBitmap)
             this.rotatedBitmap = rotatedBitmap
             galleryAddPic()
         }

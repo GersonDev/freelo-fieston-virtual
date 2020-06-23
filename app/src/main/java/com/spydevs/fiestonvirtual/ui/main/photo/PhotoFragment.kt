@@ -1,19 +1,12 @@
 package com.spydevs.fiestonvirtual.ui.main.photo
 
 import android.Manifest
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.spydevs.fiestonvirtual.R
-import com.spydevs.fiestonvirtual.framework.extensions.openGalleryExternalApp
 import com.spydevs.fiestonvirtual.ui.main.MainActivity
-import com.spydevs.fiestonvirtual.ui.main.camera.CameraActivity
-import com.spydevs.fiestonvirtual.util.NativeGallery
 import kotlinx.android.synthetic.main.fragment_photo.*
 
 class PhotoFragment : Fragment(R.layout.fragment_photo) {
@@ -47,7 +40,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo) {
     }
 
     fun setImage(uri: Uri?) {
-        imgPhoto.setImageURI(uri)
+        photoImageView.setImageURI(uri)
     }
 
 

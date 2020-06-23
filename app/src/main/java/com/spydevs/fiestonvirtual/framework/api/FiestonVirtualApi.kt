@@ -1,8 +1,8 @@
 package com.spydevs.fiestonvirtual.framework.api
 
-import com.spydevs.fiestonvirtual.data.models.GalleryImageResponse
-import com.spydevs.fiestonvirtual.domain.models.GalleryImageRequest
-import com.spydevs.fiestonvirtual.framework.response.code.CodeResponseEntity
+import com.spydevs.fiestonvirtual.data.entities.response.GalleryImageResponseEntity
+import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
+import com.spydevs.fiestonvirtual.data.entities.response.CodeResponseEntity
 import retrofit2.http.*
 
 /**
@@ -19,5 +19,6 @@ interface FiestonVirtualApi {
 
     @POST("user/{user_id}/cameraImage")
     suspend fun uploadImage(@Path("user_id") userId: Int,
-                          @Body galleryImageRequest: GalleryImageRequest): NetworkResponse<GalleryImageResponse, String>
+                          @Body galleryImageRequest: GalleryImageRequest
+    ): NetworkResponse<GalleryImageResponseEntity, String>
 }

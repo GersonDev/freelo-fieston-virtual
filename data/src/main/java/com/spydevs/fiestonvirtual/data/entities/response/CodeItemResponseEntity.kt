@@ -1,7 +1,7 @@
-package com.spydevs.fiestonvirtual.framework.response.code
+package com.spydevs.fiestonvirtual.data.entities.response
 
 //TODO refactor when the service is correct.
-data class CodeResponseEntityItem(
+data class CodeItemResponseEntity(
     val apeMat: String,
     val apePat: String,
     val celular: String,
