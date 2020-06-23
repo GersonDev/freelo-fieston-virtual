@@ -2,6 +2,7 @@ package com.spydevs.fiestonvirtual.di
 
 import com.google.gson.GsonBuilder
 import com.spydevs.fiestonvirtual.framework.api.FiestonVirtualApi
+import com.spydevs.fiestonvirtual.framework.api.NetworkResponseAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.named
@@ -36,6 +37,7 @@ val retrofitApiModule = module {
         Retrofit.Builder()
             .baseUrl("http://arpanetapp.com/fieston-virtual/api/")
             .client(get())
+            .addCallAdapterFactory(NetworkResponseAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create(get()))
             .build()
             .create(FiestonVirtualApi::class.java)

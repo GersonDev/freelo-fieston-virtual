@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.spydevs.fiestonvirtual.domain.models.User
-import com.spydevs.fiestonvirtual.domain.usecases.code.VerifyEventCodeUseCase
-import com.spydevs.fiestonvirtual.domain.usecases.user.SetLoggedInUserUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.code.VerifyEventCodeUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.SetLoggedInUserUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

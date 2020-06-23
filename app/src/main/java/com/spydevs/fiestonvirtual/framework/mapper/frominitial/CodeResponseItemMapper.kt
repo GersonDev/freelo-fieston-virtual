@@ -2,10 +2,10 @@ package com.spydevs.fiestonvirtual.framework.mapper.frominitial
 
 import com.spydevs.fiestonvirtual.domain.models.code.CodeResponseItem
 import com.spydevs.fiestonvirtual.framework.mapper.Mapper
-import com.spydevs.fiestonvirtual.framework.response.code.CodeResponseEntityItem
+import com.spydevs.fiestonvirtual.data.entities.response.CodeItemResponseEntity
 
-object CodeResponseItemMapper : Mapper<CodeResponseEntityItem, CodeResponseItem>() {
-    override fun convertFromInitial(i: CodeResponseEntityItem?): CodeResponseItem {
+object CodeResponseItemMapper : Mapper<CodeItemResponseEntity, CodeResponseItem>() {
+    override fun convertFromInitial(i: CodeItemResponseEntity?): CodeResponseItem {
         return CodeResponseItem().apply {
             apeMat = i?.apeMat
             apePat = i?.apePat
