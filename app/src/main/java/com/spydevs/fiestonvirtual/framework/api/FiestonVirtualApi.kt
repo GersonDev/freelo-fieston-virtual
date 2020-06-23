@@ -1,9 +1,14 @@
 package com.spydevs.fiestonvirtual.framework.api
 
-import com.spydevs.fiestonvirtual.data.entities.response.GalleryImageResponseEntity
-import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
 import com.spydevs.fiestonvirtual.data.entities.response.CodeResponseEntity
+import com.spydevs.fiestonvirtual.data.entities.response.GalleryImageResponseEntity
+import com.spydevs.fiestonvirtual.data.entities.response.UploadImageResponseEntity
+import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.Call
 import retrofit2.http.*
+
 
 /**
  * This API contents all end point of the services.
@@ -21,4 +26,12 @@ interface FiestonVirtualApi {
     suspend fun uploadImage(@Path("user_id") userId: Int,
                           @Body galleryImageRequest: GalleryImageRequest
     ): NetworkResponse<GalleryImageResponseEntity, String>
+
+    @Multipart
+    @POST("index.php")
+    fun uploadFile(
+        @Part file: MultipartBody.Part?,
+        @Part("name") name: RequestBody?
+    ): NetworkResponse<UploadImageResponseEntity, String>
+
 }

@@ -4,8 +4,10 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -14,13 +16,14 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.spydevs.fiestonvirtual.R
-import com.spydevs.fiestonvirtual.util.extensions.openGalleryExternalApp
-import com.spydevs.fiestonvirtual.util.extensions.openSettings
-import com.spydevs.fiestonvirtual.util.extensions.setupAlertDialog
 import com.spydevs.fiestonvirtual.ui.main.camera.CameraActivity
 import com.spydevs.fiestonvirtual.ui.main.photo.PhotoFragment
 import com.spydevs.fiestonvirtual.ui.welcome.WelcomeDialogFragment
+import com.spydevs.fiestonvirtual.util.extensions.openGalleryExternalApp
+import com.spydevs.fiestonvirtual.util.extensions.openSettings
+import com.spydevs.fiestonvirtual.util.extensions.setupAlertDialog
 import kotlinx.android.synthetic.main.toolbar_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -138,4 +141,36 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    //geting real path from gallery
+    private fun getRealPathFromURIPath(
+        contentURI: Uri,
+        activity: Activity
+    ): String? {
+        val cursor: Cursor? =
+            activity.contentResolver.query(contentURI, null, null, null, null)
+        return if (cursor == null) {
+            contentURI.path
+        } else {
+            cursor.moveToFirst()
+            val idx: Int = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+            cursor.getString(idx)
+        }
+    }
+
+    private fun getRealPathFromURI(contentURI: Uri): String? {
+        val result: String?
+        val cursor =
+            contentResolver.query(contentURI, null, null, null, null)
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+            result = contentURI.path
+        } else {
+            cursor.moveToFirst()
+            val idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+            result = cursor.getString(idx)
+            cursor.close()
+        }
+        return result
+    }
+
 }
