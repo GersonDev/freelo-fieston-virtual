@@ -17,4 +17,8 @@
 
     <string name="material_image_cropper_content_description">A simple view</string>
 
+    <string name="alertDialog_loading">Cargando…</string>
+    <string name="alertDialog_ok">Aceptar</string>
+    <string name="alertDialog_cancel">Cancelar</string>
+
 </resources>
