@@ -1,4 +1,4 @@
-package com.spydevs.fiestonvirtual.framework.extensions
+package com.spydevs.fiestonvirtual.util.extensions
 
 import android.content.Context
 import android.widget.ImageView

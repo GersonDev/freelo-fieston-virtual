@@ -17,8 +17,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import com.spydevs.fiestonvirtual.R
-import com.spydevs.fiestonvirtual.framework.extensions.openSettings
-import com.spydevs.fiestonvirtual.framework.extensions.setupAlertDialog
+import com.spydevs.fiestonvirtual.util.extensions.openSettings
+import com.spydevs.fiestonvirtual.util.extensions.setupAlertDialog
 import com.spydevs.fiestonvirtual.util.ImagesUtil
 import com.spydevs.fiestonvirtual.util.NativeGallery
 import kotlinx.android.synthetic.main.activity_camera.*

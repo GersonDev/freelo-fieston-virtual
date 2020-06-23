@@ -15,9 +15,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.spydevs.fiestonvirtual.R
-import com.spydevs.fiestonvirtual.framework.extensions.openGalleryExternalApp
-import com.spydevs.fiestonvirtual.framework.extensions.openSettings
-import com.spydevs.fiestonvirtual.framework.extensions.setupAlertDialog
+import com.spydevs.fiestonvirtual.util.extensions.openGalleryExternalApp
+import com.spydevs.fiestonvirtual.util.extensions.openSettings
+import com.spydevs.fiestonvirtual.util.extensions.setupAlertDialog
 import com.spydevs.fiestonvirtual.ui.main.camera.CameraActivity
 import com.spydevs.fiestonvirtual.ui.main.photo.PhotoFragment
 import com.spydevs.fiestonvirtual.ui.welcome.WelcomeDialogFragment

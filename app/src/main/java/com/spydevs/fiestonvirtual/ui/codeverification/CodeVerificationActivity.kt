@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.spydevs.fiestonvirtual.R
-import com.spydevs.fiestonvirtual.framework.extensions.setupLoadingAlertDialog
+import com.spydevs.fiestonvirtual.util.extensions.setupLoadingAlertDialog
 import com.spydevs.fiestonvirtual.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_code_verification.*
 import org.koin.android.ext.android.inject
