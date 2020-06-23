@@ -79,7 +79,7 @@ class CameraActivity : AppCompatActivity() {
 
     private fun subscribeToUploadImage() {
         cameraViewModel.uploadedImage.observe(this, Observer {
-            //TODO USE PICASSO TO LOAD THE IMAGE
+            //TODO USE GLIDE TO LOAD THE IMAGE
             //photoImageView
         })
     }

@@ -8,9 +8,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.spydevs.fiestonvirtual.R
-import com.squareup.picasso.Picasso
-
-fun ImageView.loadUrl1(url: String) = Picasso.with(this.context).load(url).into(this);
 
 fun ImageView.loadUrl(url: String, @DrawableRes drawablePlaceholder: Int = R.drawable.default_placeholder) =
     Glide.with(this)

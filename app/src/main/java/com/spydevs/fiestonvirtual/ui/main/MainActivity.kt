@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -122,7 +121,6 @@ class MainActivity : AppCompatActivity() {
             REQUEST_TO_MEDIA -> if (resultCode == Activity.RESULT_OK) {
                 //data?.data is NOT NULL when selecting any file from gallery
                 //mInstaCropper.setImageUri(data?.data!!)
-                Log.e("Gallery Image Uri", "data ${data?.data}")
                 galleryImageUri = data?.data
 
                 val navHostFragment =

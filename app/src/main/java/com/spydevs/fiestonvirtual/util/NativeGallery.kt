@@ -64,7 +64,7 @@ object NativeGallery {
                 context.contentResolver.insert(externalContentUri, values)
             if (uri != null) {
                 try {
-                    if (WriteFileToStream(
+                    if (writeFileToStream(
                             originalFile,
                             context.contentResolver.openOutputStream(uri)
                         )
@@ -97,7 +97,7 @@ object NativeGallery {
                 if (extension.length > 0) newFilename += ".$extension"
             } while (file.exists())
             try {
-                if (WriteFileToStream(originalFile, FileOutputStream(file))) {
+                if (writeFileToStream(originalFile, FileOutputStream(file))) {
                     values.put(MediaStore.MediaColumns.DATA, file.absolutePath)
                     context.contentResolver.insert(externalContentUri, values)
                     Log.d("Unity", "Saved media to: " + file.path)
@@ -113,7 +113,7 @@ object NativeGallery {
         }
     }
 
-    private fun WriteFileToStream(file: File, out: OutputStream?): Boolean {
+    private fun writeFileToStream(file: File, out: OutputStream?): Boolean {
         try {
             val `in`: InputStream = FileInputStream(file)
             try {
@@ -140,7 +140,7 @@ object NativeGallery {
         return true
     }
 
-    fun MediaDeleteFile(
+    fun mediaDeleteFile(
         context: Context,
         path: String,
         mediaType: Int
@@ -169,7 +169,7 @@ object NativeGallery {
         return 0
     }
 
-    fun CanSelectMultipleMedia(): Boolean {
+    fun canSelectMultipleMedia(): Boolean {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2
     }
 
@@ -358,7 +358,7 @@ object NativeGallery {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    fun GetVideoProperties(context: Context?, path: String?): String {
+    fun getVideoProperties(context: Context?, path: String?): String {
         val metadataRetriever = MediaMetadataRetriever()
         metadataRetriever.setDataSource(path)
         var width =
