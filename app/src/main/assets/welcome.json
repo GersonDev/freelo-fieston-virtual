@@ -1,0 +1,16 @@
+{
+  "message": "Respuesta exitosa",
+  "data": {
+    "event": {
+      "idEvent": 1,
+      "eventName": "Fiestón Virtual",
+      "eventWelcomeText": "Hoy celebramos el aniversario 50 de Super Mercados Metro.",
+      "eventStartDate": "15/07/2020 18:00:00",
+      "eventHost": "Omar Ramirez",
+      "eventPrize": "Un viaje para 2 personas a Cancún",
+      "eventImagePrize": "https://fiestonvirtual.com/images/eventos/1/prize/viaje-01.jpg",
+      "eventLogo": "https://fiestonvirtual.com/images/eventos/1/logo/logo-fieston-01.jpg",
+      "eventStatus": 1
+    }
+  }
+}
