@@ -24,7 +24,6 @@ import com.spydevs.fiestonvirtual.util.extensions.openSettings
 import com.spydevs.fiestonvirtual.util.extensions.setupAlertDialog
 import kotlinx.android.synthetic.main.toolbar_main.*
 
-
 class MainActivity : AppCompatActivity() {
 
     companion object {

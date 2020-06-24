@@ -13,7 +13,6 @@ import com.spydevs.fiestonvirtual.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_photo.*
 import java.util.concurrent.TimeUnit
 
-
 class PhotoFragment : Fragment(R.layout.fragment_photo) {
 
     private lateinit var photoViewModel: PhotoViewModel
@@ -38,8 +37,10 @@ class PhotoFragment : Fragment(R.layout.fragment_photo) {
     }
 
     fun setImage(uri: Uri?) {
-        uri?.let {
-            this.imagePathUri = it.path!!
+        uri?.let { nonNullUri ->
+            nonNullUri.path?.let {
+                this.imagePathUri = it
+            }
         }
         photoImageView.setImageURI(uri)
     }
@@ -48,7 +49,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo) {
         val oneTimeWorkRequest =
             OneTimeWorkRequest.Builder(UploadFileWorkManager::class.java)
                 .setInputData(createInputData(imagePathUri))
-                .setInitialDelay(2, TimeUnit.SECONDS).build()
+                .setInitialDelay(DURATION_TIME_IN_SECONDS, TimeUnit.SECONDS).build()
         WorkManager.getInstance(requireActivity()).enqueue(oneTimeWorkRequest)
     }
 
@@ -56,6 +57,10 @@ class PhotoFragment : Fragment(R.layout.fragment_photo) {
         return Data.Builder()
             .putString("imagePath", imagePath)
             .build()
+    }
+
+    companion object {
+        const val DURATION_TIME_IN_SECONDS: Long = 2
     }
 
 }

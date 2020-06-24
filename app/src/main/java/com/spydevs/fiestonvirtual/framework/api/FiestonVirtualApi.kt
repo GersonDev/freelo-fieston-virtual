@@ -6,9 +6,7 @@ import com.spydevs.fiestonvirtual.data.entities.response.UploadImageResponseEnti
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Call
 import retrofit2.http.*
-
 
 /**
  * This API contents all end point of the services.
@@ -27,6 +25,13 @@ interface FiestonVirtualApi {
                           @Body galleryImageRequest: GalleryImageRequest
     ): NetworkResponse<GalleryImageResponseEntity, String>
 
+
+    /**
+     * Upload any file to server in form-data
+     * @param [file] an image, video or whatever media file
+     * @param [name] name of the file
+     * @return response about uploaded file
+     */
     @Multipart
     @POST("index.php")
     fun uploadFile(

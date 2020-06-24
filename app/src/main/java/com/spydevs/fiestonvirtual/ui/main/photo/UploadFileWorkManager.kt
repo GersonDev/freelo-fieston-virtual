@@ -72,10 +72,11 @@ class UploadFileWorkManager(context: Context, workerParameters: WorkerParameters
                 .setContentTitle(title)
                 .setContentText(task)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
-        notificationManager.notify(1, notification.build())
+        notificationManager.notify(NOTIFICATION_ID, notification.build())
     }
 
     companion object {
+        const val NOTIFICATION_ID = 1
         const val CHANNEL_NAME = "inducesmile"
     }
 }
