@@ -3,7 +3,9 @@ package com.spydevs.fiestonvirtual.framework.api
 import com.spydevs.fiestonvirtual.data.entities.response.CodeResponseEntity
 import com.spydevs.fiestonvirtual.data.entities.response.GalleryImageResponseEntity
 import com.spydevs.fiestonvirtual.data.entities.response.UploadImageResponseEntity
+import com.spydevs.fiestonvirtual.data.entities.response.WelcomeResponseEntity
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
+import com.spydevs.fiestonvirtual.domain.models.welcome.WelcomeRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -25,7 +27,6 @@ interface FiestonVirtualApi {
                           @Body galleryImageRequest: GalleryImageRequest
     ): NetworkResponse<GalleryImageResponseEntity, String>
 
-
     /**
      * Upload any file to server in form-data
      * @param [file] an image, video or whatever media file
@@ -39,4 +40,13 @@ interface FiestonVirtualApi {
         @Part("name") name: RequestBody?
     ): NetworkResponse<UploadImageResponseEntity, String>
 
+    /**
+     * Get event welcome
+     * @param [welcomeRequest] a request object for event welcome
+     * @return response about event welcome
+     */
+    @POST("event")
+    fun getEventWelcome(
+        @Body welcomeRequest: WelcomeRequest
+    ): NetworkResponse<WelcomeResponseEntity, String>
 }
