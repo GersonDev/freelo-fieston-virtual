@@ -1,10 +1,9 @@
 package com.spydevs.fiestonvirtual.framework.api
 
-import com.spydevs.fiestonvirtual.data.entities.response.GalleryImageResponseEntity
+import com.spydevs.fiestonvirtual.data.entities.response.*
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
-import com.spydevs.fiestonvirtual.data.entities.response.CodeResponseEntity
-import com.spydevs.fiestonvirtual.data.entities.response.DataUserResponseEntity
-import com.spydevs.fiestonvirtual.data.entities.response.ErrorResponseEntity
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 /**
@@ -36,4 +35,18 @@ interface FiestonVirtualApi {
     suspend fun getDataUser(
         @Query("userId") userId: String
     ): NetworkResponse<DataUserResponseEntity, ErrorResponseEntity>
+
+    /**
+     * Upload any file to server in form-data
+     * @param [file] an image, video or whatever media file
+     * @param [name] name of the file
+     * @return response about uploaded file
+     */
+    @Multipart
+    @POST("index.php")
+    fun uploadFile(
+        @Part file: MultipartBody.Part?,
+        @Part("name") name: RequestBody?
+    ): NetworkResponse<UploadImageResponseEntity, String>
+
 }
