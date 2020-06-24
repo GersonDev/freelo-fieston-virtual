@@ -1,17 +1,23 @@
 package com.spydevs.fiestonvirtual.data.repository
 
 import com.spydevs.fiestonvirtual.data.datasource.UsersDataSource
-import com.spydevs.fiestonvirtual.domain.models.User
+import com.spydevs.fiestonvirtual.domain.models.user.User
 import com.spydevs.fiestonvirtual.domain.repository.UsersRepository
+import com.spydevs.fiestonvirtual.domain.resource.ResultType
 
 class UsersRepositoryImpl(
     private val usersDataSource: UsersDataSource
 ) : UsersRepository {
-    override suspend fun getUser(): List<User> {
-        return usersDataSource.getUsers()
+    override suspend fun getLocalUser(): User {
+        return usersDataSource.getUser()
     }
 
     override suspend fun setLoggedInUser(user: User) {
         usersDataSource.setLoggedInUser(user)
     }
+
+    override suspend fun getRemoteUser(userId: String): ResultType<User, String> {
+        return usersDataSource.getRemoteUser(userId)
+    }
+
 }
