@@ -31,9 +31,10 @@ class CodeVerificationActivity : AppCompatActivity() {
 
     private fun setUpCodeButton() {
         codeButton.setOnClickListener {
-            dialogProgress.show()
-            //TODO refactor when service is correct.
-            viewModel.verifyCode("946962")
+//            dialogProgress.show()
+//            //TODO refactor when service is correct.
+//            viewModel.verifyCode("946962")
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 
