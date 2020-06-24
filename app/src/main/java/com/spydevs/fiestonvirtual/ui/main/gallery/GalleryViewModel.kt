@@ -1,4 +1,4 @@
-package com.spydevs.fiestonvirtual.ui.main.chat
+package com.spydevs.fiestonvirtual.ui.main.gallery
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

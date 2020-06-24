@@ -1,16 +1,32 @@
 package com.spydevs.fiestonvirtual.framework.datasource
 
 import com.spydevs.fiestonvirtual.data.datasource.CodeDataSource
-import com.spydevs.fiestonvirtual.domain.models.code.CodeResponse
+import com.spydevs.fiestonvirtual.domain.models.code.EventCode
+import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.framework.api.FiestonVirtualApi
-import com.spydevs.fiestonvirtual.framework.mapper.frominitial.CodeResponseMapper
+import com.spydevs.fiestonvirtual.framework.api.NetworkResponse
 
 class CodeDataSourceImpl(
     private val fiestonVirtualApi: FiestonVirtualApi
 ) : CodeDataSource {
 
-    override suspend fun verifyCode(code: String): CodeResponse {
-        return CodeResponseMapper.convertFromInitial(fiestonVirtualApi.codeVerify(code))
+    override suspend fun verifyCode(eventCode: String): ResultType<EventCode, String> {
+        return when (val result = fiestonVirtualApi.validateCode(eventCode)) {
+            is NetworkResponse.Success -> {
+                ResultType.Success(
+                    EventCode(userInvitationCode = result.body.data.userInvitationCode)
+                )
+            }
+            is NetworkResponse.ApiError -> {
+                ResultType.Error(result.body.message)
+            }
+            is NetworkResponse.NetworkError -> {
+                ResultType.Error(result.error.message!!)
+            }
+            is NetworkResponse.UnknownError -> {
+                ResultType.Error(result.error.message!!)
+            }
+        }
     }
 
 }

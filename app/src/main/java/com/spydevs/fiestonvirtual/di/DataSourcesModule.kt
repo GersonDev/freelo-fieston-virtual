@@ -9,7 +9,7 @@ import org.koin.dsl.module
 val dataSourcesModule = module {
 
     single<UsersDataSource> {
-        UsersDataSourceImpl(get())
+        UsersDataSourceImpl(get(), get())
     }
 
     single<CodeDataSource> { CodeDataSourceImpl(get()) }
