@@ -27,7 +27,6 @@ interface FiestonVirtualApi {
                           @Body galleryImageRequest: GalleryImageRequest
     ): NetworkResponse<GalleryImageResponseEntity, String>
 
-
     /**
      * Upload any file to server in form-data
      * @param [file] an image, video or whatever media file
@@ -40,7 +39,6 @@ interface FiestonVirtualApi {
         @Part file: MultipartBody.Part?,
         @Part("name") name: RequestBody?
     ): NetworkResponse<UploadImageResponseEntity, String>
-
 
     /**
      * Get event welcome
