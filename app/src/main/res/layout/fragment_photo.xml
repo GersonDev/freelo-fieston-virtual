@@ -7,34 +7,52 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.photo.PhotoFragment">
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/photoImageView"
             android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/material_image_cropper_content_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/ic_launcher_round" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/photoButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="72dp"
+            android:layout_marginBottom="24dp"
+            android:text="Choose"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photoImageView" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/photoImageView"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_gravity="center"
-                android:contentDescription="@string/material_image_cropper_content_description"
-                app:srcCompat="@mipmap/ic_launcher_round" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/uploadFileButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Upload"
+            app:layout_constraintBottom_toBottomOf="@+id/photoButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.659"
+            app:layout_constraintStart_toEndOf="@+id/photoButton"
+            app:layout_constraintTop_toTopOf="@+id/photoButton"
+            app:layout_constraintVertical_bias="0.0" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/photoButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Button" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
