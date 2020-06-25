@@ -1,6 +1,8 @@
 package com.spydevs.fiestonvirtual.di
 
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.code.VerifyEventCodeUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.welcome.GetWelcomeUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.implementations.welcome.GetWelcomeUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.GetLocalUserUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.code.VerifyEventCodeUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.LoginUserUseCase
@@ -17,6 +19,11 @@ val useCasesModule = module {
     single<LoginUserUseCase> {
         LoginUserUseCaseImpl(
             get(),
+            get()
+        )
+    }
+    single<GetWelcomeUseCase> {
+        GetWelcomeUseCaseImpl(
             get()
         )
     }

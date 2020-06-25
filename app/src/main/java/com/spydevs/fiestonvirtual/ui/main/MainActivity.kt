@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -12,19 +11,24 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.spydevs.fiestonvirtual.R
+import com.spydevs.fiestonvirtual.domain.models.welcome.Welcome
 import com.spydevs.fiestonvirtual.ui.main.camera.CameraActivity
 import com.spydevs.fiestonvirtual.ui.main.photo.PhotoFragment
-import com.spydevs.fiestonvirtual.ui.welcome.WelcomeDialogFragment
+import com.spydevs.fiestonvirtual.ui.main.welcome.WelcomeDialogFragment
 import com.spydevs.fiestonvirtual.util.extensions.openGalleryExternalApp
 import com.spydevs.fiestonvirtual.util.extensions.openSettings
 import com.spydevs.fiestonvirtual.util.extensions.setupAlertDialog
 import kotlinx.android.synthetic.main.toolbar_main.*
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
+
+    private val mainViewModel: MainViewModel by inject()
 
     companion object {
         const val REQUEST_TO_MEDIA: Int = 2
@@ -48,7 +52,9 @@ class MainActivity : AppCompatActivity() {
 //        shoppingCartViewModel.requestCart()
 //        initBadge()
 
-        showWelcomeScreen()
+        subscribeToWelcome()
+
+        mainViewModel.getWelcome()
     }
 
     private fun setUpViews() {
@@ -63,14 +69,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showWelcomeScreen() {
-        //TODO delete data test.
+    private fun subscribeToWelcome() {
+        mainViewModel.welcome.observe(this, Observer {
+            showWelcomeScreen(it)
+        })
+    }
+
+    private fun showWelcomeScreen(welcome: Welcome) {
         WelcomeDialogFragment.newInstance(
-            "BIENVENIDO JUAN",
-            "Hoy celebramos el aniversario 50 de Super Mercados metro"
-            ,
-            "Un viaje para dos personas a Cancun",
-            "https://image.freepik.com/vector-gratis/caja-regalo-sorpresa-abierta_3446-340.jpg"
+            welcome.title,
+            welcome.description,
+            welcome.subtitle,
+            welcome.imageUrl
         ).show(supportFragmentManager, WelcomeDialogFragment.TAG)
     }
 
@@ -141,22 +151,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //geting real path from gallery
-    private fun getRealPathFromURIPath(
-        contentURI: Uri,
-        activity: Activity
-    ): String? {
-        val cursor: Cursor? =
-            activity.contentResolver.query(contentURI, null, null, null, null)
-        return if (cursor == null) {
-            contentURI.path
-        } else {
-            cursor.moveToFirst()
-            val idx: Int = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
-            cursor.getString(idx)
-        }
-    }
-
+    //TODO WE WILL USE THIS FUNCTION LATER
     private fun getRealPathFromURI(contentURI: Uri): String? {
         val result: String?
         val cursor =

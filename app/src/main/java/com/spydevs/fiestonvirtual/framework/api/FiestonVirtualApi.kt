@@ -2,6 +2,7 @@ package com.spydevs.fiestonvirtual.framework.api
 
 import com.spydevs.fiestonvirtual.data.entities.response.*
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
+import com.spydevs.fiestonvirtual.domain.models.welcome.WelcomeRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -49,4 +50,13 @@ interface FiestonVirtualApi {
         @Part("name") name: RequestBody?
     ): NetworkResponse<UploadImageResponseEntity, String>
 
+    /**
+     * Get event welcome
+     * @param [welcomeRequest] a request object for event welcome
+     * @return response about event welcome
+     */
+    @POST("event")
+    fun getEventWelcome(
+        @Body welcomeRequest: WelcomeRequest
+    ): NetworkResponse<WelcomeResponseEntity, String>
 }
