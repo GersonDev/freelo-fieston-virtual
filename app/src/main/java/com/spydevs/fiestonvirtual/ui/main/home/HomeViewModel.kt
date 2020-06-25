@@ -6,13 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.domain.models.Category
-import com.spydevs.fiestonvirtual.domain.models.User
-import com.spydevs.fiestonvirtual.domain.repository.UsersRepository
-import kotlinx.android.synthetic.main.toolbar_main.view.*
+import com.spydevs.fiestonvirtual.domain.models.user.User
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.GetLocalUserUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val usersRepository: UsersRepository) : ViewModel() {
+class HomeViewModel(
+    private val getUserUseCase: GetLocalUserUseCase
+) : ViewModel() {
 
     private val _categories = MutableLiveData<List<Category>>().apply {
         value = mutableListOf(
@@ -45,13 +46,13 @@ class HomeViewModel(private val usersRepository: UsersRepository) : ViewModel() 
 
     val categories: LiveData<List<Category>> = _categories
 
-    private val _userMutableLiveData = MutableLiveData<List<User>>()
-    val userLiveData: LiveData<List<User>>
+    private val _userMutableLiveData = MutableLiveData<User>()
+    val userLiveData: LiveData<User>
         get() = _userMutableLiveData
 
     fun getUsers() {
         viewModelScope.launch(Dispatchers.Main) {
-            _userMutableLiveData.value = usersRepository.getUser()
+            _userMutableLiveData.value = getUserUseCase()
         }
     }
 
