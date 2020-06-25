@@ -9,14 +9,14 @@ class UsersRepositoryImpl(
     private val usersDataSource: UsersDataSource
 ) : UsersRepository {
     override suspend fun getLocalUser(): User {
-        return usersDataSource.getUser()
+        return usersDataSource.getLocalUser()
     }
 
     override suspend fun setLoggedInUser(user: User) {
         usersDataSource.setLoggedInUser(user)
     }
 
-    override suspend fun getRemoteUser(userId: String): ResultType<User, String> {
+    override suspend fun getRemoteUser(userId: Int): ResultType<User, String> {
         return usersDataSource.getRemoteUser(userId)
     }
 

@@ -5,10 +5,10 @@ import com.spydevs.fiestonvirtual.domain.resource.ResultType
 
 interface UsersDataSource {
 
-    suspend fun getUser(): User
+    suspend fun getLocalUser(): User
 
     suspend fun setLoggedInUser(user: User)
 
-    suspend fun getRemoteUser(userId: String): ResultType<User, String>
+    suspend fun getRemoteUser(userId: Int): ResultType<User, String>
 
 }

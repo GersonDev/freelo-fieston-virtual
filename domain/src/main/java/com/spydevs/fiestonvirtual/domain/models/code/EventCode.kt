@@ -1,6 +1,6 @@
 package com.spydevs.fiestonvirtual.domain.models.code
 
 data class EventCode(
-    var userInvitationCode: String? = null,
-    var userId: String? = null
+    var idEvent: Int? = null,
+    var userId: Int? = null
 )

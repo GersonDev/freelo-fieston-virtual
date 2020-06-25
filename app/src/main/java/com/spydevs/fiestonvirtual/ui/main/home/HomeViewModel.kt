@@ -7,12 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.domain.models.Category
 import com.spydevs.fiestonvirtual.domain.models.user.User
-import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.GetUserUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.GetLocalUserUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val getUserUseCase: GetUserUseCase
+    private val getUserUseCase: GetLocalUserUseCase
 ) : ViewModel() {
 
     private val _categories = MutableLiveData<List<Category>>().apply {

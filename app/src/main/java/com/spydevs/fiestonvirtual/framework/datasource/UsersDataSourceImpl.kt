@@ -15,7 +15,7 @@ class UsersDataSourceImpl(
     private val usersDao: UsersDao
 ) : UsersDataSource {
 
-    override suspend fun getUser(): User {
+    override suspend fun getLocalUser(): User {
         return UserEntityMapper.convertFromInitial(usersDao.getUsers()[0])
     }
 
@@ -23,7 +23,18 @@ class UsersDataSourceImpl(
         usersDao.setLoggedInUser(UserMapper.convertFromInitial(user))
     }
 
-    override suspend fun getRemoteUser(userId: String): ResultType<User, String> {
+    //TODO update when the service is successful.
+    override suspend fun getRemoteUser(userId: Int): ResultType<User, String> {
+        return ResultType.Success(
+            User(
+                1,
+                "Steven",
+                "Garcia"
+            )
+        )
+    }
+    /*
+    override suspend fun getRemoteUser(userId: Int): ResultType<User, String> {
         return when (val result = fiestonVirtualApi.getDataUser(userId)) {
             is NetworkResponse.Success -> {
                 ResultType.Success(
@@ -44,5 +55,6 @@ class UsersDataSourceImpl(
 
         }
     }
+     */
 
 }

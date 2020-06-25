@@ -8,8 +8,9 @@ object UserResponseEntityMapper : Mapper<DataUserResponseEntity.DataEntity, User
 
     override fun convertFromInitial(i: DataUserResponseEntity.DataEntity?): User {
         return User().apply {
-            name = i?.userName
-            lastName = i?.userLastName
+            id = i?.user?.idUser
+            name = i?.user?.userName
+            lastName = i?.user?.userLastName
         }
     }
 

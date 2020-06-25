@@ -33,7 +33,7 @@ interface FiestonVirtualApi {
      */
     @GET("detalle_usuario.php")
     suspend fun getDataUser(
-        @Query("userId") userId: String
+        @Query("userId") userId: Int
     ): NetworkResponse<DataUserResponseEntity, ErrorResponseEntity>
 
     /**

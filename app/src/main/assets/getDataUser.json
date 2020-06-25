@@ -1,0 +1,19 @@
+{
+  "data": {
+    "user": {
+      "idUser": 5,
+      "userName": "Andr&eacute;s",
+      "userLastName": "Ram&iacute;rez",
+      "userSurName": "Garcia",
+      "userEmail": "andres@gmail.com",
+      "userPhone": "7387465",
+      "userCell": "99057743",
+      "userInvitationCode": "0",
+      "userTotalScore": "0",
+      "userStatus": "1",
+      "userLikePhotos": "0",
+      "userLikeVideos": "0"
+    }
+  },
+  "mensaje": "Respuesta exitosa"
+}
