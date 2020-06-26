@@ -1,0 +1,11 @@
+{
+  "data": {
+    "user": {
+      "idUser": 1
+    },
+    "event": {
+      "idEvent": 1
+    }
+  },
+  "mensaje": "Respuesta exitosa"
+}

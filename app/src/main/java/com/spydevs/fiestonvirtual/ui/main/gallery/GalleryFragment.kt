@@ -5,6 +5,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.spydevs.fiestonvirtual.R
+import com.spydevs.fiestonvirtual.ui.main.gallery.GalleryViewModel
+
 import com.spydevs.fiestonvirtual.ui.main.gallery.photo.PhotoAdapter
 import kotlinx.android.synthetic.main.fragment_gallery.*
 import org.koin.android.ext.android.inject
