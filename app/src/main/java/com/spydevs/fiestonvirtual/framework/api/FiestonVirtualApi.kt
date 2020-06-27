@@ -62,7 +62,7 @@ interface FiestonVirtualApi {
     ): NetworkResponse<WelcomeResponseEntity, String>
 
     /**
-     * Get trivia including questions and answers from web service
+     * Get trivia including questions and answers from web service.
      * @param [triviaRequest] a quest object for getting trivia
      * @return response about trivia
      */
