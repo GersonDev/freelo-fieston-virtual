@@ -2,6 +2,7 @@ package com.spydevs.fiestonvirtual.framework.api
 
 import com.spydevs.fiestonvirtual.data.entities.response.*
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
+import com.spydevs.fiestonvirtual.domain.models.trivia.TriviaRequest
 import com.spydevs.fiestonvirtual.domain.models.welcome.WelcomeRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -59,4 +60,15 @@ interface FiestonVirtualApi {
     fun getEventWelcome(
         @Body welcomeRequest: WelcomeRequest
     ): NetworkResponse<WelcomeResponseEntity, String>
+
+    /**
+     * Get trivia including questions and answers from web service
+     * @param [triviaRequest] a quest object for getting trivia
+     * @return response about trivia
+     */
+    @POST("trivias.php")
+    fun getTrivia(
+        @Body triviaRequest: TriviaRequest
+    ): NetworkResponse<TriviaResponseEntity, String>
+
 }

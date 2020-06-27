@@ -3,7 +3,7 @@ package com.spydevs.fiestonvirtual.ui.main.trivia.answer
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.spydevs.fiestonvirtual.R
-import com.spydevs.fiestonvirtual.model.trivia.AnswerModel
+import com.spydevs.fiestonvirtual.domain.models.trivia.Trivia
 import kotlinx.android.synthetic.main.layout_item_trivia_answer.view.*
 
 class AnswerViewHolder(
@@ -11,7 +11,7 @@ class AnswerViewHolder(
     private val onOptionClickListener: (position: Int) -> Unit
 ) : RecyclerView.ViewHolder(view) {
 
-    private lateinit var answerModel: AnswerModel
+    private lateinit var answerModel: Trivia.Alternative
 
     init {
         this.view.itemTriviaAnswer_btn.setOnClickListener {
@@ -19,11 +19,11 @@ class AnswerViewHolder(
         }
     }
 
-    fun bind(optionModel: AnswerModel) {
-        this.answerModel = optionModel
+    fun bind(alternative: Trivia.Alternative) {
+        this.answerModel = alternative
         this.view.itemTriviaAnswer_btn.apply {
-            text = optionModel.text
-            if (optionModel.checked) {
+            text = alternative.alternativeDescription
+            if (alternative.isAlternativeAnswer) {
                 setBackgroundColor(
                     resources.getColor(
                         R.color.colorAccent,

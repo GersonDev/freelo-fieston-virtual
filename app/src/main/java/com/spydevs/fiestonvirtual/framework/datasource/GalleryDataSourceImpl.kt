@@ -6,7 +6,7 @@ import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.framework.api.FiestonVirtualApi
 import com.spydevs.fiestonvirtual.framework.api.NetworkResponse
-import com.spydevs.fiestonvirtual.framework.mapper.frominitial.GalleryImageMapper
+import com.spydevs.fiestonvirtual.framework.mapper.implementations.GalleryImageMapper
 
 class GalleryDataSourceImpl(private val fiestonVirtualApi: FiestonVirtualApi): GalleryDataSource {
     override suspend fun uploadImage(

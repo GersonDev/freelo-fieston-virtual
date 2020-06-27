@@ -5,7 +5,7 @@ import com.spydevs.fiestonvirtual.data.entities.response.WelcomeResponseEntity
 import com.spydevs.fiestonvirtual.domain.models.welcome.Welcome
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.framework.api.FiestonVirtualApi
-import com.spydevs.fiestonvirtual.framework.mapper.frominitial.WelcomeMapper
+import com.spydevs.fiestonvirtual.framework.mapper.implementations.WelcomeMapper
 
 class EventDataSourceImpl(private val fiestonVirtualApi: FiestonVirtualApi) : EventDataSource {
     override suspend fun getWelcome(eventId: Int, userId: Int): ResultType<Welcome, String> {
