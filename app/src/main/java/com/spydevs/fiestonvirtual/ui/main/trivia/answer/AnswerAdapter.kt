@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.spydevs.fiestonvirtual.R
-import com.spydevs.fiestonvirtual.model.trivia.AnswerModel
+import com.spydevs.fiestonvirtual.domain.models.trivia.Trivia
 
 class AnswerAdapter : RecyclerView.Adapter<AnswerViewHolder>() {
 
-    private lateinit var answerList: MutableList<AnswerModel>
+    private lateinit var answerList: MutableList<Trivia.Alternative>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnswerViewHolder {
         return AnswerViewHolder(
@@ -27,20 +27,20 @@ class AnswerAdapter : RecyclerView.Adapter<AnswerViewHolder>() {
         holder.bind(answerList[position])
     }
 
-    fun addData(optionList: MutableList<AnswerModel>) {
-        this.answerList = optionList
+    fun addData(alternativeList: List<Trivia.Alternative>) {
+        this.answerList.addAll(alternativeList)
     }
 
     private fun cleanSelected() {
-        answerList.map { option ->
-            option.checked = false
+        answerList.forEach {
+            it.isAlternativeAnswer = false
         }
     }
 
     private fun setSelected(position: Int) {
-        if (!answerList[position].checked) {
+        if (!answerList[position].isAlternativeAnswer) {
             cleanSelected()
-            answerList[position].checked = true
+            answerList[position].isAlternativeAnswer = true
             notifyDataSetChanged()
         }
     }

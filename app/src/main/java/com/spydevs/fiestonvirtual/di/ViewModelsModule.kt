@@ -5,6 +5,7 @@ import com.spydevs.fiestonvirtual.ui.main.MainViewModel
 import com.spydevs.fiestonvirtual.ui.main.home.HomeViewModel
 import com.spydevs.fiestonvirtual.ui.main.photo.PhotoViewModel
 import com.spydevs.fiestonvirtual.ui.main.gallery.GalleryViewModel
+import com.spydevs.fiestonvirtual.ui.main.trivia.TriviaViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -15,5 +16,6 @@ val viewModelsModule = module {
     viewModel { GalleryViewModel(get()) }
     viewModel { MainViewModel(get()) }
     viewModel { CodeVerificationViewModel(get()) }
+    viewModel { TriviaViewModel(get()) }
 
 }

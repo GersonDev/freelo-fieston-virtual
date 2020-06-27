@@ -4,11 +4,9 @@ import com.spydevs.fiestonvirtual.data.datasource.UsersDataSource
 import com.spydevs.fiestonvirtual.domain.models.user.User
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.framework.api.FiestonVirtualApi
-import com.spydevs.fiestonvirtual.framework.api.NetworkResponse
 import com.spydevs.fiestonvirtual.framework.database.dao.UsersDao
-import com.spydevs.fiestonvirtual.framework.mapper.frominitial.UserEntityMapper
-import com.spydevs.fiestonvirtual.framework.mapper.frominitial.UserMapper
-import com.spydevs.fiestonvirtual.framework.mapper.frominitial.UserResponseEntityMapper
+import com.spydevs.fiestonvirtual.framework.mapper.implementations.UserEntityMapper
+import com.spydevs.fiestonvirtual.framework.mapper.implementations.UserMapper
 
 class UsersDataSourceImpl(
     private val fiestonVirtualApi: FiestonVirtualApi,
