@@ -1,14 +1,12 @@
-package com.spydevs.fiestonvirtual.framework.mapper.frominitial
+package com.spydevs.fiestonvirtual.framework.mapper.implementations
 
 import com.spydevs.fiestonvirtual.data.entities.response.GalleryResponseEntity
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryItem
+import com.spydevs.fiestonvirtual.framework.mapper.Mapper
 
-/**
- * TODO refactor object with a abstraction.
- */
-object GalleryItemListMapper {
+object GalleryItemListMapper : Mapper<List<GalleryResponseEntity.Post>, List<GalleryItem>>() {
 
-    fun convertFromInitial(i: List<GalleryResponseEntity.Post>): List<GalleryItem> {
+    override fun convertFromInitial(i: List<GalleryResponseEntity.Post>): List<GalleryItem> {
         return i.map {
             GalleryItem(
                 it.idPost,
@@ -16,7 +14,7 @@ object GalleryItemListMapper {
                 it.postFile,
                 it.postStatus
             )
-        }.toList()
+        }
     }
 
 }
