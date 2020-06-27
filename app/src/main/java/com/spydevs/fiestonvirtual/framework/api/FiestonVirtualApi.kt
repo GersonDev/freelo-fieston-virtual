@@ -1,8 +1,10 @@
 package com.spydevs.fiestonvirtual.framework.api
 
 import com.spydevs.fiestonvirtual.data.entities.response.*
+import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
 import com.spydevs.fiestonvirtual.domain.models.trivia.TriviaRequest
+import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryRequest
 import com.spydevs.fiestonvirtual.domain.models.welcome.WelcomeRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -71,4 +73,13 @@ interface FiestonVirtualApi {
         @Body triviaRequest: TriviaRequest
     ): NetworkResponse<TriviaResponseEntity, String>
 
+
+    /**
+     * @param [galleryRequest] This object is necessary for return the gallery.
+     * @return all the images and videos.
+     */
+    @POST("getGallery")
+    fun getGallery(
+        @Body galleryRequest: GalleryRequest
+    ): NetworkResponse<GalleryResponseEntity, ErrorResponse>
 }

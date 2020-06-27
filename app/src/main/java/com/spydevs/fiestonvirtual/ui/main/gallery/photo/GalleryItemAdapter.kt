@@ -4,16 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.spydevs.fiestonvirtual.R
-import com.spydevs.fiestonvirtual.domain.models.photo.Photo
+import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryItem
 
-class PhotoAdapter(
+class GalleryItemAdapter(
     private val onPhotoClickListener: (position: Int) -> Unit
-) : RecyclerView.Adapter<PhotoViewHolder>() {
+) : RecyclerView.Adapter<GalleryItemViewHolder>() {
 
-    private var photoList: MutableList<Photo> = mutableListOf()
+    private var photoList: List<GalleryItem> = mutableListOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
-        return PhotoViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryItemViewHolder {
+        return GalleryItemViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.layout_item_photo, parent, false)
         ) { position ->
@@ -25,11 +25,11 @@ class PhotoAdapter(
         return photoList.size
     }
 
-    override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GalleryItemViewHolder, position: Int) {
         holder.bind(photoList[position])
     }
 
-    fun addData(photoList: MutableList<Photo>) {
+    fun addData(photoList: List<GalleryItem>) {
         this.photoList = photoList
         notifyDataSetChanged()
     }
