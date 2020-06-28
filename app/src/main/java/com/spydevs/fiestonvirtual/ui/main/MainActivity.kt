@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
 //        initBadge()
 
         subscribeToWelcome()
+        subscribeToAnyError()
 
         mainViewModel.getWelcome()
     }
@@ -72,6 +73,12 @@ class MainActivity : AppCompatActivity() {
     private fun subscribeToWelcome() {
         mainViewModel.welcome.observe(this, Observer {
             showWelcomeScreen(it)
+        })
+    }
+
+    private fun subscribeToAnyError() {
+        mainViewModel.error.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
     }
 

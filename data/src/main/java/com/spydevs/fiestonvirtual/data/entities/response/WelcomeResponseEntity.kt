@@ -8,7 +8,6 @@ data class WelcomeResponseEntity(
         val event: Event
     ) {
         data class Event(
-            val eventHost: String,
             val eventImagePrize: String,
             val eventLogo: String,
             val eventName: String,

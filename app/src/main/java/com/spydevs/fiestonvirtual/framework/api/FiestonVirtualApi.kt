@@ -58,7 +58,7 @@ interface FiestonVirtualApi {
      * @param [welcomeRequest] a request object for event welcome
      * @return response about event welcome
      */
-    @POST("event")
+    @POST("detalle_evento.php")
     suspend fun getEventWelcome(
         @Body welcomeRequest: WelcomeRequest
     ): NetworkResponse<WelcomeResponseEntity, String>

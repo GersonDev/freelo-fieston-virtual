@@ -1,6 +1,7 @@
 package com.spydevs.fiestonvirtual.data.datasource
 
 import com.spydevs.fiestonvirtual.domain.models.welcome.Welcome
+import com.spydevs.fiestonvirtual.domain.models.welcome.WelcomeRequest
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 
 /**
@@ -14,5 +15,5 @@ interface EventDataSource {
      * @param [userId] the user id
      * @return a [ResultType] that contains information encapsulated in a domain model
      */
-    suspend fun getWelcome(eventId: Int, userId: Int): ResultType<Welcome, String>
+    suspend fun getWelcome(welcomeRequest: WelcomeRequest): ResultType<Welcome, String>
 }
