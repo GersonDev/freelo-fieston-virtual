@@ -8,7 +8,7 @@ import com.spydevs.fiestonvirtual.domain.models.trivia.Trivia
 
 class AnswerAdapter : RecyclerView.Adapter<AnswerViewHolder>() {
 
-    private lateinit var answerList: MutableList<Trivia.Alternative>
+    private var answerList = mutableListOf<Trivia.Alternative>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnswerViewHolder {
         return AnswerViewHolder(

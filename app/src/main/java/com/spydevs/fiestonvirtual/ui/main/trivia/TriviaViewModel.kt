@@ -22,7 +22,6 @@ class TriviaViewModel(private val getTriviaUseCase: GetTriviaUseCase) : ViewMode
 
     fun getTrivia() {
         viewModelScope.launch(Dispatchers.Main) {
-
             when (val result = getTriviaUseCase()) {
                 is ResultType.Success -> {
                     _trivia.value = result.value

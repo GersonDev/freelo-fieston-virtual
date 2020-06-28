@@ -18,6 +18,7 @@ class TriviaPagerAdapter(
     fun addAllData(triviaModelList: List<Trivia>) {
         clearData()
         this.triviaModelList.addAll(triviaModelList)
+        notifyDataSetChanged()
     }
 
     private fun clearData() {
