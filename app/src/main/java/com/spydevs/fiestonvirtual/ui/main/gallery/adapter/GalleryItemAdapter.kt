@@ -7,7 +7,7 @@ import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryItem
 
 class GalleryItemAdapter(
-    private val onPhotoClickListener: (position: Int) -> Unit
+    private val onPhotoClickListener: (galleryItem: GalleryItem) -> Unit
 ) : RecyclerView.Adapter<GalleryItemViewHolder>() {
 
     private var photoList: List<GalleryItem> = mutableListOf()
@@ -17,7 +17,7 @@ class GalleryItemAdapter(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.layout_item_photo, parent, false)
         ) { position ->
-            onPhotoClickListener(position)
+            onPhotoClickListener(photoList[position])
         }
     }
 

@@ -16,8 +16,12 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
 
     private val galleryViewModel: GalleryViewModel by inject()
     private val galleryItemAdapter: GalleryItemAdapter by lazy {
-        GalleryItemAdapter {
-            startActivity(Intent(context, GalleryDetailActivity::class.java))
+        GalleryItemAdapter { GalleryItem ->
+            startActivity(
+                Intent(context, GalleryDetailActivity::class.java).apply {
+                    putExtra(GalleryDetailActivity.OBJECT_GALLERY_ITEM, GalleryItem)
+                }
+            )
         }
     }
 

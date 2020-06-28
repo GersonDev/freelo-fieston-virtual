@@ -1,6 +1,7 @@
 package com.spydevs.fiestonvirtual.di
 
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.code.VerifyEventCodeUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.comment.GetCommentsUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.trivia.GetTriviaUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.GetGalleryUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.UploadImageUseCase
@@ -9,6 +10,7 @@ import com.spydevs.fiestonvirtual.domain.usecases.implementations.welcome.GetWel
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.GetLocalUserUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.code.VerifyEventCodeUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.LoginUserUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.implementations.comment.GetCommentsUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.trivia.GetTriviaUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.gallery.GetGalleryUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.gallery.UploadImageUseCaseImpl
@@ -47,5 +49,9 @@ val useCasesModule = module {
 
     single<UploadImageUseCase> {
         UploadImageUseCaseImpl(get())
+    }
+
+    single<GetCommentsUseCase> {
+        GetCommentsUseCaseImpl(get())
     }
 }

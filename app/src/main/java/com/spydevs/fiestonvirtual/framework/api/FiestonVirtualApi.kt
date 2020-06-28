@@ -1,6 +1,7 @@
 package com.spydevs.fiestonvirtual.framework.api
 
 import com.spydevs.fiestonvirtual.data.entities.response.*
+import com.spydevs.fiestonvirtual.domain.models.comment.CommentRequest
 import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
 import com.spydevs.fiestonvirtual.domain.models.trivia.TriviaRequest
@@ -82,4 +83,13 @@ interface FiestonVirtualApi {
     fun getGallery(
         @Body galleryRequest: GalleryRequest
     ): NetworkResponse<GalleryResponseEntity, ErrorResponse>
+
+    /**
+     * @param [commentRequest] This object is necessary for return the comments.
+     * @return all the comments.
+     */
+    @POST("getComments")
+    fun getComments(
+        @Body commentRequest: CommentRequest
+    ): NetworkResponse<GetCommentsResponseEntity, ErrorResponse>
 }
