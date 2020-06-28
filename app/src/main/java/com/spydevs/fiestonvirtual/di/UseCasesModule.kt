@@ -3,6 +3,7 @@ package com.spydevs.fiestonvirtual.di
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.code.VerifyEventCodeUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.trivia.GetTriviaUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.GetGalleryUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.UploadImageUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.welcome.GetWelcomeUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.welcome.GetWelcomeUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.GetLocalUserUseCase
@@ -10,6 +11,7 @@ import com.spydevs.fiestonvirtual.domain.usecases.implementations.code.VerifyEve
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.LoginUserUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.trivia.GetTriviaUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.gallery.GetGalleryUseCaseImpl
+import com.spydevs.fiestonvirtual.domain.usecases.implementations.gallery.UploadImageUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.user.GetLocalUserUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.user.LoginUserUseCaseImpl
 import org.koin.dsl.module
@@ -41,5 +43,9 @@ val useCasesModule = module {
 
     single<GetGalleryUseCase> {
         GetGalleryUseCaseImpl(get())
+    }
+
+    single<UploadImageUseCase> {
+        UploadImageUseCaseImpl(get())
     }
 }
