@@ -48,7 +48,7 @@ interface FiestonVirtualApi {
      */
     @Multipart
     @POST("index.php")
-    fun uploadFile(
+    suspend fun uploadFile(
         @Part file: MultipartBody.Part?,
         @Part("name") name: RequestBody?
     ): NetworkResponse<UploadImageResponseEntity, String>
@@ -59,7 +59,7 @@ interface FiestonVirtualApi {
      * @return response about event welcome
      */
     @POST("event")
-    fun getEventWelcome(
+    suspend fun getEventWelcome(
         @Body welcomeRequest: WelcomeRequest
     ): NetworkResponse<WelcomeResponseEntity, String>
 
@@ -69,7 +69,7 @@ interface FiestonVirtualApi {
      * @return response about trivia
      */
     @POST("trivias.php")
-    fun getTrivia(
+    suspend fun getTrivia(
         @Body triviaRequest: TriviaRequest
     ): NetworkResponse<TriviaResponseEntity, String>
 
