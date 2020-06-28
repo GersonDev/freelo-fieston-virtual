@@ -1,4 +1,4 @@
-package com.spydevs.fiestonvirtual.ui.main.gallery.photo
+package com.spydevs.fiestonvirtual.ui.main.gallery.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
