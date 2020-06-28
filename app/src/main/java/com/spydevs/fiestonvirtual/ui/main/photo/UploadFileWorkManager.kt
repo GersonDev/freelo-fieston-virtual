@@ -36,24 +36,26 @@ class UploadFileWorkManager(context: Context, workerParameters: WorkerParameters
         val fileName = RequestBody.create(MediaType.parse("text/plain"), file.name)
         val apiService = retrofit.create(FiestonVirtualApi::class.java)
 
-        return when (val uploadImageResponse = apiService.uploadFile(fileUploadMultiPart, fileName)) {
-            is NetworkResponse.Success -> {
-                showNotification(CHANNEL_NAME, "Image uploaded successfully")
-                Result.success()
-            }
-            is NetworkResponse.ApiError -> {
-                print(uploadImageResponse.body)
-                Result.failure()
-            }
-            is NetworkResponse.NetworkError -> {
-                print(uploadImageResponse.error.message)
-                Result.failure()
-            }
-            is NetworkResponse.UnknownError -> {
-                print(uploadImageResponse.error.message)
-                Result.failure()
-            }
-        }
+        //TODO IMPROVE THIS CODE BY USING COROUTINEWORKS INSTEAD OF WORKER
+        return  Result.success()
+//        return when (val uploadImageResponse = apiService.uploadFile(fileUploadMultiPart, fileName)) {
+//            is NetworkResponse.Success -> {
+//                showNotification(CHANNEL_NAME, "Image uploaded successfully")
+//                Result.success()
+//            }
+//            is NetworkResponse.ApiError -> {
+//                print(uploadImageResponse.body)
+//                Result.failure()
+//            }
+//            is NetworkResponse.NetworkError -> {
+//                print(uploadImageResponse.error.message)
+//                Result.failure()
+//            }
+//            is NetworkResponse.UnknownError -> {
+//                print(uploadImageResponse.error.message)
+//                Result.failure()
+//            }
+//        }
     }
 
     private fun showNotification(title: String, task: String) {

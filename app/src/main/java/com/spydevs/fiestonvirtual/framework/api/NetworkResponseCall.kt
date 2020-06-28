@@ -2,6 +2,7 @@ package com.spydevs.fiestonvirtual.framework.api
 
 import okhttp3.Request
 import okhttp3.ResponseBody
+import okio.Timeout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Converter
@@ -30,7 +31,7 @@ internal class NetworkResponseCall<S : Any, E : Any>(
                         // Response is successful but the body is null
                         callback.onResponse(
                             this@NetworkResponseCall,
-                            Response.success(NetworkResponse.UnknownError(Throwable("Body is null")))
+                            Response.success(NetworkResponse.UnknownError(Throwable("Unknown Error")))
                         )
                     }
                 } else {
@@ -51,7 +52,7 @@ internal class NetworkResponseCall<S : Any, E : Any>(
                     } else {
                         callback.onResponse(
                             this@NetworkResponseCall,
-                            Response.success(NetworkResponse.UnknownError(Throwable("Error body is null")))
+                            Response.success(NetworkResponse.UnknownError(Throwable("Unknown Error")))
                         )
                     }
                 }
@@ -80,4 +81,6 @@ internal class NetworkResponseCall<S : Any, E : Any>(
     }
 
     override fun request(): Request = delegate.request()
+
+    override fun timeout(): Timeout = delegate.timeout()
 }
