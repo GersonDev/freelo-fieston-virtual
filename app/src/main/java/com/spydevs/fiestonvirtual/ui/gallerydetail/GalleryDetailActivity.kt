@@ -2,62 +2,35 @@ package com.spydevs.fiestonvirtual.ui.gallerydetail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.spydevs.fiestonvirtual.R
-import com.spydevs.fiestonvirtual.domain.models.comment.Comment
+import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryItem
 import com.spydevs.fiestonvirtual.ui.gallerydetail.adapter.CommentAdapter
 import kotlinx.android.synthetic.main.activity_camera.toolbar
 import kotlinx.android.synthetic.main.content_gallery_detail.*
+import org.koin.android.ext.android.inject
 
 class GalleryDetailActivity : AppCompatActivity() {
+
+    private val viewModel: GalleryDetailViewModel by inject()
+    private val commentAdapter: CommentAdapter by lazy {
+        CommentAdapter()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gallery_detail)
         setUpToolbar()
-        //TODO add ViewModel.
-        galleryDetail_rv.adapter = CommentAdapter().apply {
-            addData(
-                mutableListOf(
-                    Comment(
-                        1,
-                        "chevre",
-                        "https://pngimg.com/uploads/face/face_PNG11760.png"
-                    ),
-                    Comment(
-                        1,
-                        "bacan",
-                        "https://pngimg.com/uploads/face/face_PNG11760.png"
-                    ),
-                    Comment(
-                        1,
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-                        "https://pngimg.com/uploads/face/face_PNG11760.png"
-                    ),
-                    Comment(
-                        1,
-                        "exito",
-                        "https://pngimg.com/uploads/face/face_PNG11760.png"
-                    ),
-                    Comment(
-                        1,
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-                        "https://pngimg.com/uploads/face/face_PNG11760.png"
-                    ),
-                    Comment(
-                        1,
-                        "eliminar",
-                        "https://pngimg.com/uploads/face/face_PNG11760.png"
-                    ),
-                    Comment(
-                        1,
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-                        "https://pngimg.com/uploads/face/face_PNG11760.png"
-                    )
-                )
+        setUpCommentList()
+        subscribeToGetCommentList()
+        getCommentList()
 
-            )
+    }
+
+    private fun getCommentList() {
+        intent.extras?.let { bundle ->
+            viewModel.getCommentList((bundle.get(OBJECT_GALLERY_ITEM) as GalleryItem).id)
         }
-
     }
 
     private fun setUpToolbar() {
@@ -66,6 +39,20 @@ class GalleryDetailActivity : AppCompatActivity() {
             finish()
         }
         supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+
+    private fun setUpCommentList() {
+        galleryDetail_rv.adapter = this.commentAdapter
+    }
+
+    private fun subscribeToGetCommentList() {
+        this.viewModel.commentList.observe(this, Observer {
+            this.commentAdapter.addData(it)
+        })
+    }
+
+    companion object {
+        const val OBJECT_GALLERY_ITEM = "OBJECT_GALLERY_ITEM"
     }
 
 }
