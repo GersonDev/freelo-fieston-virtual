@@ -18,25 +18,25 @@ class HomeViewModel(
     private val _categories = MutableLiveData<List<Category>>().apply {
         value = mutableListOf(
             Category(
-                "FOTOS",
+                HomeFragment.CATEGORY_NAME_PHOTO,
                 R.drawable.ic_home_fotos,
                 "GALERIA DE FOTOS Y",
                 "VIDEOS"
             ),
             Category(
-                "CHAT",
+                HomeFragment.CATEGORY_NAME_CHAT,
                 R.drawable.ic_home_chat,
                 "CHATEAR AHORA",
                 "ARMA LA CONVERSA"
             ),
             Category(
-                "PLAY LIST",
+                HomeFragment.CATEGORY_NAME_PLAY_LIST,
                 R.drawable.ic_home_playlist,
                 "Participa de la fiesta",
                 "PIDE UNA CANCION"
             ),
             Category(
-                "TRIVIAS",
+                HomeFragment.CATEGORY_NAME_TRIVIA,
                 R.drawable.ic_home_trivia,
                 "GANA PUNTOS CON LAS TRIVIAS AHORA",
                 "JUGAR AHORA"

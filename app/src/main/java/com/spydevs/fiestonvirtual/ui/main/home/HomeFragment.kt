@@ -22,15 +22,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val categoryAdapter by lazy {
         CategoryAdapter {
             when (it.name) {
-                "FOTOS" -> {
+                CATEGORY_NAME_PHOTO -> {
                     val navController = findNavController()
                     navController.navigate(R.id.action_navigation_home_to_navigation_gallery)
                 }
-                "CHAT" -> {
+                CATEGORY_NAME_CHAT -> {
                     val navController = findNavController()
                     navController.navigate(R.id.action_navigation_home_to_navigation_chat)
                 }
-                "TRIVIAS" -> {
+                CATEGORY_NAME_TRIVIA -> {
                     val navController = findNavController()
                     navController.navigate(R.id.action_navigation_home_to_navigation_trivia)
                 }
@@ -72,6 +72,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun setupViewListeners() {
 
+    }
+
+    companion object {
+        const val CATEGORY_NAME_PHOTO = "FOTOS"
+        const val CATEGORY_NAME_CHAT = "CHAT"
+        const val CATEGORY_NAME_TRIVIA = "TRIVIAS"
+        const val CATEGORY_NAME_PLAY_LIST = "PLAY LIST"
     }
 
 }
