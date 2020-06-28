@@ -55,7 +55,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".ui.main.gallery.detail.GalleryDetailActivity"
+            android:name=".ui.gallerydetail.GalleryDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
