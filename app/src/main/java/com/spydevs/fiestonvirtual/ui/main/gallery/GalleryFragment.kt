@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryRequest
 import com.spydevs.fiestonvirtual.ui.main.gallery.detail.GalleryDetailActivity
-import com.spydevs.fiestonvirtual.ui.main.gallery.photo.GalleryItemAdapter
+import com.spydevs.fiestonvirtual.ui.main.gallery.adapter.GalleryItemAdapter
 import kotlinx.android.synthetic.main.fragment_gallery.*
 import org.koin.android.ext.android.inject
 
