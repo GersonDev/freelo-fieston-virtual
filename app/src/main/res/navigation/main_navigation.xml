@@ -9,7 +9,17 @@
         android:id="@+id/navigation_home"
         android:name="com.spydevs.fiestonvirtual.ui.main.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_trivia"
+            app:destination="@id/navigation_trivia" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_chat"
+            app:destination="@id/navigation_chat" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_gallery"
+            app:destination="@id/navigation_gallery" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_gallery"

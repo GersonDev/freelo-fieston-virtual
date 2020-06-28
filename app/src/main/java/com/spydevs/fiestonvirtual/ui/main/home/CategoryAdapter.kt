@@ -41,6 +41,7 @@ class CategoryAdapter(
 
         fun bind(category: Category) {
             this.categoryModel = category
+            itemView.categoryForegroundImageView.setImageResource(category.image)
             itemView.categoryNameTextView.text = category.name
             itemView.descriptionTextView.text = category.description
             itemView.moreDescriptionTextView.text = category.subDescription

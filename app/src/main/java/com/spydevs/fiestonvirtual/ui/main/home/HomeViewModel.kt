@@ -19,25 +19,25 @@ class HomeViewModel(
         value = mutableListOf(
             Category(
                 "FOTOS",
-                R.drawable.mango,
+                R.drawable.ic_home_fotos,
                 "GALERIA DE FOTOS Y",
                 "VIDEOS"
             ),
             Category(
                 "CHAT",
-                R.drawable.mango,
-                "Participa de la fiesta",
-                "PIDE UNA CANCION"
-            ),
-            Category(
-                "PLAY LIST",
-                R.drawable.mango,
+                R.drawable.ic_home_chat,
                 "CHATEAR AHORA",
                 "ARMA LA CONVERSA"
             ),
             Category(
+                "PLAY LIST",
+                R.drawable.ic_home_playlist,
+                "Participa de la fiesta",
+                "PIDE UNA CANCION"
+            ),
+            Category(
                 "TRIVIAS",
-                R.drawable.mango,
+                R.drawable.ic_home_trivia,
                 "GANA PUNTOS CON LAS TRIVIAS AHORA",
                 "JUGAR AHORA"
             )
