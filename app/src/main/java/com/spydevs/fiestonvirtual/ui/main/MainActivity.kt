@@ -59,10 +59,10 @@ class MainActivity : AppCompatActivity() {
 //        shoppingCartViewModel.requestCart()
 //        initBadge()
 
-//        subscribeToWelcome()
-//        subscribeToAnyError()
-//
-//        mainViewModel.getWelcome()
+        subscribeToWelcome()
+        subscribeToAnyError()
+
+        mainViewModel.getWelcome()
     }
 
     private fun setUpViews() {
