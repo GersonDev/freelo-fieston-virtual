@@ -52,7 +52,7 @@ class HomeViewModel(
 
     fun getUsers() {
         viewModelScope.launch(Dispatchers.Main) {
-            //_userMutableLiveData.value = getUserUseCase()
+            _userMutableLiveData.value = getUserUseCase()
         }
     }
 
