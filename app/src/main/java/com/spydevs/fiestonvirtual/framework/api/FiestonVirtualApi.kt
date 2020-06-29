@@ -2,12 +2,10 @@ package com.spydevs.fiestonvirtual.framework.api
 
 import com.spydevs.fiestonvirtual.data.entities.response.*
 import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
-import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
 import com.spydevs.fiestonvirtual.domain.models.trivia.TriviaRequest
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryRequest
 import com.spydevs.fiestonvirtual.domain.models.welcome.WelcomeRequest
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.http.*
 
 /**
@@ -23,13 +21,6 @@ interface FiestonVirtualApi {
     suspend fun validateCode(
         @Query("codInv") codeEvent: String
     ): NetworkResponse<CodeResponseEntity, ErrorResponseEntity>
-
-    //TODO add comments.
-    @POST("user/{user_id}/cameraImage")
-    suspend fun uploadImage(
-        @Path("user_id") userId: Int,
-        @Body galleryImageRequest: GalleryImageRequest
-    ): NetworkResponse<GalleryImageResponseEntity, String>
 
     /**
      * This [userId] is the id user.
@@ -47,11 +38,13 @@ interface FiestonVirtualApi {
      * @return response about uploaded file
      */
     @Multipart
-    @POST("index.php")
+    @POST("publicaciones.php")
     suspend fun uploadFile(
         @Part file: MultipartBody.Part?,
-        @Part("name") name: RequestBody?
-    ): NetworkResponse<UploadImageResponseEntity, String>
+        @Part("idUser") userId: Int,
+        @Part("idEvent") eventId: Int,
+        @Part("postType") postType: Int
+    ): NetworkResponse<UploadFileResponseEntity, String>
 
     /**
      * Get event welcome

@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
+import com.spydevs.fiestonvirtual.domain.models.photo.Photo
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.UploadImageUseCase
 import com.spydevs.fiestonvirtual.util.formatter.ImageFormattingStrategy
@@ -18,24 +18,20 @@ class CameraViewModel(
     private val imageFormattingStrategy: ImageFormattingStrategy
 ) : ViewModel() {
 
-    private val _uploadedImage = MutableLiveData<String>()
-    val uploadedImage: LiveData<String>
+    private val _uploadedImage = MutableLiveData<Photo>()
+    val uploadedImage: LiveData<Photo>
         get() = _uploadedImage
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String>
         get() = _error
 
-    fun uploadImage(bitmap: Bitmap) {
+    //TODO FOR NOW WE ARE NOY GOING TO USE THIS METHOD, INSTEAD WE ARE USING WORKMANAGER AND WE ARE SHOWING NOTIFICATIONS
+    fun uploadImage(imagePath: String) {
         viewModelScope.launch(Dispatchers.Main) {
-            val formattedImageString = convertImage(bitmap)
-            val galleryRequestImage =
-                GalleryImageRequest(
-                    formattedImageString
-                )
-            when (val result = uploadImageUseCase(galleryRequestImage)) {
+            when (val result = uploadImageUseCase(imagePath)) {
                 is ResultType.Success -> {
-                    _uploadedImage.value = result.value.imageUrl
+                    _uploadedImage.value = result.value
                 }
                 is ResultType.Error -> {
                     _error.value = result.value

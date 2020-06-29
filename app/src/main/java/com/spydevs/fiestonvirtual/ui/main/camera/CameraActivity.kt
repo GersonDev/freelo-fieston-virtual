@@ -16,7 +16,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
+import androidx.work.*
 import com.spydevs.fiestonvirtual.R
+import com.spydevs.fiestonvirtual.ui.main.photo.PhotoFragment
+import com.spydevs.fiestonvirtual.ui.main.photo.UploadFileCoroutineWorker
 import com.spydevs.fiestonvirtual.util.extensions.openSettings
 import com.spydevs.fiestonvirtual.util.extensions.setupAlertDialog
 import com.spydevs.fiestonvirtual.util.ImagesUtil
@@ -27,6 +30,7 @@ import org.koin.android.ext.android.inject
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class CameraActivity : AppCompatActivity() {
 
@@ -55,10 +59,11 @@ class CameraActivity : AppCompatActivity() {
         setUpView()
         setUpViewListeners()
         subscribeToUploadImage()
+        subscribeToAnyError()
     }
 
     private fun setUpView() {
-        fabUploadCameraPhoto.isEnabled = false
+        //fabUploadCameraPhoto.isEnabled = false
     }
 
     private fun setUpViewListeners() {
@@ -72,7 +77,7 @@ class CameraActivity : AppCompatActivity() {
 
         fabUploadCameraPhoto.setOnClickListener {
             rotatedBitmap?.let {
-                cameraViewModel.uploadImage(it)
+                startWork()
             }
         }
     }
@@ -81,6 +86,13 @@ class CameraActivity : AppCompatActivity() {
         cameraViewModel.uploadedImage.observe(this, Observer {
             //TODO USE GLIDE TO LOAD THE IMAGE
             //photoImageView
+            Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+        })
+    }
+
+    private fun subscribeToAnyError() {
+        cameraViewModel.error.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
     }
 
@@ -247,6 +259,26 @@ class CameraActivity : AppCompatActivity() {
 
     private fun galleryAddPic() {
         NativeGallery.saveMedia(this, 0, currentPhotoPath, "Camera")
+    }
+
+    private fun startWork() {
+        // Create the Constraints
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+
+        val oneTimeWorkRequest =
+            OneTimeWorkRequest.Builder(UploadFileCoroutineWorker::class.java)
+                .setInputData(createInputData(currentPhotoPath))
+                .setConstraints(constraints)
+                .setInitialDelay(PhotoFragment.DURATION_TIME_IN_SECONDS, TimeUnit.SECONDS).build()
+        WorkManager.getInstance(this).enqueue(oneTimeWorkRequest)
+    }
+
+    private fun createInputData(imagePath: String): Data {
+        return Data.Builder()
+            .putString("imagePath", imagePath)
+            .build()
     }
 
 }
