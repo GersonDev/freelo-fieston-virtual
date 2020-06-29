@@ -2,16 +2,10 @@ package com.spydevs.fiestonvirtual.ui.main
 
 import android.Manifest
 import android.app.Activity
-import android.content.ContentUris
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.database.Cursor
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.os.Environment
-import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -31,7 +25,6 @@ import com.spydevs.fiestonvirtual.util.extensions.openSettings
 import com.spydevs.fiestonvirtual.util.extensions.setupAlertDialog
 import kotlinx.android.synthetic.main.toolbar_main.*
 import org.koin.android.ext.android.inject
-
 
 class MainActivity : AppCompatActivity() {
 
