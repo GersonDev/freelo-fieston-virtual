@@ -41,7 +41,7 @@ interface FiestonVirtualApi {
     @POST("detalle_usuario.php")
     suspend fun getDataUser(
         @Body getRemoteUserRequest: GetRemoteUserRequest
-    ): NetworkResponse<DataUserResponseEntity, ErrorResponseEntity>
+    ): NetworkResponse<DataUserResponseEntity, ErrorResponse>
 
     /**
      * Upload any file to server in form-data
