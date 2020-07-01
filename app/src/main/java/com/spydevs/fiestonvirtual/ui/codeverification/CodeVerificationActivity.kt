@@ -33,7 +33,6 @@ class CodeVerificationActivity : AppCompatActivity() {
         codeButton.setOnClickListener {
             dialogProgress.show()
             viewModel.verifyCode(codeVerification_et.text.toString().trim())
-            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 
@@ -41,6 +40,7 @@ class CodeVerificationActivity : AppCompatActivity() {
         dialogProgress.dismiss()
         if (it) {
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 

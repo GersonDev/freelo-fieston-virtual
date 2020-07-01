@@ -1,5 +1,6 @@
 package com.spydevs.fiestonvirtual.domain.repository
 
+import com.spydevs.fiestonvirtual.domain.models.user.GetRemoteUserRequest
 import com.spydevs.fiestonvirtual.domain.models.user.User
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 
@@ -10,5 +11,5 @@ import com.spydevs.fiestonvirtual.domain.resource.ResultType
 interface UsersRepository {
     suspend fun getLocalUser(): User
     suspend fun setLoggedInUser(user: User)
-    suspend fun getRemoteUser(userId: Int): ResultType<User, String>
+    suspend fun getRemoteUser(getRemoteUserRequest: GetRemoteUserRequest): ResultType<User, String>
 }

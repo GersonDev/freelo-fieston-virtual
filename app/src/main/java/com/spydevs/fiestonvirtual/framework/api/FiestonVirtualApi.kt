@@ -7,6 +7,7 @@ import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
 import com.spydevs.fiestonvirtual.domain.models.trivia.TriviaRequest
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryRequest
+import com.spydevs.fiestonvirtual.domain.models.user.GetRemoteUserRequest
 import com.spydevs.fiestonvirtual.domain.models.welcome.WelcomeRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -34,12 +35,12 @@ interface FiestonVirtualApi {
     ): NetworkResponse<GalleryImageResponseEntity, String>
 
     /**
-     * This [userId] is the id user.
+     * This [getRemoteUserRequest] content the id user.
      * @return all data user.
      */
-    @GET("detalle_usuario.php")
+    @POST("detalle_usuario.php")
     suspend fun getDataUser(
-        @Query("userId") userId: Int
+        @Body getRemoteUserRequest: GetRemoteUserRequest
     ): NetworkResponse<DataUserResponseEntity, ErrorResponseEntity>
 
     /**

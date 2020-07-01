@@ -18,8 +18,8 @@ class CodeDataSourceImpl(
             is NetworkResponse.Success -> {
                 ResultType.Success(
                     EventCode(
-                        idEvent = result.body.data.user.idUser,
-                        idUser = result.body.data.event.idEvent
+                        idEvent = result.body.data.event.idEvent,
+                        idUser = result.body.data.user.idUser
                     )
                 )
             }
