@@ -32,7 +32,7 @@ class UsersDataSourceImpl(
             is NetworkResponse.Success -> {
                 ResultType.Success(
                     UserResponseEntityMapper.convertFromInitial(
-                        result.body.data
+                        result.body.data.user
                     )
                 )
             }

@@ -59,6 +59,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun subscribeToUser() {
         homeViewModel.userLiveData.observe(viewLifecycleOwner, Observer { user ->
             nameTextView.text = user.name.plus(" ").plus(user.lastName)
+            textView4.text = user.totalScore.toString()
+            textView6.text = user.ranking.toString()
         })
     }
 
