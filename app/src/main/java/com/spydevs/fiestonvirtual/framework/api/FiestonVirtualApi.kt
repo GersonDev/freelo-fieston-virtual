@@ -1,6 +1,7 @@
 package com.spydevs.fiestonvirtual.framework.api
 
 import com.spydevs.fiestonvirtual.data.entities.response.*
+import com.spydevs.fiestonvirtual.domain.models.code.ValidateCodeRequest
 import com.spydevs.fiestonvirtual.domain.models.comment.CommentRequest
 import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
@@ -17,12 +18,12 @@ import retrofit2.http.*
 interface FiestonVirtualApi {
 
     /**
-     * This [codeEvent] is event code to input to application.
+     * This [validateCodeRequest]  content the event code to input to application.
      * @return all data logged user.
      */
-    @GET("consulta_codigo.php")
+    @POST("consulta_codigo.php")
     suspend fun validateCode(
-        @Query("codInv") codeEvent: String
+        @Body validateCodeRequest: ValidateCodeRequest
     ): NetworkResponse<CodeResponseEntity, ErrorResponseEntity>
 
     //TODO add comments.

@@ -1,5 +1,6 @@
 package com.spydevs.fiestonvirtual.domain.usecases.abstractions.user
 
+import com.spydevs.fiestonvirtual.domain.models.code.ValidateCodeRequest
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 
 /**
@@ -8,8 +9,10 @@ import com.spydevs.fiestonvirtual.domain.resource.ResultType
 interface LoginUserUseCase {
 
     /**
-     * @param [eventCode] contains the data of the logged user.
+     * @param [validateCodeRequest] This contains the the data of the logged user.
      */
-    suspend operator fun invoke(eventCode: String): ResultType<Boolean, String>
+    suspend operator fun invoke(
+        validateCodeRequest: ValidateCodeRequest
+    ): ResultType<Boolean, String>
 
 }

@@ -1,5 +1,6 @@
 package com.spydevs.fiestonvirtual.domain.usecases.implementations.user
 
+import com.spydevs.fiestonvirtual.domain.models.code.ValidateCodeRequest
 import com.spydevs.fiestonvirtual.domain.repository.CodeRepository
 import com.spydevs.fiestonvirtual.domain.repository.UsersRepository
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
@@ -10,11 +11,13 @@ class LoginUserUseCaseImpl(
     private val usersRepository: UsersRepository
 ) : LoginUserUseCase {
 
-    override suspend operator fun invoke(eventCode: String): ResultType<Boolean, String> {
-        return when (val eventCodeResult = codeRepository.verifyCode(eventCode)) {
+    override suspend operator fun invoke(
+        validateCodeRequest: ValidateCodeRequest
+    ): ResultType<Boolean, String> {
+        return when (val eventCodeResult = codeRepository.verifyCode(validateCodeRequest)) {
             is ResultType.Success -> {
                 when (val userResult =
-                    usersRepository.getRemoteUser(eventCodeResult.value.userId ?: 0)) {
+                    usersRepository.getRemoteUser(eventCodeResult.value.idUser)) {
                     is ResultType.Success -> {
                         usersRepository.setLoggedInUser(userResult.value)
                         ResultType.Success(true)

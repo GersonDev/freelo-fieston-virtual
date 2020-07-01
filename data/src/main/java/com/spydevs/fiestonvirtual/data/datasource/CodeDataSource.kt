@@ -1,6 +1,7 @@
 package com.spydevs.fiestonvirtual.data.datasource
 
 import com.spydevs.fiestonvirtual.domain.models.code.EventCode
+import com.spydevs.fiestonvirtual.domain.models.code.ValidateCodeRequest
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 
 /**
@@ -8,9 +9,9 @@ import com.spydevs.fiestonvirtual.domain.resource.ResultType
  */
 interface CodeDataSource {
     /**
-     * @param [eventCode] this is the event code to enter the application.
+     * @param [validateCodeRequest] This content the event code to enter the application.
      * @return the [EventCode].
      */
-    suspend fun verifyCode(eventCode: String): ResultType<EventCode, String>
+    suspend fun verifyCode(validateCodeRequest: ValidateCodeRequest): ResultType<EventCode, String>
 
 }

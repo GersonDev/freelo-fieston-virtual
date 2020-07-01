@@ -1,20 +1,20 @@
 package com.spydevs.fiestonvirtual.data.entities.response
 
 class CodeResponseEntity(
-    var data: DataEntity? = null,
-    var message: String? = null
+    var data: DataEntity,
+    var message: String
 ) {
     data class DataEntity(
-        var user: UserEntity? = null,
-        var event: EventEntity? = null
+        var user: UserEntity,
+        var event: EventEntity
     )
 
     data class UserEntity(
-        var idUser: Int? = null
+        var idUser: Int
     )
 
     data class EventEntity(
-        var userInvitationCode: Int? = null
+        var idEvent: Int
     )
 }
 

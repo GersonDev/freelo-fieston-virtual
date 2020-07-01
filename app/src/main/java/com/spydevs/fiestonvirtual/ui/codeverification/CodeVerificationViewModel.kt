@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.spydevs.fiestonvirtual.domain.models.code.ValidateCodeRequest
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.LoginUserUseCase
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +26,8 @@ class CodeVerificationViewModel(
     fun verifyCode(code: String?) {
         viewModelScope.launch(Dispatchers.Main) {
             if (!code.isNullOrEmpty()) {
-                when (val loginResult = loginUserUseCase.invoke(code)) {
+                when (val loginResult =
+                    loginUserUseCase.invoke(ValidateCodeRequest(code.toInt()))) {
                     is ResultType.Success -> {
                         _isSuccessCode.value = true
                     }
