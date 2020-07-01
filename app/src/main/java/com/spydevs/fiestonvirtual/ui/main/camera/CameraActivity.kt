@@ -63,7 +63,6 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun setUpView() {
-        //fabUploadCameraPhoto.isEnabled = false
     }
 
     private fun setUpViewListeners() {
@@ -85,8 +84,6 @@ class CameraActivity : AppCompatActivity() {
     private fun subscribeToUploadImage() {
         cameraViewModel.uploadedImage.observe(this, Observer {
             //TODO USE GLIDE TO LOAD THE IMAGE
-            //photoImageView
-            Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
         })
     }
 

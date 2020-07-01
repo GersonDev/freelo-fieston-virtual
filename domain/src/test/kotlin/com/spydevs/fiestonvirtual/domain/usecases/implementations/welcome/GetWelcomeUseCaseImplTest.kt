@@ -1,5 +1,6 @@
 package com.spydevs.fiestonvirtual.domain.usecases.implementations.welcome
 
+import com.spydevs.fiestonvirtual.domain.models.welcome.WelcomeRequest
 import com.spydevs.fiestonvirtual.domain.repository.EventRepository
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.resetMain
@@ -43,9 +44,11 @@ class GetWelcomeUseCaseImplTest {
     fun `given a signed in user then show a event welcome message`() {
         runBlocking {
             launch(Dispatchers.Main) {  // Will be launched in the mainThreadSurrogate dispatcher
-                getWelcomeUseCaseImpl.invoke()
-                Mockito.verify(repository, times(1)).getWelcome(1,1)
+                getWelcomeUseCaseImpl()
+                Mockito.verify(repository, times(1)).getWelcome(fakeWelcomeRequest)
             }
         }
     }
+
+    private val fakeWelcomeRequest = WelcomeRequest(3, 1)
 }

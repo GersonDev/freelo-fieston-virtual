@@ -22,10 +22,6 @@
 
     <string name="notification_channel_id">channel id</string>
     <string name="notification_title">Notification title</string>
-    <string name="cancel_download">Cancell</string>
+    <string name="cancel_download">Cancel</string>
 
-
-<!--    val id = context.getString(R.string.notification_channel_id)-->
-<!--    val title = context.getString(R.string.notification_title)-->
-<!--    val cancel = context.getString(R.string.cancel_download)-->
 </resources>
