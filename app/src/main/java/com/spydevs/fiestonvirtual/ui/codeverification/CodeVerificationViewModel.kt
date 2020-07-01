@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.spydevs.fiestonvirtual.domain.models.code.ValidateCodeRequest
+import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.LoginUserUseCase
 import kotlinx.coroutines.Dispatchers
@@ -18,9 +19,9 @@ class CodeVerificationViewModel(
     val isSuccessCode: LiveData<Boolean>
         get() = _isSuccessCode
 
-    private val _error = MutableLiveData<String>()
+    private val _error = MutableLiveData<ErrorResponse>()
 
-    val error: LiveData<String>
+    val error: LiveData<ErrorResponse>
         get() = _error
 
     fun verifyCode(code: String?) {

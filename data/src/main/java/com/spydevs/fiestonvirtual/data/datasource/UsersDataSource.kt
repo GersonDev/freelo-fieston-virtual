@@ -1,5 +1,6 @@
 package com.spydevs.fiestonvirtual.data.datasource
 
+import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.models.user.GetRemoteUserRequest
 import com.spydevs.fiestonvirtual.domain.models.user.User
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
@@ -10,6 +11,8 @@ interface UsersDataSource {
 
     suspend fun setLoggedInUser(user: User)
 
-    suspend fun getRemoteUser(getRemoteUserRequest: GetRemoteUserRequest): ResultType<User, String>
+    suspend fun getRemoteUser(
+        getRemoteUserRequest: GetRemoteUserRequest
+    ): ResultType<User, ErrorResponse>
 
 }

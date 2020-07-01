@@ -1,6 +1,7 @@
 package com.spydevs.fiestonvirtual.data.repository
 
 import com.spydevs.fiestonvirtual.data.datasource.UsersDataSource
+import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.models.user.GetRemoteUserRequest
 import com.spydevs.fiestonvirtual.domain.models.user.User
 import com.spydevs.fiestonvirtual.domain.repository.UsersRepository
@@ -17,7 +18,9 @@ class UsersRepositoryImpl(
         usersDataSource.setLoggedInUser(user)
     }
 
-    override suspend fun getRemoteUser(getRemoteUserRequest: GetRemoteUserRequest): ResultType<User, String> {
+    override suspend fun getRemoteUser(
+        getRemoteUserRequest: GetRemoteUserRequest
+    ): ResultType<User, ErrorResponse> {
         return usersDataSource.getRemoteUser(getRemoteUserRequest)
     }
 

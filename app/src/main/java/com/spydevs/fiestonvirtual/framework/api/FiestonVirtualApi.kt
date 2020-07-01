@@ -25,7 +25,7 @@ interface FiestonVirtualApi {
     @POST("consulta_codigo.php")
     suspend fun validateCode(
         @Body validateCodeRequest: ValidateCodeRequest
-    ): NetworkResponse<CodeResponseEntity, ErrorResponseEntity>
+    ): NetworkResponse<CodeResponseEntity, ErrorResponse>
 
     //TODO add comments.
     @POST("user/{user_id}/cameraImage")

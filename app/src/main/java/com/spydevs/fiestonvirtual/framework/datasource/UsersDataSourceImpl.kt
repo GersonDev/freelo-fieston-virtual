@@ -1,6 +1,7 @@
 package com.spydevs.fiestonvirtual.framework.datasource
 
 import com.spydevs.fiestonvirtual.data.datasource.UsersDataSource
+import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.models.user.GetRemoteUserRequest
 import com.spydevs.fiestonvirtual.domain.models.user.User
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
@@ -24,7 +25,9 @@ class UsersDataSourceImpl(
         usersDao.setLoggedInUser(UserMapper.convertFromInitial(user))
     }
 
-    override suspend fun getRemoteUser(getRemoteUserRequest: GetRemoteUserRequest): ResultType<User, String> {
+    override suspend fun getRemoteUser(
+        getRemoteUserRequest: GetRemoteUserRequest
+    ): ResultType<User, ErrorResponse> {
         return when (val result = fiestonVirtualApi.getDataUser(getRemoteUserRequest)) {
             is NetworkResponse.Success -> {
                 ResultType.Success(
@@ -34,13 +37,13 @@ class UsersDataSourceImpl(
                 )
             }
             is NetworkResponse.ApiError -> {
-                ResultType.Error(result.body.message)
+                ResultType.Error(ErrorResponse(message = result.body.message))
             }
             is NetworkResponse.NetworkError -> {
-                ResultType.Error(result.error.message ?: "")
+                ResultType.Error(ErrorResponse(message = result.error.message ?: ""))
             }
             is NetworkResponse.UnknownError -> {
-                ResultType.Error(result.error.message ?: "")
+                ResultType.Error(ErrorResponse(message = result.error.message ?: ""))
             }
 
         }

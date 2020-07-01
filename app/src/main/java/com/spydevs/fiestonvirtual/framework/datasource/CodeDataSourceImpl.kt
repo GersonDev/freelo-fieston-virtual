@@ -3,6 +3,7 @@ package com.spydevs.fiestonvirtual.framework.datasource
 import com.spydevs.fiestonvirtual.data.datasource.CodeDataSource
 import com.spydevs.fiestonvirtual.domain.models.code.EventCode
 import com.spydevs.fiestonvirtual.domain.models.code.ValidateCodeRequest
+import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.framework.api.FiestonVirtualApi
 import com.spydevs.fiestonvirtual.framework.api.NetworkResponse
@@ -13,7 +14,7 @@ class CodeDataSourceImpl(
 
     override suspend fun verifyCode(
         validateCodeRequest: ValidateCodeRequest
-    ): ResultType<EventCode, String> {
+    ): ResultType<EventCode, ErrorResponse> {
         return when (val result = fiestonVirtualApi.validateCode(validateCodeRequest)) {
             is NetworkResponse.Success -> {
                 ResultType.Success(
@@ -24,13 +25,13 @@ class CodeDataSourceImpl(
                 )
             }
             is NetworkResponse.ApiError -> {
-                ResultType.Error(result.body.message)
+                ResultType.Error(ErrorResponse(message = result.body.message))
             }
             is NetworkResponse.NetworkError -> {
-                ResultType.Error(result.error.message ?: "")
+                ResultType.Error(ErrorResponse(message = result.error.message ?: ""))
             }
             is NetworkResponse.UnknownError -> {
-                ResultType.Error(result.error.message ?: "")
+                ResultType.Error(ErrorResponse(message = result.error.message ?: ""))
             }
         }
     }
