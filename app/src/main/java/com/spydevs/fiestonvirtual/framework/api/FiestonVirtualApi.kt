@@ -19,7 +19,7 @@ import retrofit2.http.*
 interface FiestonVirtualApi {
 
     /**
-     * This [validateCodeRequest]  content the event code to input to application.
+     * @param validateCodeRequest  content the event code to input to application.
      * @return all data logged user.
      */
     @POST("consulta_codigo.php")
@@ -35,7 +35,7 @@ interface FiestonVirtualApi {
     ): NetworkResponse<GalleryImageResponseEntity, String>
 
     /**
-     * This [getRemoteUserRequest] content the id user.
+     * @param getRemoteUserRequest content the id user.
      * @return all data user.
      */
     @POST("detalle_usuario.php")

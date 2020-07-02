@@ -1,6 +1,5 @@
 package com.spydevs.fiestonvirtual.di
 
-import com.spydevs.fiestonvirtual.domain.usecases.abstractions.code.VerifyEventCodeUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.comment.GetCommentsUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.trivia.GetTriviaUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.GetGalleryUseCase
@@ -8,7 +7,6 @@ import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.UploadIma
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.welcome.GetWelcomeUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.welcome.GetWelcomeUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.GetLocalUserUseCase
-import com.spydevs.fiestonvirtual.domain.usecases.implementations.code.VerifyEventCodeUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.LoginUserUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.comment.GetCommentsUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.trivia.GetTriviaUseCaseImpl
@@ -19,11 +17,6 @@ import com.spydevs.fiestonvirtual.domain.usecases.implementations.user.LoginUser
 import org.koin.dsl.module
 
 val useCasesModule = module {
-    single<VerifyEventCodeUseCase> {
-        VerifyEventCodeUseCaseImpl(
-            get()
-        )
-    }
     single<LoginUserUseCase> {
         LoginUserUseCaseImpl(
             get(),
