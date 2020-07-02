@@ -57,7 +57,7 @@ interface FiestonVirtualApi {
     @POST("detalle_evento.php")
     suspend fun getEventWelcome(
         @Body welcomeRequest: WelcomeRequest
-    ): NetworkResponse<WelcomeResponseEntity, String>
+    ): NetworkResponse<WelcomeResponseEntity, ErrorResponse>
 
     /**
      * Get trivia including questions and answers from web service.

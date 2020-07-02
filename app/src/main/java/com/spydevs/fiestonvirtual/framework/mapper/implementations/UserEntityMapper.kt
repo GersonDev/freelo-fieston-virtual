@@ -7,13 +7,14 @@ import com.spydevs.fiestonvirtual.framework.mapper.Mapper
 object UserEntityMapper : Mapper<UserEntity, User>() {
 
     override fun convertFromInitial(i: UserEntity): User {
-        return User().apply {
-            id = i.id
-            name = i.firstName
-            lastName = i.lastName
-            totalScore = i.totalScore
-            ranking = i.ranking
-        }
+        return User(
+            id = i.id,
+            name = i.firstName,
+            lastName = i.lastName,
+            totalScore = i.totalScore,
+            ranking = i.ranking,
+            idEvent = i.idEvent
+        )
     }
 
 }

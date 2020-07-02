@@ -10,5 +10,6 @@ data class UserEntity(
     @ColumnInfo(name = "first_name") var firstName: String,
     @ColumnInfo(name = "last_name") var lastName: String,
     @ColumnInfo(name = "total_score") var totalScore: Int,
-    @ColumnInfo(name = "ranking") var ranking: Int
+    @ColumnInfo(name = "ranking") var ranking: Int,
+    @ColumnInfo(name = "id_event") var idEvent: Int
 )
