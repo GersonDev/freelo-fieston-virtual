@@ -10,6 +10,7 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.ui.main.MainActivity
+import com.spydevs.fiestonvirtual.util.RealPathUtil
 import kotlinx.android.synthetic.main.fragment_photo.*
 import java.util.concurrent.TimeUnit
 
@@ -37,17 +38,15 @@ class PhotoFragment : Fragment(R.layout.fragment_photo) {
     }
 
     fun setImage(uri: Uri?) {
-        uri?.let { nonNullUri ->
-            nonNullUri.path?.let {
-                this.imagePathUri = it
-            }
+        uri?.let { noNullUri ->
+            this.imagePathUri = RealPathUtil.getRealPath(requireActivity(), noNullUri) ?: ""
         }
         photoImageView.setImageURI(uri)
     }
 
     private fun startWork() {
         val oneTimeWorkRequest =
-            OneTimeWorkRequest.Builder(UploadFileWorkManager::class.java)
+            OneTimeWorkRequest.Builder(UploadFileCoroutineWorker::class.java)
                 .setInputData(createInputData(imagePathUri))
                 .setInitialDelay(DURATION_TIME_IN_SECONDS, TimeUnit.SECONDS).build()
         WorkManager.getInstance(requireActivity()).enqueue(oneTimeWorkRequest)

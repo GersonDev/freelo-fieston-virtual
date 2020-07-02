@@ -18,4 +18,10 @@
     <string name="previous">Previous</string>
 
     <string name="material_image_cropper_content_description">A simple view</string>
+
+
+    <string name="notification_channel_id">channel id</string>
+    <string name="notification_title">Notification title</string>
+    <string name="cancel_download">Cancel</string>
+
 </resources>

@@ -2,25 +2,24 @@ package com.spydevs.fiestonvirtual.framework.datasource
 
 import com.spydevs.fiestonvirtual.data.datasource.GalleryDataSource
 import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
-import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImage
-import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryItem
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryRequest
+import com.spydevs.fiestonvirtual.domain.models.photo.Photo
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.framework.api.FiestonVirtualApi
 import com.spydevs.fiestonvirtual.framework.api.NetworkResponse
-import com.spydevs.fiestonvirtual.framework.mapper.implementations.GalleryImageMapper
+import com.spydevs.fiestonvirtual.framework.mapper.implementations.UploadFileMapper
+import okhttp3.MultipartBody
 
 class GalleryDataSourceImpl(private val fiestonVirtualApi: FiestonVirtualApi) : GalleryDataSource {
     override suspend fun uploadImage(
-        userId: Int,
-        galleryImageRequest: GalleryImageRequest
-    ): ResultType<GalleryImage, String> {
+        file: MultipartBody.Part, idUser: Int, eventId: Int, postType: Int
+    ): ResultType<Photo, String> {
         return when (val uploadImageNetworkResponse =
-            fiestonVirtualApi.uploadImage(1, galleryImageRequest)) {
+            fiestonVirtualApi.uploadFile(file, idUser, eventId, postType)) {
             is NetworkResponse.Success -> {
                 val galleryImage =
-                    GalleryImageMapper.convertFromInitial(uploadImageNetworkResponse.body)
+                    UploadFileMapper.convertFromInitial(uploadImageNetworkResponse.body)
                 ResultType.Success(galleryImage)
             }
             is NetworkResponse.ApiError -> {

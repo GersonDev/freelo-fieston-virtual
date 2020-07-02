@@ -6,6 +6,8 @@ import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryItem
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryRequest
+import com.spydevs.fiestonvirtual.domain.models.photo.Photo
+import okhttp3.MultipartBody
 
 /**
  * This repository is used to interact user images with server
@@ -17,9 +19,8 @@ interface GalleryRepository {
      * @return [ResultType] The result type with the galley image from the server
      */
     suspend fun uploadImage(
-        userId: Int,
-        galleryImageRequest: GalleryImageRequest
-    ): ResultType<GalleryImage, String>
+        file: MultipartBody.Part, idUser: Int, eventId: Int, postType: Int
+    ): ResultType<Photo, String>
 
     /**
      * @param [galleryRequest] This object is necessary for return the [ResultType].
