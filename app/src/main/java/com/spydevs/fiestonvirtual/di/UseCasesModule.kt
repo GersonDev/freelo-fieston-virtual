@@ -25,6 +25,7 @@ val useCasesModule = module {
     }
     single<GetWelcomeUseCase> {
         GetWelcomeUseCaseImpl(
+            get(),
             get()
         )
     }

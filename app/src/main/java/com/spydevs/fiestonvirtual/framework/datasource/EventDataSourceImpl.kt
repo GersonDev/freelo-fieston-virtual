@@ -18,7 +18,7 @@ class EventDataSourceImpl(private val fiestonVirtualApi: FiestonVirtualApi) : Ev
                 )
             }
             is NetworkResponse.ApiError -> {
-                ResultType.Error(result.body)
+                ResultType.Error(result.body.message)
             }
             is NetworkResponse.NetworkError -> {
                 ResultType.Error(result.error.message ?: "")

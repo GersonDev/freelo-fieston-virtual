@@ -2,6 +2,7 @@ package com.spydevs.fiestonvirtual.ui.main.trivia
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.spydevs.fiestonvirtual.R
@@ -21,6 +22,7 @@ class TriviaFragment : Fragment(R.layout.fragment_trivia) {
         super.onViewCreated(view, savedInstanceState)
         setUpViews()
         subscribeToTrivia()
+        subscribeToAnyError()
         triviaViewModel.getTrivia()
     }
 
@@ -32,6 +34,12 @@ class TriviaFragment : Fragment(R.layout.fragment_trivia) {
     private fun subscribeToTrivia() {
         triviaViewModel.trivia.observe(viewLifecycleOwner, Observer {
             triviaPagerAdapter.addAllData(it)
+        })
+    }
+
+    private fun subscribeToAnyError() {
+        triviaViewModel.error.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
         })
     }
 
