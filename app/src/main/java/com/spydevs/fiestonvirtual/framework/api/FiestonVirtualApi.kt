@@ -1,10 +1,12 @@
 package com.spydevs.fiestonvirtual.framework.api
 
 import com.spydevs.fiestonvirtual.data.entities.response.*
+import com.spydevs.fiestonvirtual.domain.models.code.ValidateCodeRequest
 import com.spydevs.fiestonvirtual.domain.models.comment.CommentRequest
 import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.models.trivia.TriviaRequest
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryRequest
+import com.spydevs.fiestonvirtual.domain.models.user.GetRemoteUserRequest
 import com.spydevs.fiestonvirtual.domain.models.welcome.WelcomeRequest
 import okhttp3.MultipartBody
 import retrofit2.http.*
@@ -15,22 +17,22 @@ import retrofit2.http.*
 interface FiestonVirtualApi {
 
     /**
-     * This [codeEvent] is event code to input to application.
+     * @param validateCodeRequest  content the event code to input to application.
      * @return all data logged user.
      */
-    @GET("consulta_codigo.php")
+    @POST("consulta_codigo.php")
     suspend fun validateCode(
-        @Query("codInv") codeEvent: String
-    ): NetworkResponse<CodeResponseEntity, ErrorResponseEntity>
+        @Body validateCodeRequest: ValidateCodeRequest
+    ): NetworkResponse<CodeResponseEntity, ErrorResponse>
 
     /**
-     * This [userId] is the id user.
+     * @param getRemoteUserRequest content the id user.
      * @return all data user.
      */
-    @GET("detalle_usuario.php")
+    @POST("detalle_usuario.php")
     suspend fun getDataUser(
-        @Query("userId") userId: Int
-    ): NetworkResponse<DataUserResponseEntity, ErrorResponseEntity>
+        @Body getRemoteUserRequest: GetRemoteUserRequest
+    ): NetworkResponse<DataUserResponseEntity, ErrorResponse>
 
     /**
      * Upload any file to server in form-data

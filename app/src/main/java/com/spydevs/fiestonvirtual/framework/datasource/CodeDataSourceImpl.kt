@@ -2,6 +2,8 @@ package com.spydevs.fiestonvirtual.framework.datasource
 
 import com.spydevs.fiestonvirtual.data.datasource.CodeDataSource
 import com.spydevs.fiestonvirtual.domain.models.code.EventCode
+import com.spydevs.fiestonvirtual.domain.models.code.ValidateCodeRequest
+import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.framework.api.FiestonVirtualApi
 import com.spydevs.fiestonvirtual.framework.api.NetworkResponse
@@ -9,37 +11,29 @@ import com.spydevs.fiestonvirtual.framework.api.NetworkResponse
 class CodeDataSourceImpl(
     private val fiestonVirtualApi: FiestonVirtualApi
 ) : CodeDataSource {
-    //TODO update when the service is successful.
-    override suspend fun verifyCode(eventCode: String): ResultType<EventCode, String> {
-        return ResultType.Success(
-            EventCode(
-                1,
-                1
-            )
-        )
-    }
-/*
-    override suspend fun verifyCode(eventCode: String): ResultType<EventCode, String> {
-        return when (val result = fiestonVirtualApi.validateCode(eventCode)) {
+
+    override suspend fun verifyCode(
+        validateCodeRequest: ValidateCodeRequest
+    ): ResultType<EventCode, ErrorResponse> {
+        return when (val result = fiestonVirtualApi.validateCode(validateCodeRequest)) {
             is NetworkResponse.Success -> {
                 ResultType.Success(
                     EventCode(
-                        idEvent = result.body.data?.user?.idUser,
-                        userId = result.body.data?.event?.userInvitationCode
+                        idEvent = result.body.data.event.idEvent,
+                        idUser = result.body.data.user.idUser
                     )
                 )
             }
             is NetworkResponse.ApiError -> {
-                ResultType.Error(result.body.message)
+                ResultType.Error(ErrorResponse(message = result.body.message))
             }
             is NetworkResponse.NetworkError -> {
-                ResultType.Error(result.error.message ?: "")
+                ResultType.Error(ErrorResponse(message = result.error.message ?: ""))
             }
             is NetworkResponse.UnknownError -> {
-                ResultType.Error(result.error.message ?: "")
+                ResultType.Error(ErrorResponse(message = result.error.message ?: ""))
             }
         }
     }
- */
 
 }

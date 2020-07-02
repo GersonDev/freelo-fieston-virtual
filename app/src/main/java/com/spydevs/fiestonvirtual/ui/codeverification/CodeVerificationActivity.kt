@@ -26,22 +26,19 @@ class CodeVerificationActivity : AppCompatActivity() {
     }
 
     private fun setUpViewModel() {
-        viewModel.isSuccessCode.observe(this, isSuccessCodeObserver)
+        viewModel.isSuccessCode.observe(this, Observer {
+            dialogProgress.dismiss()
+            if (it) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
+        })
     }
 
     private fun setUpCodeButton() {
         codeButton.setOnClickListener {
-//            dialogProgress.show()
-//            //TODO refactor when service is correct.
-//            viewModel.verifyCode("946962")
-            startActivity(Intent(this, MainActivity::class.java))
-        }
-    }
-
-    private val isSuccessCodeObserver = Observer<Boolean> {
-        dialogProgress.dismiss()
-        if (it) {
-            startActivity(Intent(this, MainActivity::class.java))
+            dialogProgress.show()
+            viewModel.verifyCode(codeVerification_et.text.toString())
         }
     }
 

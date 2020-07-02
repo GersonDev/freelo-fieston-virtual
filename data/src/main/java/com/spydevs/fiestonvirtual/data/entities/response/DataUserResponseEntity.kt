@@ -1,26 +1,28 @@
 package com.spydevs.fiestonvirtual.data.entities.response
 
 data class DataUserResponseEntity(
-    var data: DataEntity? = null,
-    var mensaje: String? = null
+    var data: DataEntity,
+    var message: String
 ) {
     data class DataEntity(
-        var user: UserEntity? = null
+        var user: UserEntity
     )
 
     data class UserEntity(
-        var idUser: Int? = null,
-        var userName: String? = null,
-        var userLastName: String? = null,
-        var userSurName: String? = null,
-        var userEmail: String? = null,
-        var userPhone: String? = null,
-        var userCell: String? = null,
-        var userInvitationCode: String? = null,
-        var userTotalScore: String? = null,
-        var userStatus: String? = null,
-        var userLikePhotos: String? = null,
-        var userLikeVideos: String? = null
+        var idUser: Int,
+        var idEvent: Int,
+        var userName: String,
+        var userLastName: String,
+        var userSurName: String,
+        var userEmail: String,
+        var userPhone: String,
+        var userCell: String,
+        var userTotalScore: Int,
+        var userStatus: Int,
+        var userLikesPhotos: Int,
+        var userLikesVideos: Int,
+        var userRanking: Int
     )
+
 }
 

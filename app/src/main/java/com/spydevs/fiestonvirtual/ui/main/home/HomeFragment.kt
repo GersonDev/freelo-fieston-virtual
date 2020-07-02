@@ -1,17 +1,14 @@
 package com.spydevs.fiestonvirtual.ui.main.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.spydevs.fiestonvirtual.R
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.layout_user.*
 import org.koin.android.ext.android.inject
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -60,8 +57,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun subscribeToUser() {
-        homeViewModel.userLiveData.observe(viewLifecycleOwner, Observer {
-            //TODO populate the user ui
+        homeViewModel.userLiveData.observe(viewLifecycleOwner, Observer { user ->
+            nameTextView.text = user.name.plus(" ").plus(user.lastName)
+            textView4.text = user.totalScore.toString()
+            textView6.text = user.ranking.toString()
         })
     }
 
