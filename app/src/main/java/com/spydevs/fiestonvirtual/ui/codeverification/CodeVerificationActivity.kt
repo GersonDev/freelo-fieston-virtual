@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.util.extensions.setupLoadingAlertDialog
 import com.spydevs.fiestonvirtual.ui.main.MainActivity
+import com.spydevs.fiestonvirtual.util.extensions.setupAlertDialog
 import kotlinx.android.synthetic.main.activity_code_verification.*
 import org.koin.android.ext.android.inject
 
@@ -26,20 +27,50 @@ class CodeVerificationActivity : AppCompatActivity() {
     }
 
     private fun setUpViewModel() {
-        viewModel.isSuccessCode.observe(this, Observer {
-            dialogProgress.dismiss()
-            if (it) {
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }
-        })
+        viewModel.apply {
+            isSuccessCode.observe(
+                this@CodeVerificationActivity, Observer(::codeVerificationState)
+            )
+            error.observe(
+                this@CodeVerificationActivity, Observer(::codeVerificationState)
+            )
+            loading.observe(
+                this@CodeVerificationActivity, Observer(::codeVerificationState)
+            )
+        }
+
     }
 
     private fun setUpCodeButton() {
         codeButton.setOnClickListener {
-            dialogProgress.show()
             viewModel.verifyCode(codeVerification_et.text.toString())
         }
+    }
+
+    private fun codeVerificationState(result: CodeVerificationResult) {
+        when (result) {
+            is CodeVerificationResult.Loading -> {
+                if (result.show) {
+                    this.dialogProgress.show()
+                } else {
+                    this.dialogProgress.dismiss()
+                }
+            }
+            CodeVerificationResult.CodeVerificationSuccessful -> {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
+            is CodeVerificationResult.CodeVerificationError -> {
+                result.errorResponse.let {
+                    this.setupAlertDialog(
+                        it.title,
+                        it.message
+                    ) {}
+                }
+
+            }
+        }
+
     }
 
 }
