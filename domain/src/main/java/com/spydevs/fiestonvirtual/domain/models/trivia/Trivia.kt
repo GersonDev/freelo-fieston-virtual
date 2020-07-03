@@ -7,7 +7,7 @@ data class Trivia(
     val question: String,
     val questionScore: Int,
     val questionImageUrl: String,
-    val questionStatus: Boolean,
+    val questionStatus: Int,
     val questionAlternative: List<Alternative>
 ) {
     data class Alternative(
