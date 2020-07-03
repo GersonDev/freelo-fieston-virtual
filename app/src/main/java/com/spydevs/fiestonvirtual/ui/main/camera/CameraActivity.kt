@@ -20,14 +20,16 @@ import androidx.work.*
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.ui.main.photo.PhotoFragment
 import com.spydevs.fiestonvirtual.ui.main.photo.UploadFileCoroutineWorker
-import com.spydevs.fiestonvirtual.util.extensions.openSettings
-import com.spydevs.fiestonvirtual.util.extensions.setupAlertDialog
 import com.spydevs.fiestonvirtual.util.ImagesUtil
 import com.spydevs.fiestonvirtual.util.NativeGallery
+import com.spydevs.fiestonvirtual.util.extensions.openSettings
+import com.spydevs.fiestonvirtual.util.extensions.setupAlertDialog
+import com.spydevs.fiestonvirtual.util.extensions.setupLoadingAlertDialog
 import kotlinx.android.synthetic.main.activity_camera.*
 import kotlinx.android.synthetic.main.content_camera.*
 import org.koin.android.ext.android.inject
-import java.io.*
+import java.io.File
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -35,6 +37,10 @@ import java.util.concurrent.TimeUnit
 class CameraActivity : AppCompatActivity() {
 
     private val cameraViewModel: CameraViewModel by inject()
+
+    private val dialogProgress by lazy {
+        setupLoadingAlertDialog()
+    }
 
     private var rotatedBitmap: Bitmap? = null
 
@@ -269,7 +275,28 @@ class CameraActivity : AppCompatActivity() {
                 .setInputData(createInputData(currentPhotoPath))
                 .setConstraints(constraints)
                 .setInitialDelay(PhotoFragment.DURATION_TIME_IN_SECONDS, TimeUnit.SECONDS).build()
-        WorkManager.getInstance(this).enqueue(oneTimeWorkRequest)
+        val workManager = WorkManager.getInstance(this)
+        workManager.enqueue(oneTimeWorkRequest)
+
+        dialogProgress.show()
+
+        workManager.getWorkInfoByIdLiveData(oneTimeWorkRequest.id).observe(this, Observer {
+
+                if (it?.state == null)
+                    return@Observer
+                when (it.state) {
+                    WorkInfo.State.SUCCEEDED -> {
+                        val successOutputData = it.outputData
+                        Toast.makeText(this, successOutputData.getString("KEY_SUCCESS"), Toast.LENGTH_SHORT).show()
+                        dialogProgress.dismiss()
+                    }
+                    WorkInfo.State.FAILED -> {
+                        val failureOutputData = it.outputData
+                        Toast.makeText(this, failureOutputData.getString("KEY_ERROR"), Toast.LENGTH_SHORT).show()
+                        dialogProgress.dismiss()
+                    }
+                }
+            })
     }
 
     private fun createInputData(imagePath: String): Data {
