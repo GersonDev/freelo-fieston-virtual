@@ -39,8 +39,6 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
         val progress = "Starting Uploading..."
         setForeground(createForegroundInfo(CHANNEL_NAME, "Image uploaded successfully", progress))
 
-        setProgressAsync(Data.Builder().putInt("Starting Uploading...", 0).build())
-
         return when (val uploadImageResponse =
             fiestonVirtualApi.uploadFile(fileUploadMultiPart, 5, 3, 1)) {
             is NetworkResponse.Success -> {
