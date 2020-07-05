@@ -66,7 +66,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpViewListeners() {
         cameraImageButton.setOnClickListener {
-            startActivity(Intent(this, CameraActivity::class.java))
+            //TODO UNCOMMENT FOR THE NEXT RELEASE
+            //startActivity(Intent(this, CameraActivity::class.java))
         }
     }
 

@@ -12,6 +12,8 @@ import androidx.work.*
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.framework.api.FiestonVirtualApi
 import com.spydevs.fiestonvirtual.framework.api.NetworkResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -19,7 +21,6 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.File
 
-//TODO  REFACTORING THIS CLASS, DECOUPLED THE CODE
 class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParameters) :
     CoroutineWorker(context, workerParameters), KoinComponent {
 
@@ -28,8 +29,9 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
     private var notificationManager: NotificationManager =
         applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-    override suspend fun doWork(): Result {
-        val imagePath = inputData.getString("imagePath") ?: return Result.failure()
+    override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
+        val imagePath = inputData.getString("imagePath")
+        if (imagePath == null) Result.failure()
 
         val file = File(imagePath)
         val requestBody = RequestBody.create(MediaType.parse("image/*"), file)
@@ -39,7 +41,7 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
         val progress = "Starting Uploading..."
         setForeground(createForegroundInfo(CHANNEL_NAME, "Image uploaded successfully", progress))
 
-        return when (val uploadImageResponse =
+        when (val uploadImageResponse =
             fiestonVirtualApi.uploadFile(fileUploadMultiPart, 5, 3, 1)) {
             is NetworkResponse.Success -> {
                 val data = workDataOf(
@@ -52,6 +54,7 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
                 Result.success(data)
             }
             is NetworkResponse.ApiError -> {
+                print(uploadImageResponse.body)
                 val data = workDataOf(
                     "KEY_ERROR" to uploadImageResponse.body
                 )
