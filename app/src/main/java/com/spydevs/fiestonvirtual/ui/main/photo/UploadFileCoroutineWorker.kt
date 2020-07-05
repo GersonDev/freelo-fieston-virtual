@@ -47,6 +47,8 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
                 )
                 notificationManager.notify(2, createSimpleNotification("Image",
                 uploadImageResponse.body.message))
+
+
                 Result.success(data)
             }
             is NetworkResponse.ApiError -> {
