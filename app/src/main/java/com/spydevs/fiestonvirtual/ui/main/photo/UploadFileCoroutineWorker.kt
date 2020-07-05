@@ -54,7 +54,6 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
                 Result.success(data)
             }
             is NetworkResponse.ApiError -> {
-                print(uploadImageResponse.body)
                 val data = workDataOf(
                     "KEY_ERROR" to uploadImageResponse.body
                 )
