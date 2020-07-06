@@ -1,5 +1,5 @@
 package com.spydevs.fiestonvirtual.domain.models.user
 
-class GetRemoteUserRequest(
+data class GetRemoteUserRequest(
     val idUser: Int
 )
