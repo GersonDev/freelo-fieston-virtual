@@ -40,7 +40,8 @@ class AnswerAdapter : RecyclerView.Adapter<AnswerViewHolder>() {
     private fun setSelected(position: Int) {
         if (!answerList[position].isAlternativeAnswer) {
             cleanSelected()
-            answerList[position].isAlternativeAnswer = true
+            //TODO LOGIC FOR SELECTING RIGHT ANSWER
+            //answerList[position].isAlternativeAnswer = true
             notifyDataSetChanged()
         }
     }
