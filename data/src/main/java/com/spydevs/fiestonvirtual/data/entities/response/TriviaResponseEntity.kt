@@ -14,7 +14,7 @@ data class TriviaResponseEntity(
             val questionImage: String,
             val questionName: String,
             val questionScore: Int,
-            val questionStatus: Boolean,
+            val questionStatus: Int,
             val questionType: String
         ) {
             data class QuestionAlternative(

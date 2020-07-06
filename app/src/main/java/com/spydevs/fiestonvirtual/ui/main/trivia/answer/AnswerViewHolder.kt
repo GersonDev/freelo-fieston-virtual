@@ -19,11 +19,12 @@ class AnswerViewHolder(
         }
     }
 
+    //TODO LOGIC FOR SELECTING RIGHT ANSWER
     fun bind(alternative: Trivia.Alternative) {
         this.answerModel = alternative
         this.view.itemTriviaAnswer_btn.apply {
             text = alternative.alternativeDescription
-            if (alternative.isAlternativeAnswer) {
+            if (alternative.isSelected) {
                 setBackgroundColor(
                     resources.getColor(
                         R.color.colorAccent,
