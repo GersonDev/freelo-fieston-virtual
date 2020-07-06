@@ -13,6 +13,7 @@ data class Trivia(
     data class Alternative(
         val alternativeId: Int,
         val alternativeDescription: String,
-        var isAlternativeAnswer: Boolean
+        var isAlternativeAnswer: Boolean,
+        var isSelected: Boolean = false
     )
 }

@@ -24,21 +24,21 @@ class AnswerViewHolder(
         this.answerModel = alternative
         this.view.itemTriviaAnswer_btn.apply {
             text = alternative.alternativeDescription
-//            if (alternative.isAlternativeAnswer) {
-//                setBackgroundColor(
-//                    resources.getColor(
-//                        R.color.colorAccent,
-//                        null
-//                    )
-//                )
-//            } else {
-//                setBackgroundColor(
-//                    resources.getColor(
-//                        R.color.colorPrimary,
-//                        null
-//                    )
-//                )
-//            }
+            if (alternative.isSelected) {
+                setBackgroundColor(
+                    resources.getColor(
+                        R.color.colorAccent,
+                        null
+                    )
+                )
+            } else {
+                setBackgroundColor(
+                    resources.getColor(
+                        R.color.colorPrimary,
+                        null
+                    )
+                )
+            }
         }
     }
 

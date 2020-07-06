@@ -33,14 +33,14 @@ class AnswerAdapter : RecyclerView.Adapter<AnswerViewHolder>() {
 
     private fun cleanSelected() {
         answerList.forEach {
-            it.isAlternativeAnswer = false
+            it.isSelected = false
         }
     }
 
     private fun setSelected(position: Int) {
-        if (!answerList[position].isAlternativeAnswer) {
+        if (!answerList[position].isSelected) {
             cleanSelected()
-            answerList[position].isAlternativeAnswer = true
+            answerList[position].isSelected = true
             notifyDataSetChanged()
         }
     }
