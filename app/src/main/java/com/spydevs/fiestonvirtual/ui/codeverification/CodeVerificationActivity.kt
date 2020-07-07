@@ -21,56 +21,54 @@ class CodeVerificationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_code_verification)
+        subscribeToSuccessCode()
+        subscribeToError()
+        subscribeToLoading()
         setUpCodeButton()
-        setUpViewModel()
 
     }
 
-    private fun setUpViewModel() {
-        viewModel.apply {
-            isSuccessCode.observe(
-                this@CodeVerificationActivity, Observer(::codeVerificationState)
-            )
-            error.observe(
-                this@CodeVerificationActivity, Observer(::codeVerificationState)
-            )
-            loading.observe(
-                this@CodeVerificationActivity, Observer(::codeVerificationState)
-            )
-        }
+    private fun subscribeToSuccessCode() {
+        viewModel.isSuccessCode.observe(
+            this@CodeVerificationActivity,
+            Observer {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
+        )
+    }
 
+    private fun subscribeToError() {
+        viewModel.error.observe(
+            this@CodeVerificationActivity,
+            Observer {
+                (it as CodeVerificationResult.CodeVerificationError).errorResponse.let { errorResponse ->
+                    this.setupAlertDialog(
+                        errorResponse.title,
+                        errorResponse.message
+                    ) {}
+                }
+            }
+        )
+    }
+
+    private fun subscribeToLoading() {
+        viewModel.loading.observe(
+            this@CodeVerificationActivity,
+            Observer {
+                if ((it as CodeVerificationResult.Loading).show) {
+                    this.dialogProgress.show()
+                } else {
+                    this.dialogProgress.dismiss()
+                }
+            }
+        )
     }
 
     private fun setUpCodeButton() {
         codeButton.setOnClickListener {
             viewModel.verifyCode(codeVerification_et.text.toString())
         }
-    }
-
-    private fun codeVerificationState(result: CodeVerificationResult) {
-        when (result) {
-            is CodeVerificationResult.Loading -> {
-                if (result.show) {
-                    this.dialogProgress.show()
-                } else {
-                    this.dialogProgress.dismiss()
-                }
-            }
-            CodeVerificationResult.CodeVerificationSuccessful -> {
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }
-            is CodeVerificationResult.CodeVerificationError -> {
-                result.errorResponse.let {
-                    this.setupAlertDialog(
-                        it.title,
-                        it.message
-                    ) {}
-                }
-
-            }
-        }
-
     }
 
 }
