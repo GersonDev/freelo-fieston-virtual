@@ -1,5 +1,5 @@
 package com.spydevs.fiestonvirtual.domain.models.code
 
-class ValidateCodeRequest(
+data class ValidateCodeRequest(
     var userInvitationCode: Int
 )
