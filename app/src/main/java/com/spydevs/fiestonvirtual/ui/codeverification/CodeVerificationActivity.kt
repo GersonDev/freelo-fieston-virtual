@@ -44,9 +44,9 @@ class CodeVerificationActivity : AppCompatActivity() {
             Observer {
                 (it as CodeVerificationResult.CodeVerificationError).errorResponse.let { errorResponse ->
                     this.setupAlertDialog(
-                        errorResponse.title,
-                        errorResponse.message
-                    ) {}
+                        title = errorResponse.title,
+                        message = errorResponse.message
+                    )
                 }
             }
         )
