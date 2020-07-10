@@ -7,16 +7,28 @@ import androidx.appcompat.app.AlertDialog
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.ui.main.MainActivity.Companion.REQUEST_TO_MEDIA
 
-fun Activity.setupAlertDialog(title: String = getString(R.string.alertDialog_cancel), message: String, onPositiveButtonClick:() -> Unit) {
+fun Activity.setupAlertDialog(
+    title: String? = null,
+    message: String,
+    textPositiveButton: String? = getString(R.string.alertDialog_ok),
+    onPositiveButtonClick: (() -> Unit)? = null,
+    textNegativeButton: String? = null,
+    onNegativeButtonClick: (() -> Unit)? = null,
+    setCancelable: Boolean = false
+) {
     AlertDialog.Builder(this)
         .setTitle(title)
         .setMessage(message)
-        .setCancelable(false)
-        .setNegativeButton(getString(R.string.alertDialog_cancel)) { _, _ ->
-
+        .setCancelable(setCancelable)
+        .setNegativeButton(
+            textNegativeButton
+        ) { _, _ ->
+            onNegativeButtonClick?.let { it() }
         }
-        .setPositiveButton(getString(R.string.alertDialog_ok)) { _, _ ->
-            onPositiveButtonClick()
+        .setPositiveButton(
+            textPositiveButton
+        ) { _, _ ->
+            onPositiveButtonClick?.let { it() }
         }
         .create()
         .show()
