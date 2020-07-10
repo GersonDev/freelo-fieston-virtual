@@ -74,8 +74,8 @@ interface FiestonVirtualApi {
      * @param [galleryRequest] This object is necessary for return the gallery.
      * @return all the images and videos.
      */
-    @POST("getGallery")
-    fun getGallery(
+    @POST("galeria.php")
+    suspend fun getGallery(
         @Body galleryRequest: GalleryRequest
     ): NetworkResponse<GalleryResponseEntity, ErrorResponse>
 
