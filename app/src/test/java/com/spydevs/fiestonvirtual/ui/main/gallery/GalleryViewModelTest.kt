@@ -6,10 +6,12 @@ import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryItem
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.GetGalleryUseCase
 import kotlinx.coroutines.runBlocking
+import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.core.context.stopKoin
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
@@ -29,6 +31,11 @@ class GalleryViewModelTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         galleryViewModel = GalleryViewModel(mockGetGalleryUseCase)
+    }
+
+    @After
+    fun after() {
+        stopKoin()
     }
 
     @Test
