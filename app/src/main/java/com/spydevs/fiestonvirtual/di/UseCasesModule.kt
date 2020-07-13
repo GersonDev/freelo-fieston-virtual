@@ -38,7 +38,7 @@ val useCasesModule = module {
     }
 
     single<GetGalleryUseCase> {
-        GetGalleryUseCaseImpl(get())
+        GetGalleryUseCaseImpl(get(), get())
     }
 
     single<UploadImageUseCase> {

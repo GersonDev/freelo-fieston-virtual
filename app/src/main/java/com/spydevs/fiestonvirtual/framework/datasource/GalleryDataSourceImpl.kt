@@ -8,6 +8,7 @@ import com.spydevs.fiestonvirtual.domain.models.photo.Photo
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.framework.api.FiestonVirtualApi
 import com.spydevs.fiestonvirtual.framework.api.NetworkResponse
+import com.spydevs.fiestonvirtual.framework.mapper.implementations.GalleryItemListMapper
 import com.spydevs.fiestonvirtual.framework.mapper.implementations.UploadFileMapper
 import okhttp3.MultipartBody
 
@@ -37,41 +38,6 @@ class GalleryDataSourceImpl(private val fiestonVirtualApi: FiestonVirtualApi) : 
     override suspend fun getGallery(
         galleryRequest: GalleryRequest
     ): ResultType<List<GalleryItem>, ErrorResponse> {
-        return ResultType.Success(
-            mutableListOf(
-                GalleryItem(
-                    1,
-                    1,
-                    "https://pngimg.com/uploads/face/face_PNG11760.png",
-                    1
-                ),
-                GalleryItem(
-                    2,
-                    2,
-                    "https://pngimg.com/uploads/face/face_PNG11760.png",
-                    1
-                ),
-                GalleryItem(
-                    3,
-                    2,
-                    "https://pngimg.com/uploads/face/face_PNG11760.png",
-                    1
-                ),
-                GalleryItem(
-                    4,
-                    2,
-                    "https://pngimg.com/uploads/face/face_PNG11760.png",
-                    1
-                ),
-                GalleryItem(
-                    5,
-                    2,
-                    "https://pngimg.com/uploads/face/face_PNG11760.png",
-                    1
-                )
-            )
-        )
-        /*
         return when (val result = fiestonVirtualApi.getGallery(galleryRequest)) {
             is NetworkResponse.Success -> {
                 ResultType.Success(GalleryItemListMapper.convertFromInitial(result.body.data.posts))
@@ -80,13 +46,13 @@ class GalleryDataSourceImpl(private val fiestonVirtualApi: FiestonVirtualApi) : 
                 ResultType.Error(result.body)
             }
             is NetworkResponse.NetworkError -> {
-                ResultType.Error(ErrorResponse(message = result.error.message))
+                ResultType.Error(ErrorResponse(message = result.error.message ?: ""))
             }
             is NetworkResponse.UnknownError -> {
-                ResultType.Error(ErrorResponse(message = result.error.message))
+                ResultType.Error(ErrorResponse(message = result.error.message ?: ""))
             }
         }
-         */
+
     }
 
 }
