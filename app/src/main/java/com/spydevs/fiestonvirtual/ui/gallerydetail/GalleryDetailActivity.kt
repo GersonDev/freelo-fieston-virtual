@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryItem
 import com.spydevs.fiestonvirtual.ui.gallerydetail.adapter.CommentAdapter
+import com.spydevs.fiestonvirtual.util.extensions.loadUrl
 import kotlinx.android.synthetic.main.activity_camera.toolbar
 import kotlinx.android.synthetic.main.content_gallery_detail.*
 import org.koin.android.ext.android.inject
@@ -24,7 +25,13 @@ class GalleryDetailActivity : AppCompatActivity() {
         setUpCommentList()
         subscribeToGetCommentList()
         getCommentList()
+        setUpImage()
+    }
 
+    private fun setUpImage() {
+        intent.extras?.let { bundle ->
+            galleryDetail_iv.loadUrl((bundle.get(OBJECT_GALLERY_ITEM) as GalleryItem).file)
+        }
     }
 
     private fun getCommentList() {

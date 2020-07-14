@@ -11,7 +11,7 @@ class CommentRepositoryImpl(
     private val commentDataSource: CommentDataSource
 ) : CommentRepository {
 
-    override fun getRemoteComments(
+    override suspend fun getRemoteComments(
         commentRequest: CommentRequest
     ): ResultType<List<Comment>, ErrorResponse> {
         return commentDataSource.getRemoteComments(commentRequest)

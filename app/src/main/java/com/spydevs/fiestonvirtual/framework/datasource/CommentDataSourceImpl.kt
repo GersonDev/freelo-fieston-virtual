@@ -13,46 +13,10 @@ class CommentDataSourceImpl(
     private val fiestonVirtualApi: FiestonVirtualApi
 ) : CommentDataSource {
 
-    override fun getRemoteComments(
+    override suspend fun getRemoteComments(
         commentRequest: CommentRequest
     ): ResultType<List<Comment>, ErrorResponse> {
-
-        return ResultType.Success(
-            mutableListOf(
-                Comment(
-                    1,
-                    "chevre",
-                    "https://pngimg.com/uploads/face/face_PNG11760.png"
-                ),
-                Comment(
-                    1,
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-                    "https://pngimg.com/uploads/face/face_PNG11760.png"
-                ),
-                Comment(
-                    1,
-                    "exito",
-                    "https://pngimg.com/uploads/face/face_PNG11760.png"
-                ),
-                Comment(
-                    1,
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-                    "https://pngimg.com/uploads/face/face_PNG11760.png"
-                ),
-                Comment(
-                    1,
-                    "eliminar",
-                    "https://pngimg.com/uploads/face/face_PNG11760.png"
-                ),
-                Comment(
-                    1,
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-                    "https://pngimg.com/uploads/face/face_PNG11760.png"
-                )
-            )
-        )
-        /*
-        return when (val result = fiestonVirtualApi.getComments(idPost)) {
+        return when (val result = fiestonVirtualApi.getComments(commentRequest)) {
             is NetworkResponse.Success -> {
                 ResultType.Success(CommentListMapper.convertFromInitial(result.body.data.comments))
             }
@@ -66,7 +30,6 @@ class CommentDataSourceImpl(
                 ResultType.Error(ErrorResponse(message = result.error.message ?: ""))
             }
         }
-         */
     }
 
 }

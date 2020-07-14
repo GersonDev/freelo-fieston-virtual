@@ -23,9 +23,12 @@ interface UsersDao {
     @Delete
     suspend fun deleteUser(user: UserEntity)
 
+    @Query("DELETE FROM users")
+    suspend fun deleteAllUsers()
+
     @Transaction
     suspend fun setLoggedInUser(loggedInUser: UserEntity) {
-        deleteUser(loggedInUser)
+        deleteAllUsers()
         insertUser(loggedInUser)
     }
 

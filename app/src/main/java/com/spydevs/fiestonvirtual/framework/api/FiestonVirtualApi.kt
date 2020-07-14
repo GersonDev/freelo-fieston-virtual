@@ -83,8 +83,8 @@ interface FiestonVirtualApi {
      * @param [commentRequest] This object is necessary for return the comments.
      * @return all the comments.
      */
-    @POST("getComments")
-    fun getComments(
+    @POST("comentarios.php")
+    suspend fun getComments(
         @Body commentRequest: CommentRequest
     ): NetworkResponse<GetCommentsResponseEntity, ErrorResponse>
 }

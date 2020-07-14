@@ -12,7 +12,7 @@ class CommentViewHolder(
 
     fun bind(comment: Comment) {
         itemView.apply {
-            commentItem_iv_photo.loadUrl(comment.urlImage)
+            commentItem_iv_photo.loadUrl(comment.avatar)
             commentItem_tv_comment.text = comment.text
         }
 

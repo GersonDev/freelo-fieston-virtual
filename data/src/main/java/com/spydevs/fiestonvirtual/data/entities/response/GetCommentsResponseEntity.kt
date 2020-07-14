@@ -1,7 +1,7 @@
 package com.spydevs.fiestonvirtual.data.entities.response
 
 data class GetCommentsResponseEntity(
-    val `data`: Data,
+    val data: Data,
     val message: String
 ) {
     data class Data(
@@ -15,6 +15,6 @@ data class GetCommentsResponseEntity(
         val idComment: Int,
         val idUserComment: Int,
         val userComment: String,
-        val urlPhoto: String
+        val avatar: String
     )
 }
