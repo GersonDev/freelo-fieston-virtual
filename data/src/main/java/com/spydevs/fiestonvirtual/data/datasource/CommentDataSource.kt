@@ -11,7 +11,7 @@ interface CommentDataSource {
      * @param [commentRequest] This object is necessary for return the comments.
      * @return all the comments of the post from the web services.
      */
-    fun getRemoteComments(
+    suspend fun getRemoteComments(
         commentRequest: CommentRequest
     ): ResultType<List<Comment>, ErrorResponse>
 
