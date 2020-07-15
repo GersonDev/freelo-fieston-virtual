@@ -1,7 +1,7 @@
 <resources>
 
     <!-- TODO CHANGE LANGUAGE TO SPANISH-->
-    <string name="app_name">freelo-fieston-virtual</string>
+    <string name="app_name">Fieston Virtual</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_gallery">Gallery</string>
