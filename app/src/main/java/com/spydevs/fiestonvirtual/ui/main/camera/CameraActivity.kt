@@ -289,6 +289,7 @@ class CameraActivity : AppCompatActivity() {
                         val successOutputData = it.outputData
                         Toast.makeText(this, successOutputData.getString("KEY_SUCCESS"), Toast.LENGTH_SHORT).show()
                         dialogProgress.dismiss()
+                        finish()
                     }
                     WorkInfo.State.FAILED -> {
                         val failureOutputData = it.outputData

@@ -41,8 +41,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo) {
             (requireActivity() as MainActivity).validatePermission(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
         uploadFileButton.setOnClickListener {
-            //TODO UNCOMMENT FOR THE NEXT RELEASE
-            //startWork()
+            startWork()
         }
     }
 
