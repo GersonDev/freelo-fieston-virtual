@@ -46,7 +46,8 @@
             android:layout_width="45dp"
             android:contentDescription="@null"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_baseline_dehaze_24" />
+            app:srcCompat="@drawable/ic_baseline_dehaze_24"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
