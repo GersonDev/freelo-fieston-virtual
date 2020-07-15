@@ -5,11 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/galleryFragment_rv"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:paddingHorizontal="8dp"
     android:paddingVertical="18dp"
-    android:paddingStart="30dp"
-    android:paddingEnd="8dp"
     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
     app:spanCount="3"
     tools:listitem="@layout/layout_item_photo" />
