@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.work.*
 import com.spydevs.fiestonvirtual.R
+import com.spydevs.fiestonvirtual.domain.repository.UsersRepository
 import com.spydevs.fiestonvirtual.framework.api.FiestonVirtualApi
 import com.spydevs.fiestonvirtual.framework.api.NetworkResponse
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +26,7 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
     CoroutineWorker(context, workerParameters), KoinComponent {
 
     private val fiestonVirtualApi: FiestonVirtualApi by inject()
+    private val usersRepository: UsersRepository by inject()
 
     private var notificationManager: NotificationManager =
         applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -41,8 +43,10 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
         val progress = "Starting Uploading..."
         setForeground(createForegroundInfo(CHANNEL_NAME, "Image uploaded successfully", progress))
 
+        val user = usersRepository.getLocalUser()
+
         when (val uploadImageResponse =
-            fiestonVirtualApi.uploadFile(fileUploadMultiPart, 5, 3, 1)) {
+            fiestonVirtualApi.uploadFile(fileUploadMultiPart, user.id, user.idEvent, 1)) {
             is NetworkResponse.Success -> {
                 val data = workDataOf(
                     "KEY_SUCCESS" to "RESPUESTA EXITOSA"
