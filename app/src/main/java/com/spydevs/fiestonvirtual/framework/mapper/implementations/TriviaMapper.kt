@@ -6,16 +6,16 @@ import com.spydevs.fiestonvirtual.framework.mapper.Mapper
 
 object TriviaMapper : Mapper<TriviaResponseEntity, List<Trivia>>() {
     override fun convertFromInitial(i: TriviaResponseEntity): List<Trivia> {
-        return i.data.map {
+        return i.data.question.map {
             Trivia(
-                it.question.idQuestion,
-                it.question.questionType,
-                it.question.questionName,
-                it.question.question,
-                it.question.questionScore,
-                it.question.questionImage,
-                it.question.questionStatus,
-                it.question.questionAlternative.map { questionAlternative ->
+                it.idQuestion,
+                it.questionType,
+                it.questionName,
+                it.question,
+                it.questionScore,
+                it.questionImage,
+                it.questionStatus,
+                it.questionAlternative.map { questionAlternative ->
                     Trivia.Alternative(
                         questionAlternative.idAlternative,
                         questionAlternative.alternativeDescription,

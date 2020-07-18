@@ -1,11 +1,11 @@
 package com.spydevs.fiestonvirtual.data.entities.response
 
 data class TriviaResponseEntity(
-    val `data`: List<Data>,
+    val `data`: Data,
     val message: String
 ) {
     data class Data(
-        val question: Question
+        val question: List<Question>
     ) {
         data class Question(
             val idQuestion: Int,
