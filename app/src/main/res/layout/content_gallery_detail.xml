@@ -1,70 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:paddingHorizontal="16dp"
     tools:showIn="@layout/activity_gallery_detail">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="16dp">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:background="@color/white"
+        android:id="@+id/galleryDetail_iv_detail"
+        android:layout_height="300dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_width="0dp"
+        android:src="@mipmap/ic_launcher_round"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/galleryDetail_iv"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/white"
-            android:src="@mipmap/ic_launcher_round"
-            app:layout_constraintBottom_toTopOf="@+id/galleryDetail_guideline"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/galleryDetail_fab_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@color/red_500"
+        app:srcCompat="@drawable/ic_baseline_share_24"
+        app:layout_constraintBottom_toBottomOf="@+id/galleryDetail_iv_detail"
+        app:layout_constraintStart_toStartOf="@+id/galleryDetail_iv_detail"
+        app:tint="@color/white"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/galleryDetail_iv_shared"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            android:src="@mipmap/ic_launcher_round"
-            app:layout_constraintBottom_toBottomOf="@+id/galleryDetail_iv"
-            app:layout_constraintStart_toStartOf="@+id/galleryDetail_iv" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/galleryDetail_fab_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@color/red_500"
+        app:srcCompat="@drawable/ic_baseline_favorite_24"
+        app:layout_constraintBottom_toBottomOf="@+id/galleryDetail_iv_detail"
+        app:layout_constraintEnd_toEndOf="@+id/galleryDetail_iv_detail"
+        app:tint="@color/white"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/galleryDetail_iv_like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:src="@mipmap/ic_launcher_round"
-            app:layout_constraintBottom_toBottomOf="@+id/galleryDetail_iv"
-            app:layout_constraintEnd_toEndOf="@+id/galleryDetail_iv" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/galleryDetail_rv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/galleryDetail_iv_detail"
+        tools:listitem="@layout/layout_item_comment" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/galleryDetail_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/galleryDetail_rv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/galleryDetail_guideline"
-            tools:listitem="@layout/layout_item_comment" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
 

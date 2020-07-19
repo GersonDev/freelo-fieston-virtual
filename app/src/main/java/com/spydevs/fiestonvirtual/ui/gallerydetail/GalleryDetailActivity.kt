@@ -1,11 +1,13 @@
 package com.spydevs.fiestonvirtual.ui.gallerydetail
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryItem
 import com.spydevs.fiestonvirtual.ui.gallerydetail.adapter.CommentAdapter
+import com.spydevs.fiestonvirtual.ui.main.gallery.GalleryViewModel
 import com.spydevs.fiestonvirtual.util.extensions.loadUrl
 import kotlinx.android.synthetic.main.activity_camera.toolbar
 import kotlinx.android.synthetic.main.content_gallery_detail.*
@@ -18,38 +20,49 @@ class GalleryDetailActivity : AppCompatActivity() {
         CommentAdapter()
     }
 
+    private var postId  = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gallery_detail)
-        setUpToolbar()
-        setUpCommentList()
+        setUpIntentExtras()
+        setUpViews()
+        setUpViewListeners()
+        subscribeToAnyError()
         subscribeToGetCommentList()
-        getCommentList()
-        setUpImage()
+        subscribeToPostDetails()
+        viewModel.getCommentList(postId)
+        viewModel.getPostDetail(postId)
     }
 
-    private fun setUpImage() {
+    private fun setUpIntentExtras() {
         intent.extras?.let { bundle ->
-            galleryDetail_iv.loadUrl((bundle.get(OBJECT_GALLERY_ITEM) as GalleryItem).file)
+            postId = (bundle.get(OBJECT_GALLERY_ITEM) as GalleryItem).id
         }
     }
 
-    private fun getCommentList() {
-        intent.extras?.let { bundle ->
-            viewModel.getCommentList((bundle.get(OBJECT_GALLERY_ITEM) as GalleryItem).id)
-        }
-    }
-
-    private fun setUpToolbar() {
-        setSupportActionBar(toolbar)
+    private fun setUpViewListeners() {
         toolbar.setNavigationOnClickListener {
             finish()
         }
-        supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
-    private fun setUpCommentList() {
+    private fun setUpViews() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         galleryDetail_rv.adapter = this.commentAdapter
+    }
+
+    private fun subscribeToAnyError() {
+        this.viewModel.error.observe(this, Observer {
+            Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+        })
+    }
+
+    private fun subscribeToPostDetails() {
+        this.viewModel.postDetail.observe(this, Observer {
+            galleryDetail_iv_detail.loadUrl(it.galleryItemList[0].file)
+        })
     }
 
     private fun subscribeToGetCommentList() {

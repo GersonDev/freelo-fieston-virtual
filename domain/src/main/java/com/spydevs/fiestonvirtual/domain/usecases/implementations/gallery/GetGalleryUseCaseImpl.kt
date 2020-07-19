@@ -19,7 +19,8 @@ class GetGalleryUseCaseImpl(
             GalleryRequest(
                 idUser = user.id,
                 idEvent = user.idEvent,
-                postStatus = 1
+                postStatus = 1,
+                idPost = null
             )
         )
     }
