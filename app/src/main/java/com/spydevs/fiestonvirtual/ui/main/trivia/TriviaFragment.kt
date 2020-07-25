@@ -52,13 +52,13 @@ class TriviaFragment : Fragment(R.layout.fragment_trivia) {
     private fun isCorrectAnswer(positionAnswer: Int) {
         val answerCorrect =
             triviaModelList[triviaFragment_vp.currentItem].questionAlternative[positionAnswer].isAlternativeAnswer
+        //TODO updated to add services.
         var messageText = "Respuesta Incorrecta"
         if (answerCorrect) {
             messageText = "Respuesta exitosa"
         }
         activity?.setupAlertDialog(
             message = messageText,
-            textPositiveButton = "Aceptar",
             onPositiveButtonClick = { nextPage() })
     }
 
