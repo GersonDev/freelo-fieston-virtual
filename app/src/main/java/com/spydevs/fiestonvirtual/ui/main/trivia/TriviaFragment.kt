@@ -84,10 +84,24 @@ class TriviaFragment : Fragment(R.layout.fragment_trivia) {
         this.triviaViewModel.answerTriviaSuccess.observe(
             viewLifecycleOwner,
             Observer {
-                activity?.setupAlertDialog(
-                    message = (it as TriviaResult.AnswerTrivia.Success).message,
-                    onPositiveButtonClick = { nextPage() }
+                val message = getString(
+                    R.string.trivia_message_of_the_answer,
+                    (it as TriviaResult.AnswerTrivia.Success).message,
+                    it.userTotalScore.toString()
                 )
+                //if last page to pager then show onboarding trivia else next page.
+                if (triviaFragment_vp.currentItem + 1 == triviaPagerAdapter.itemCount) {
+                    activity?.setupAlertDialog(
+                        message = message,
+                        onPositiveButtonClick = { showOnboardingTrivia() }
+                    )
+                } else {
+                    activity?.setupAlertDialog(
+                        message = message,
+                        onPositiveButtonClick = { nextPageToPager() }
+                    )
+                }
+
             }
         )
     }
@@ -111,7 +125,11 @@ class TriviaFragment : Fragment(R.layout.fragment_trivia) {
         )
     }
 
-    private fun nextPage() {
+    private fun nextPageToPager() {
         triviaFragment_vp.setCurrentItem(triviaFragment_vp.currentItem + 1, true)
+    }
+
+    private fun showOnboardingTrivia() {
+        onboarding_trivia_cl.visibility = View.VISIBLE
     }
 }
