@@ -5,12 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="20dp"
     tools:context=".ui.main.MainActivity">
+
+    <include layout="@layout/layout_onboarding_trivia" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/triviaFragment_vp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingHorizontal="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
