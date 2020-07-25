@@ -1,5 +1,6 @@
 package com.spydevs.fiestonvirtual.domain.usecases.implementations.trivia
 
+import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.models.trivia.Trivia
 import com.spydevs.fiestonvirtual.domain.models.trivia.TriviaRequest
 import com.spydevs.fiestonvirtual.domain.repository.TriviaRepository
@@ -11,7 +12,7 @@ class GetTriviaUseCaseImpl(
     private val triviaRepository: TriviaRepository,
     private val usersRepository: UsersRepository
 ) : GetTriviaUseCase {
-    override suspend fun invoke(): ResultType<List<Trivia>, String> {
+    override suspend fun invoke(): ResultType<List<Trivia>, ErrorResponse> {
         val user = usersRepository.getLocalUser()
         val triviaRequest = TriviaRequest(
             user.idEvent,
