@@ -12,7 +12,7 @@ import com.spydevs.fiestonvirtual.domain.resource.ResultType
 class TriviaRepositoryImpl(
     private val triviaDataSource: TriviaDataSource
 ) : TriviaRepository {
-    override suspend fun getTrivia(triviaRequest: TriviaRequest): ResultType<List<Trivia>, String> {
+    override suspend fun getTrivia(triviaRequest: TriviaRequest): ResultType<List<Trivia>, ErrorResponse> {
         return triviaDataSource.getTrivia(triviaRequest)
     }
 
