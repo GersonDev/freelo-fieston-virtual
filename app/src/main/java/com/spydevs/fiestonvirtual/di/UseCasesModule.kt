@@ -1,5 +1,6 @@
 package com.spydevs.fiestonvirtual.di
 
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.comment.AddCommentUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.comment.GetCommentsUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.trivia.GetTriviaUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.GetGalleryUseCase
@@ -9,6 +10,7 @@ import com.spydevs.fiestonvirtual.domain.usecases.abstractions.welcome.GetWelcom
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.welcome.GetWelcomeUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.GetLocalUserUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.LoginUserUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.implementations.comment.AddCommentUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.comment.GetCommentsUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.trivia.GetTriviaUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.gallery.GetGalleryUseCaseImpl
@@ -53,5 +55,9 @@ val useCasesModule = module {
 
     single<GetPostDetailUseCase> {
         GetPostDetailUseCaseImpl(get())
+    }
+
+    single<AddCommentUseCase> {
+        AddCommentUseCaseImpl(get(), get())
     }
 }

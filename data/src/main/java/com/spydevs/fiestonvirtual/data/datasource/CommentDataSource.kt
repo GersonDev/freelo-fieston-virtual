@@ -1,5 +1,6 @@
 package com.spydevs.fiestonvirtual.data.datasource
 
+import com.spydevs.fiestonvirtual.domain.models.comment.AddCommentRequest
 import com.spydevs.fiestonvirtual.domain.models.comment.Comment
 import com.spydevs.fiestonvirtual.domain.models.comment.CommentRequest
 import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
@@ -15,4 +16,10 @@ interface CommentDataSource {
         commentRequest: CommentRequest
     ): ResultType<List<Comment>, ErrorResponse>
 
+    /**
+     * @param [addCommentRequest] Request object fore creating a new comment on server side.
+     */
+    suspend fun addRemoteComment(
+        addCommentRequest: AddCommentRequest
+    ): ResultType<Comment, ErrorResponse>
 }

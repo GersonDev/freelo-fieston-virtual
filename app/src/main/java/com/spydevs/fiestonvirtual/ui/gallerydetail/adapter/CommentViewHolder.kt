@@ -12,6 +12,7 @@ class CommentViewHolder(
 
     fun bind(comment: Comment) {
         itemView.apply {
+            commentItem_tv_userName.text = comment.userName
             commentItem_iv_photo.loadUrl(comment.avatar)
             commentItem_tv_comment.text = comment.text
         }

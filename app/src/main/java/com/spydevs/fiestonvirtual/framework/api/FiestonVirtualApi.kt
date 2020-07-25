@@ -2,6 +2,7 @@ package com.spydevs.fiestonvirtual.framework.api
 
 import com.spydevs.fiestonvirtual.data.entities.response.*
 import com.spydevs.fiestonvirtual.domain.models.code.ValidateCodeRequest
+import com.spydevs.fiestonvirtual.domain.models.comment.AddCommentRequest
 import com.spydevs.fiestonvirtual.domain.models.comment.CommentRequest
 import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.models.trivia.TriviaRequest
@@ -87,4 +88,13 @@ interface FiestonVirtualApi {
     suspend fun getComments(
         @Body commentRequest: CommentRequest
     ): NetworkResponse<GetCommentsResponseEntity, ErrorResponse>
+
+    /**
+     * @param [addCommentRequest] Request object for creating a new comment on server side.
+     */
+    @POST("agregar_comentarios.php")
+    suspend fun addComment(
+        @Body addCommentRequest: AddCommentRequest
+    ): NetworkResponse<AddCommentResponseEntity, ErrorResponse>
+
 }

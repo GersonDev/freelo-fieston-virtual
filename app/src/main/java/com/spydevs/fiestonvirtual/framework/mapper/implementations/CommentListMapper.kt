@@ -11,7 +11,8 @@ object CommentListMapper : Mapper<List<GetCommentsResponseEntity.Comment>, List<
             Comment(
                 id = it.idComment,
                 text = it.comment,
-                avatar = it.avatar
+                avatar = it.avatar,
+                userName = it.userComment
             )
         }
     }

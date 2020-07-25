@@ -3,19 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:paddingHorizontal="16dp"
     tools:showIn="@layout/activity_gallery_detail">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:background="@color/white"
         android:id="@+id/galleryDetail_iv_detail"
-        android:layout_height="300dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_width="0dp"
+        android:layout_width="385dp"
+        android:layout_height="290dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/white"
+        android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher_round"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,10 +29,10 @@
         android:layout_gravity="bottom"
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@color/red_500"
-        app:srcCompat="@drawable/ic_baseline_share_24"
         app:layout_constraintBottom_toBottomOf="@+id/galleryDetail_iv_detail"
         app:layout_constraintStart_toStartOf="@+id/galleryDetail_iv_detail"
-        app:tint="@color/white"/>
+        app:srcCompat="@drawable/ic_baseline_share_24"
+        app:tint="@color/white" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/galleryDetail_fab_favorite"
@@ -40,26 +41,52 @@
         android:layout_gravity="bottom"
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@color/red_500"
-        app:srcCompat="@drawable/ic_baseline_favorite_24"
         app:layout_constraintBottom_toBottomOf="@+id/galleryDetail_iv_detail"
         app:layout_constraintEnd_toEndOf="@+id/galleryDetail_iv_detail"
-        app:tint="@color/white"/>
+        app:srcCompat="@drawable/ic_baseline_favorite_24"
+        app:tint="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/galleryDetail_rv"
-        android:layout_width="0dp"
+        android:layout_width="385dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/galleryDetail_et_comment"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/galleryDetail_iv_detail"
         tools:listitem="@layout/layout_item_comment" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/galleryDetail_et_comment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:hint="Escriba un mensaje"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/galleryDetail_ib_send"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/galleryDetail_ib_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#F44336"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/galleryDetail_et_comment"
+        app:srcCompat="@drawable/ic_baseline_send_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
