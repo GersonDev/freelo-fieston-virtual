@@ -27,7 +27,7 @@ class TriviaViewModel(private val getTriviaUseCase: GetTriviaUseCase) : ViewMode
                     _trivia.value = result.value
                 }
                 is ResultType.Error -> {
-                    _error.value = result.value
+                    _error.value = result.value.message
                 }
             }
         }
