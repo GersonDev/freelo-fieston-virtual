@@ -95,6 +95,6 @@ interface FiestonVirtualApi {
      */
     @POST("respuesta_trivia.php")
     suspend fun answerTrivia(
-        answerTriviaRequest: AnswerTriviaRequest
+        @Body answerTriviaRequest: AnswerTriviaRequest
     ): NetworkResponse<AnswerTriviaResponseEntity, ErrorResponse>
 }
