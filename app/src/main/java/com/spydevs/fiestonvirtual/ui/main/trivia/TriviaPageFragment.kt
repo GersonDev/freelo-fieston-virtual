@@ -9,7 +9,8 @@ import com.spydevs.fiestonvirtual.ui.main.trivia.answer.AnswerAdapter
 import kotlinx.android.synthetic.main.fragment_page_trivia.*
 
 class TriviaPageFragment(
-    private var trivia: Trivia
+    private var trivia: Trivia,
+    private val onAnswerPositionClickListener: (position: Int) -> Unit
 ) : Fragment(R.layout.fragment_page_trivia) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -17,7 +18,10 @@ class TriviaPageFragment(
         super.onViewCreated(view, savedInstanceState)
         triviaPageFragment_tv_title.text = trivia.questionName
         triviaPageFragment_tv_points.text = trivia.question
-        triviaPageFragment_rv_options.adapter = AnswerAdapter().apply {
+        triviaPageFragment_rv_options.adapter = AnswerAdapter { position ->
+            trivia.questionAlternative[position]
+            onAnswerPositionClickListener(position)
+        }.apply {
             addData(trivia.questionAlternative)
         }
     }

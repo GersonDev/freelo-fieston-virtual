@@ -6,16 +6,21 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.spydevs.fiestonvirtual.R
+import com.spydevs.fiestonvirtual.domain.models.trivia.Trivia
 import com.spydevs.fiestonvirtual.util.ZoomOutPageTransformer
+import com.spydevs.fiestonvirtual.util.extensions.setupAlertDialog
 import kotlinx.android.synthetic.main.fragment_trivia.*
 import org.koin.android.ext.android.inject
 
 class TriviaFragment : Fragment(R.layout.fragment_trivia) {
 
     private val triviaViewModel: TriviaViewModel by inject()
+    private lateinit var triviaModelList: List<Trivia>
 
     private val triviaPagerAdapter: TriviaPagerAdapter by lazy {
-        TriviaPagerAdapter(this)
+        TriviaPagerAdapter(this) { positionAnswer ->
+            isCorrectAnswer(positionAnswer)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,6 +39,7 @@ class TriviaFragment : Fragment(R.layout.fragment_trivia) {
     private fun subscribeToTrivia() {
         triviaViewModel.trivia.observe(viewLifecycleOwner, Observer {
             triviaPagerAdapter.addAllData(it)
+            triviaModelList = it
         })
     }
 
@@ -43,4 +49,20 @@ class TriviaFragment : Fragment(R.layout.fragment_trivia) {
         })
     }
 
+    private fun isCorrectAnswer(positionAnswer: Int) {
+        val answerCorrect =
+            triviaModelList[triviaFragment_vp.currentItem].questionAlternative[positionAnswer].isAlternativeAnswer
+        var messageText = "Respuesta Incorrecta"
+        if (answerCorrect) {
+            messageText = "Respuesta exitosa"
+        }
+        activity?.setupAlertDialog(
+            message = messageText,
+            textPositiveButton = "Aceptar",
+            onPositiveButtonClick = { nextPage() })
+    }
+
+    private fun nextPage() {
+        triviaFragment_vp.setCurrentItem(triviaFragment_vp.currentItem + 1, true);
+    }
 }
