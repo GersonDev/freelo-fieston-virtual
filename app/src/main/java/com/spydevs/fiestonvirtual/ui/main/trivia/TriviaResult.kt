@@ -5,7 +5,7 @@ import com.spydevs.fiestonvirtual.domain.models.trivia.Trivia
 sealed class TriviaResult {
 
     sealed class GetTrivia : TriviaResult() {
-        data class Successful(
+        data class Success(
             val triviaList: List<Trivia>
         ) : GetTrivia()
 
@@ -14,14 +14,16 @@ sealed class TriviaResult {
         ) : GetTrivia()
     }
 
-    data class AnswerTriviaSuccessful(
-        val message: String,
-        val userTotalScore: Int
-    ) : TriviaResult()
+    sealed class AnswerTrivia : TriviaResult() {
+        data class Success(
+            val message: String,
+            val userTotalScore: Int
+        ) : AnswerTrivia()
 
-    data class AnswerTriviaError(
-        val message: String
-    ) : TriviaResult()
+        data class Error(
+            val message: String
+        ) : AnswerTrivia()
+    }
 
     data class Loading(
         val show: Boolean

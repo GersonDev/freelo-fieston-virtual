@@ -2,7 +2,6 @@ package com.spydevs.fiestonvirtual.ui.main.trivia
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.spydevs.fiestonvirtual.R
@@ -11,6 +10,7 @@ import com.spydevs.fiestonvirtual.util.ZoomOutPageTransformer
 import com.spydevs.fiestonvirtual.util.extensions.setupAlertDialog
 import com.spydevs.fiestonvirtual.util.extensions.setupLoadingAlertDialog
 import kotlinx.android.synthetic.main.fragment_trivia.*
+import kotlinx.android.synthetic.main.layout_onboarding_trivia.*
 import org.koin.android.ext.android.inject
 
 class TriviaFragment : Fragment(R.layout.fragment_trivia) {
@@ -30,31 +30,40 @@ class TriviaFragment : Fragment(R.layout.fragment_trivia) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpViews()
-        subscribeToTrivia()
-        subscribeToAnyError()
+        setUpViewPager()
+        subscribeToGetTriviaSuccess()
+        subscribeToGetTriviaError()
         subscribeToLoading()
-        subscribeToAnswerTriviaSuccessful()
+        subscribeToAnswerTriviaSuccess()
         subscribeToAnswerTriviaError()
-        triviaViewModel.getTrivia()
+        setUpPlayButton()
     }
 
-    private fun setUpViews() {
+    private fun setUpPlayButton() {
+        onboarding_trivia_btn.setOnClickListener {
+            triviaViewModel.getTrivia()
+        }
+    }
+
+    private fun setUpViewPager() {
         triviaFragment_vp.adapter = triviaPagerAdapter
         triviaFragment_vp.setPageTransformer(ZoomOutPageTransformer())
         triviaFragment_vp.isUserInputEnabled = false
     }
 
-    private fun subscribeToTrivia() {
-        triviaViewModel.trivia.observe(viewLifecycleOwner, Observer {
-            triviaPagerAdapter.addAllData(it)
-            triviaModelList = it
+    private fun subscribeToGetTriviaSuccess() {
+        triviaViewModel.getTriviaSuccess.observe(viewLifecycleOwner, Observer {
+            onboarding_trivia_cl.visibility = View.INVISIBLE
+            triviaPagerAdapter.addAllData((it as TriviaResult.GetTrivia.Success).triviaList)
+            triviaModelList = it.triviaList
         })
     }
 
-    private fun subscribeToAnyError() {
-        triviaViewModel.error.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
+    private fun subscribeToGetTriviaError() {
+        triviaViewModel.getTriviaError.observe(viewLifecycleOwner, Observer {
+            activity?.setupAlertDialog(
+                message = (it as TriviaResult.GetTrivia.Error).text
+            )
         })
     }
 
@@ -71,12 +80,12 @@ class TriviaFragment : Fragment(R.layout.fragment_trivia) {
         )
     }
 
-    private fun subscribeToAnswerTriviaSuccessful() {
-        this.triviaViewModel.answerTriviaSuccessful.observe(
+    private fun subscribeToAnswerTriviaSuccess() {
+        this.triviaViewModel.answerTriviaSuccess.observe(
             viewLifecycleOwner,
             Observer {
                 activity?.setupAlertDialog(
-                    message = (it as TriviaResult.AnswerTriviaSuccessful).message,
+                    message = (it as TriviaResult.AnswerTrivia.Success).message,
                     onPositiveButtonClick = { nextPage() }
                 )
             }
@@ -88,7 +97,7 @@ class TriviaFragment : Fragment(R.layout.fragment_trivia) {
             viewLifecycleOwner,
             Observer {
                 activity?.setupAlertDialog(
-                    message = (it as TriviaResult.AnswerTriviaError).message
+                    message = (it as TriviaResult.AnswerTrivia.Error).message
                 )
             }
         )
@@ -103,6 +112,6 @@ class TriviaFragment : Fragment(R.layout.fragment_trivia) {
     }
 
     private fun nextPage() {
-        triviaFragment_vp.setCurrentItem(triviaFragment_vp.currentItem + 1, true);
+        triviaFragment_vp.setCurrentItem(triviaFragment_vp.currentItem + 1, true)
     }
 }

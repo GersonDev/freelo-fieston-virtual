@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.spydevs.fiestonvirtual.domain.models.trivia.Trivia
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.trivia.AnswerTriviaUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.trivia.GetTriviaUseCase
@@ -16,17 +15,17 @@ class TriviaViewModel(
     private val answerTriviaUseCase: AnswerTriviaUseCase
 ) : ViewModel() {
 
-    private val _trivia = MutableLiveData<TriviaResult>()
-    val trivia: LiveData<TriviaResult>
-        get() = _trivia
+    private val _getTriviaSuccess = MutableLiveData<TriviaResult>()
+    val getTriviaSuccess: LiveData<TriviaResult>
+        get() = _getTriviaSuccess
 
-    private val _error = MutableLiveData<TriviaResult>()
-    val error: LiveData<TriviaResult>
-        get() = _error
+    private val _getTriviaError = MutableLiveData<TriviaResult>()
+    val getTriviaError: LiveData<TriviaResult>
+        get() = _getTriviaError
 
-    private val _answerTriviaSuccessful = MutableLiveData<TriviaResult>()
-    val answerTriviaSuccessful: LiveData<TriviaResult>
-        get() = _answerTriviaSuccessful
+    private val _answerTriviaSuccess = MutableLiveData<TriviaResult>()
+    val answerTriviaSuccess: LiveData<TriviaResult>
+        get() = _answerTriviaSuccess
 
     private val _answerTriviaError = MutableLiveData<TriviaResult>()
     val answerTriviaError: LiveData<TriviaResult>
@@ -41,10 +40,10 @@ class TriviaViewModel(
         viewModelScope.launch(Dispatchers.Main) {
             when (val result = getTriviaUseCase()) {
                 is ResultType.Success -> {
-                    _trivia.value = TriviaResult.GetTrivia.Successful(result.value)
+                    _getTriviaSuccess.value = TriviaResult.GetTrivia.Success(result.value)
                 }
                 is ResultType.Error -> {
-                    _error.value = TriviaResult.GetTrivia.Error(result.value.message)
+                    _getTriviaError.value = TriviaResult.GetTrivia.Error(result.value.message)
                 }
             }
             _loading.value = TriviaResult.Loading(false)
@@ -56,14 +55,14 @@ class TriviaViewModel(
         viewModelScope.launch(Dispatchers.Main) {
             when (val result = answerTriviaUseCase(idAlternative)) {
                 is ResultType.Success -> {
-                    _answerTriviaSuccessful.value =
-                        TriviaResult.AnswerTriviaSuccessful(
+                    _answerTriviaSuccess.value =
+                        TriviaResult.AnswerTrivia.Success(
                             result.value.message,
                             result.value.userTotalScore
                         )
                 }
                 is ResultType.Error -> {
-                    _answerTriviaError.value = TriviaResult.AnswerTriviaError(result.value.message)
+                    _answerTriviaError.value = TriviaResult.AnswerTrivia.Error(result.value.message)
                 }
             }
             _loading.value = TriviaResult.Loading(false)
