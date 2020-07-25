@@ -16,12 +16,12 @@ class TriviaViewModel(
     private val answerTriviaUseCase: AnswerTriviaUseCase
 ) : ViewModel() {
 
-    private val _trivia = MutableLiveData<List<Trivia>>()
-    val trivia: LiveData<List<Trivia>>
+    private val _trivia = MutableLiveData<TriviaResult>()
+    val trivia: LiveData<TriviaResult>
         get() = _trivia
 
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String>
+    private val _error = MutableLiveData<TriviaResult>()
+    val error: LiveData<TriviaResult>
         get() = _error
 
     private val _answerTriviaSuccessful = MutableLiveData<TriviaResult>()
@@ -37,15 +37,17 @@ class TriviaViewModel(
         get() = _loading
 
     fun getTrivia() {
+        _loading.value = TriviaResult.Loading(true)
         viewModelScope.launch(Dispatchers.Main) {
             when (val result = getTriviaUseCase()) {
                 is ResultType.Success -> {
-                    _trivia.value = result.value
+                    _trivia.value = TriviaResult.GetTrivia.Successful(result.value)
                 }
                 is ResultType.Error -> {
-                    _error.value = result.value.message
+                    _error.value = TriviaResult.GetTrivia.Error(result.value.message)
                 }
             }
+            _loading.value = TriviaResult.Loading(false)
         }
     }
 
