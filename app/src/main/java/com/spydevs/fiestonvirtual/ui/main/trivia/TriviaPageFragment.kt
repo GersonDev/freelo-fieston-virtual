@@ -13,17 +13,20 @@ class TriviaPageFragment(
     private val onAnswerPositionClickListener: (position: Int) -> Unit
 ) : Fragment(R.layout.fragment_page_trivia) {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        super.onViewCreated(view, savedInstanceState)
-        triviaPageFragment_tv_title.text = trivia.questionName
-        triviaPageFragment_tv_points.text = trivia.question
-        triviaPageFragment_rv_options.adapter = AnswerAdapter { position ->
+    private val answerAdapter by lazy {
+        AnswerAdapter { position ->
             trivia.questionAlternative[position]
             onAnswerPositionClickListener(position)
         }.apply {
             addData(trivia.questionAlternative)
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        triviaPageFragment_tv_title.text = this.trivia.questionName
+        triviaPageFragment_tv_points.text = this.trivia.question
+        triviaPageFragment_rv_options.adapter = this.answerAdapter
     }
 
 }
