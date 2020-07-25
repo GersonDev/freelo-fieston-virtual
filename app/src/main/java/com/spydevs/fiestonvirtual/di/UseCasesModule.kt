@@ -36,7 +36,7 @@ val useCasesModule = module {
     }
 
     single<GetTriviaUseCase> {
-        GetTriviaUseCaseImpl(get())
+        GetTriviaUseCaseImpl(get(), get())
     }
 
     single<GetGalleryUseCase> {
