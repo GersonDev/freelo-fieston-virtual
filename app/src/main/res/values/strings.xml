@@ -25,5 +25,6 @@
     <string name="cancel_download">Cancel</string>
     <string name="upload">Subir</string>
     <string name="choose">Elegir</string>
+    <string name="comment">Comentar...</string>
 
 </resources>
