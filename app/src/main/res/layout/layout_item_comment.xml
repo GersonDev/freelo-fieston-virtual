@@ -22,11 +22,20 @@
         android:id="@+id/commentItem_llc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/commentItem_iv_photo"
         app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/commentItem_tv_userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/colorAccent"
+            android:padding="5dp"
+            tools:text="Carlos Vargas Huaman" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/commentItem_tv_comment"
@@ -34,8 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:background="@drawable/background_item_comment"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="10dp"
+            android:textColor="@color/grey_500"
+            android:padding="5dp"
             tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

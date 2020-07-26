@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.spydevs.fiestonvirtual.domain.models.comment.Comment
 import com.spydevs.fiestonvirtual.domain.models.comment.CommentRequest
 import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.comment.AddCommentUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.comment.GetCommentsUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.GetPostDetailUseCase
 import com.spydevs.fiestonvirtual.ui.main.gallery.GalleryResult
@@ -16,12 +16,13 @@ import kotlinx.coroutines.launch
 
 class GalleryDetailViewModel(
     private val getCommentsUseCase: GetCommentsUseCase,
-    private val getPostDetailUseCase: GetPostDetailUseCase
+    private val getPostDetailUseCase: GetPostDetailUseCase,
+    private val addCommentUseCase: AddCommentUseCase
 ) : ViewModel() {
 
-    private val _commentList = MutableLiveData<List<Comment>>()
-    val commentList: LiveData<List<Comment>>
-        get() = _commentList
+    private val _commentResult = MutableLiveData<CommentsResult>()
+    val commentResult: LiveData<CommentsResult>
+        get() = _commentResult
 
     private val _error = MutableLiveData<ErrorResponse>()
     val error: LiveData<ErrorResponse>
@@ -34,16 +35,18 @@ class GalleryDetailViewModel(
     private val _postDetail = MutableLiveData<GalleryResult.GetGallerySuccessful>()
     val postDetail: LiveData<GalleryResult.GetGallerySuccessful> = _postDetail
 
-    fun getCommentList(idPost: Int) {
+    fun getComments(idPost: Int) {
         viewModelScope.launch(Dispatchers.Main) {
+            _commentResult.value = CommentsResult.GetComments.Loading(true)
             when (val result = getCommentsUseCase(CommentRequest(idPost))) {
                 is ResultType.Success -> {
-                    _commentList.value = result.value
+                    _commentResult.value = CommentsResult.GetComments.Success(result.value)
                 }
                 is ResultType.Error -> {
                     _error.value = result.value
                 }
             }
+            _commentResult.value = CommentsResult.GetComments.Loading(false)
         }
     }
 
@@ -59,6 +62,21 @@ class GalleryDetailViewModel(
                 }
             }
             _loading.value = GalleryResult.Loading(false)
+        }
+    }
+
+    fun addComment(postId: Int, comment: String) {
+        viewModelScope.launch(Dispatchers.Main) {
+            _commentResult.value = CommentsResult.AddComment.Loading(true)
+            when (val result = addCommentUseCase(postId, comment)) {
+                is ResultType.Success -> {
+                    _commentResult.value = CommentsResult.AddComment.Success(result.value)
+                }
+                is ResultType.Error -> {
+                    _error.value = result.value
+                }
+            }
+            _commentResult.value = CommentsResult.AddComment.Loading(false)
         }
     }
 
