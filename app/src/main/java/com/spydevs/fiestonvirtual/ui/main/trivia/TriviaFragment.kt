@@ -54,6 +54,7 @@ class TriviaFragment : Fragment(R.layout.fragment_trivia) {
     private fun subscribeToGetTriviaSuccess() {
         triviaViewModel.getTriviaSuccess.observe(viewLifecycleOwner, Observer {
             onboarding_trivia_cl.visibility = View.INVISIBLE
+            triviaFragment_vp.visibility = View.VISIBLE
             triviaPagerAdapter.addAllData((it as TriviaResult.GetTrivia.Success).triviaList)
             triviaModelList = it.triviaList
         })
@@ -130,6 +131,7 @@ class TriviaFragment : Fragment(R.layout.fragment_trivia) {
     }
 
     private fun showOnboardingTrivia() {
+        triviaFragment_vp.visibility = View.INVISIBLE
         onboarding_trivia_cl.visibility = View.VISIBLE
     }
 }
