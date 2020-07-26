@@ -15,4 +15,9 @@ interface UsersDataSource {
         getRemoteUserRequest: GetRemoteUserRequest
     ): ResultType<User, ErrorResponse>
 
+    suspend fun updateTotalScoreOfUser(
+        idUser: Int,
+        totalScore: Int
+    )
+
 }

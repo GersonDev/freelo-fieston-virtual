@@ -49,5 +49,12 @@ class UsersDataSourceImpl(
         }
     }
 
+    override suspend fun updateTotalScoreOfUser(idUser: Int, totalScore: Int) {
+        usersDao.updateTotalScoreOfUser(
+            idUser,
+            totalScore
+        )
+    }
+
 
 }

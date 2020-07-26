@@ -15,4 +15,10 @@ interface UsersRepository {
     suspend fun getRemoteUser(
         getRemoteUserRequest: GetRemoteUserRequest
     ): ResultType<User, ErrorResponse>
+
+    suspend fun updateLocalTotalScoreOfUser(
+        idUser: Int,
+        totalScore: Int
+    )
+
 }
