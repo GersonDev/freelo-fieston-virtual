@@ -30,4 +30,9 @@ class CommentAdapter : RecyclerView.Adapter<CommentViewHolder>() {
         notifyDataSetChanged()
     }
 
+    fun addData(comment: Comment) {
+        this.commentList.add(comment)
+        notifyDataSetChanged()
+    }
+
 }

@@ -2,6 +2,7 @@ package com.spydevs.fiestonvirtual.framework.api
 
 import com.spydevs.fiestonvirtual.data.entities.response.*
 import com.spydevs.fiestonvirtual.domain.models.code.ValidateCodeRequest
+import com.spydevs.fiestonvirtual.domain.models.comment.AddCommentRequest
 import com.spydevs.fiestonvirtual.domain.models.comment.CommentRequest
 import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.models.trivia.TriviaRequest
@@ -90,6 +91,14 @@ interface FiestonVirtualApi {
     ): NetworkResponse<GetCommentsResponseEntity, ErrorResponse>
 
     /**
+     * @param [addCommentRequest] Request object for creating a new comment on server side.
+     */
+    @POST("agregar_comentarios.php")
+    suspend fun addComment(
+        @Body addCommentRequest: AddCommentRequest
+    ): NetworkResponse<AddCommentResponseEntity, ErrorResponse>
+
+    /**
      * @param [answerTriviaRequest] This object is necessary for answer a trivia.
      * @return total score.
      */
@@ -97,4 +106,5 @@ interface FiestonVirtualApi {
     suspend fun answerTrivia(
         @Body answerTriviaRequest: AnswerTriviaRequest
     ): NetworkResponse<AnswerTriviaResponseEntity, ErrorResponse>
+
 }
