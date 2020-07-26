@@ -7,10 +7,9 @@ import androidx.lifecycle.Observer
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryItem
 import com.spydevs.fiestonvirtual.ui.gallerydetail.adapter.CommentAdapter
-import com.spydevs.fiestonvirtual.ui.main.gallery.GalleryViewModel
 import com.spydevs.fiestonvirtual.util.extensions.loadUrl
-import kotlinx.android.synthetic.main.activity_camera.toolbar
 import kotlinx.android.synthetic.main.content_gallery_detail.*
+import kotlinx.android.synthetic.main.toolbar_simple.*
 import org.koin.android.ext.android.inject
 
 class GalleryDetailActivity : AppCompatActivity() {
