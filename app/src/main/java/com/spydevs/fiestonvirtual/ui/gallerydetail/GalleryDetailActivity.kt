@@ -8,11 +8,21 @@ import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryItem
 import com.spydevs.fiestonvirtual.ui.gallerydetail.adapter.CommentAdapter
 import com.spydevs.fiestonvirtual.util.extensions.loadUrl
+import com.spydevs.fiestonvirtual.util.extensions.setupLoadingAlertDialog
+import com.spydevs.fiestonvirtual.util.extensions.show
 import kotlinx.android.synthetic.main.content_gallery_detail.*
 import kotlinx.android.synthetic.main.toolbar_simple.*
 import org.koin.android.ext.android.inject
 
 class GalleryDetailActivity : AppCompatActivity() {
+
+    private val getCommentsLoadingDialog by lazy {
+        setupLoadingAlertDialog()
+    }
+
+    private val addCommentLoadingDialog by lazy {
+        setupLoadingAlertDialog()
+    }
 
     private val viewModel: GalleryDetailViewModel by inject()
     private val commentAdapter: CommentAdapter by lazy {
@@ -28,9 +38,9 @@ class GalleryDetailActivity : AppCompatActivity() {
         setUpViews()
         setUpViewListeners()
         subscribeToAnyError()
-        subscribeToGetCommentList()
         subscribeToPostDetails()
-        viewModel.getCommentList(postId)
+        subscribeToCommentsResult()
+        viewModel.getComments(postId)
         viewModel.getPostDetail(postId)
     }
 
@@ -43,6 +53,9 @@ class GalleryDetailActivity : AppCompatActivity() {
     private fun setUpViewListeners() {
         toolbar.setNavigationOnClickListener {
             finish()
+        }
+        galleryDetail_ib_send.setOnClickListener {
+            viewModel.addComment(postId, galleryDetail_et_comment.text.toString())
         }
     }
 
@@ -58,15 +71,28 @@ class GalleryDetailActivity : AppCompatActivity() {
         })
     }
 
-    private fun subscribeToPostDetails() {
-        this.viewModel.postDetail.observe(this, Observer {
-            galleryDetail_iv_detail.loadUrl(it.galleryItemList[0].file)
+    private fun subscribeToCommentsResult() {
+        this.viewModel.commentResult.observe(this, Observer {
+            when(it) {
+                is CommentsResult.GetComments.Success -> {
+                    this.commentAdapter.addData(it.comments)
+                }
+                is CommentsResult.GetComments.Loading -> {
+                    this.getCommentsLoadingDialog.show(it.loading)
+                }
+                is CommentsResult.AddComment.Success -> {
+                    this.commentAdapter.addData(it.comment)
+                }
+                is CommentsResult.AddComment.Loading -> {
+                    this.addCommentLoadingDialog.show(it.loading)
+                }
+            }
         })
     }
 
-    private fun subscribeToGetCommentList() {
-        this.viewModel.commentList.observe(this, Observer {
-            this.commentAdapter.addData(it)
+    private fun subscribeToPostDetails() {
+        this.viewModel.postDetail.observe(this, Observer {
+            galleryDetail_iv_detail.loadUrl(it.galleryItemList[0].file)
         })
     }
 
