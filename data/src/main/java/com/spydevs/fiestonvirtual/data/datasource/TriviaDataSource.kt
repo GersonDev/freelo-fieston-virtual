@@ -15,7 +15,7 @@ interface TriviaDataSource {
      * @param [triviaRequest] a request for getting the trivia.
      * @return the [ResultType].
      */
-    suspend fun getTrivia(triviaRequest: TriviaRequest): ResultType<List<Trivia>, String>
+    suspend fun getTrivia(triviaRequest: TriviaRequest): ResultType<List<Trivia>, ErrorResponse>
 
     /**
      * @param [answerTriviaRequest] a request for answer a trivia.

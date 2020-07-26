@@ -99,3 +99,6 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
+### Sonar ###
+#Sonar generated dir
+/.idea/sonarlint/

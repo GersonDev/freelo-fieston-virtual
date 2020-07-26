@@ -69,7 +69,7 @@ interface FiestonVirtualApi {
     @POST("trivias.php")
     suspend fun getTrivia(
         @Body triviaRequest: TriviaRequest
-    ): NetworkResponse<TriviaResponseEntity, String>
+    ): NetworkResponse<TriviaResponseEntity, ErrorResponse>
 
 
     /**
@@ -104,7 +104,7 @@ interface FiestonVirtualApi {
      */
     @POST("respuesta_trivia.php")
     suspend fun answerTrivia(
-        answerTriviaRequest: AnswerTriviaRequest
+        @Body answerTriviaRequest: AnswerTriviaRequest
     ): NetworkResponse<AnswerTriviaResponseEntity, ErrorResponse>
 
 }

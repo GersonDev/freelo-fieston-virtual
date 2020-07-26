@@ -18,7 +18,7 @@ interface TriviaRepository {
      * @param [triviaRequest] the request model for getting trivia information.
      * @return [ResultType] The result type with trivia game from the server.
      */
-    suspend fun getTrivia(triviaRequest: TriviaRequest): ResultType<List<Trivia>, String>
+    suspend fun getTrivia(triviaRequest: TriviaRequest): ResultType<List<Trivia>, ErrorResponse>
 
     /**
      * This is used for answer a trivia.

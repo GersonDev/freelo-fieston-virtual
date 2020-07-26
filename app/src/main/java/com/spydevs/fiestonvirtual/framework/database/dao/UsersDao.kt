@@ -32,4 +32,10 @@ interface UsersDao {
         insertUser(loggedInUser)
     }
 
+    @Query("UPDATE users SET total_score=:totalScore WHERE id=:idUser")
+    suspend fun updateTotalScoreOfUser(
+        idUser: Int,
+        totalScore: Int
+    )
+
 }

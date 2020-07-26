@@ -17,9 +17,16 @@ class AnswerTriviaUseCaseImpl(
         idAlternative: Int
     ): ResultType<AnswerTriviaResponse, ErrorResponse> {
         val user = usersRepository.getLocalUser()
-        return triviaRepository.answerTrivia(
+        val result = triviaRepository.answerTrivia(
             AnswerTriviaRequest(idAlternative, user.id)
         )
+        if (result is ResultType.Success) {
+            usersRepository.updateLocalTotalScoreOfUser(
+                user.id,
+                result.value.userTotalScore
+            )
+        }
+        return result
     }
 
 }

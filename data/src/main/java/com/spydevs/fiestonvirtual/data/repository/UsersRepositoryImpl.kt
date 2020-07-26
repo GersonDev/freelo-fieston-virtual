@@ -24,4 +24,8 @@ class UsersRepositoryImpl(
         return usersDataSource.getRemoteUser(getRemoteUserRequest)
     }
 
+    override suspend fun updateLocalTotalScoreOfUser(idUser: Int, totalScore: Int) {
+        return usersDataSource.updateTotalScoreOfUser(idUser, totalScore)
+    }
+
 }
