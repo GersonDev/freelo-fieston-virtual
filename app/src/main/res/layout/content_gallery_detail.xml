@@ -10,7 +10,7 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/galleryDetail_iv_detail"
-        android:layout_width="385dp"
+        android:layout_width="0dp"
         android:layout_height="290dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -48,7 +48,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/galleryDetail_rv"
-        android:layout_width="385dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
