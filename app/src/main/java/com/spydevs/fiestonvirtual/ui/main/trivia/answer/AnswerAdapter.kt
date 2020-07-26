@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.domain.models.trivia.Trivia
 
-class AnswerAdapter : RecyclerView.Adapter<AnswerViewHolder>() {
+class AnswerAdapter(
+    private val onAnswerPositionClickListener: (position: Int) -> Unit
+) : RecyclerView.Adapter<AnswerViewHolder>() {
 
     private var answerList = mutableListOf<Trivia.Alternative>()
 
@@ -16,6 +18,7 @@ class AnswerAdapter : RecyclerView.Adapter<AnswerViewHolder>() {
                 .inflate(R.layout.layout_item_trivia_answer, parent, false)
         ) {
             setSelected(it)
+            onAnswerPositionClickListener(it)
         }
     }
 

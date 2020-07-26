@@ -7,6 +7,7 @@ import com.spydevs.fiestonvirtual.domain.models.comment.CommentRequest
 import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.models.trivia.TriviaRequest
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryRequest
+import com.spydevs.fiestonvirtual.domain.models.trivia.AnswerTriviaRequest
 import com.spydevs.fiestonvirtual.domain.models.user.GetRemoteUserRequest
 import com.spydevs.fiestonvirtual.domain.models.welcome.WelcomeRequest
 import okhttp3.MultipartBody
@@ -96,5 +97,14 @@ interface FiestonVirtualApi {
     suspend fun addComment(
         @Body addCommentRequest: AddCommentRequest
     ): NetworkResponse<AddCommentResponseEntity, ErrorResponse>
+
+    /**
+     * @param [answerTriviaRequest] This object is necessary for answer a trivia.
+     * @return total score.
+     */
+    @POST("respuesta_trivia.php")
+    suspend fun answerTrivia(
+        answerTriviaRequest: AnswerTriviaRequest
+    ): NetworkResponse<AnswerTriviaResponseEntity, ErrorResponse>
 
 }

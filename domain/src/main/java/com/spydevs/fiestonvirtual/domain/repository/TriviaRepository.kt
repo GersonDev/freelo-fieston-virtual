@@ -1,5 +1,8 @@
 package com.spydevs.fiestonvirtual.domain.repository
 
+import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
+import com.spydevs.fiestonvirtual.domain.models.trivia.AnswerTriviaRequest
+import com.spydevs.fiestonvirtual.domain.models.trivia.AnswerTriviaResponse
 import com.spydevs.fiestonvirtual.domain.models.trivia.Trivia
 import com.spydevs.fiestonvirtual.domain.models.trivia.TriviaRequest
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
@@ -16,4 +19,14 @@ interface TriviaRepository {
      * @return [ResultType] The result type with trivia game from the server.
      */
     suspend fun getTrivia(triviaRequest: TriviaRequest): ResultType<List<Trivia>, String>
+
+    /**
+     * This is used for answer a trivia.
+     * @param [answerTriviaRequest] a request for answer a trivia.
+     * @return the [ResultType].
+     */
+    suspend fun answerTrivia(
+        answerTriviaRequest: AnswerTriviaRequest
+    ): ResultType<AnswerTriviaResponse, ErrorResponse>
+
 }

@@ -5,13 +5,16 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.spydevs.fiestonvirtual.domain.models.trivia.Trivia
 
 class TriviaPagerAdapter(
-    fragment: Fragment
+    fragment: Fragment,
+    private val onAnswerPositionClickListener: (position: Int) -> Unit
 ) : FragmentStateAdapter(fragment) {
 
     private var triviaModelList = mutableListOf<Trivia>()
 
     override fun createFragment(position: Int): Fragment =
-        TriviaPageFragment(triviaModelList[position])
+        TriviaPageFragment(triviaModelList[position]) {
+            onAnswerPositionClickListener(it)
+        }
 
     override fun getItemCount(): Int = triviaModelList.size
 
