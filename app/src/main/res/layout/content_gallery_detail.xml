@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:background="@color/white"
-        android:hint="Comentar..."
+        android:hint="@string/comment"
         android:inputType="textPersonName"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/galleryDetail_ib_send"
