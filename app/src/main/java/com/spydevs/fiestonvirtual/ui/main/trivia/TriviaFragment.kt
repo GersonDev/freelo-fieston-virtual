@@ -85,11 +85,7 @@ class TriviaFragment : Fragment(R.layout.fragment_trivia) {
         this.triviaViewModel.answerTriviaSuccess.observe(
             viewLifecycleOwner,
             Observer {
-                val message = getString(
-                    R.string.trivia_message_of_the_answer,
-                    (it as TriviaResult.AnswerTrivia.Success).message,
-                    it.userTotalScore.toString()
-                )
+                val message = (it as TriviaResult.AnswerTrivia.Success).message
                 //if last page to pager then show onboarding trivia else next page.
                 if (triviaFragment_vp.currentItem + 1 == triviaPagerAdapter.itemCount) {
                     activity?.setupAlertDialog(
