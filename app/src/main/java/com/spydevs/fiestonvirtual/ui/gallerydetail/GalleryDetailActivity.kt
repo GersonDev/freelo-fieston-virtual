@@ -82,6 +82,7 @@ class GalleryDetailActivity : AppCompatActivity() {
                 }
                 is CommentsResult.AddComment.Success -> {
                     this.commentAdapter.addData(it.comment)
+                    this.galleryDetail_et_comment.text?.clear()
                 }
                 is CommentsResult.AddComment.Loading -> {
                     this.addCommentLoadingDialog.show(it.loading)
