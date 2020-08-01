@@ -34,9 +34,31 @@ fun Activity.setupAlertDialog(
         .show()
 }
 
-fun Activity.openGalleryExternalApp() {
+fun Activity.openImageGalleryExternalApp() {
     val intent = Intent(Intent.ACTION_PICK).apply {
         data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+    }
+    startActivityForResult(intent, REQUEST_TO_MEDIA)
+}
+
+fun Activity.openVideoGalleryExternalApp() {
+    val intent = Intent(Intent.ACTION_PICK).apply {
+        data = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+    }
+    startActivityForResult(intent, REQUEST_TO_MEDIA)
+}
+
+fun Activity.openAudioGalleryExternalApp() {
+    val intent = Intent(Intent.ACTION_PICK).apply {
+        data = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+    }
+    startActivityForResult(intent, REQUEST_TO_MEDIA)
+}
+
+fun Activity.openImageAndVideoGalleryExternalApp() {
+    val intent = Intent(Intent.ACTION_PICK).apply {
+        data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        type = "image/* video/*"
     }
     startActivityForResult(intent, REQUEST_TO_MEDIA)
 }
