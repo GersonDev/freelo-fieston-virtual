@@ -300,9 +300,9 @@ class CameraActivity : AppCompatActivity() {
             })
     }
 
-    private fun createInputData(imagePath: String): Data {
+    private fun createInputData(filePath: String): Data {
         return Data.Builder()
-            .putString("imagePath", imagePath)
+            .putString(UploadFileCoroutineWorker.FILE_PATH_KEY, filePath)
             .build()
     }
 

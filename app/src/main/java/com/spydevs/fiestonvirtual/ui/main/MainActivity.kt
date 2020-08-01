@@ -20,7 +20,7 @@ import com.spydevs.fiestonvirtual.domain.models.welcome.Welcome
 import com.spydevs.fiestonvirtual.ui.main.camera.CameraActivity
 import com.spydevs.fiestonvirtual.ui.main.photo.PhotoFragment
 import com.spydevs.fiestonvirtual.ui.main.welcome.WelcomeDialogFragment
-import com.spydevs.fiestonvirtual.util.extensions.openGalleryExternalApp
+import com.spydevs.fiestonvirtual.util.extensions.openImageAndVideoGalleryExternalApp
 import com.spydevs.fiestonvirtual.util.extensions.openSettings
 import com.spydevs.fiestonvirtual.util.extensions.setupAlertDialog
 import kotlinx.android.synthetic.main.toolbar_main.*
@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                 if (ContextCompat.checkSelfPermission(this, manifestPermission)
                     == PackageManager.PERMISSION_GRANTED
                 ) {
-                    openGalleryExternalApp()
+                    openImageAndVideoGalleryExternalApp()
                 } else {
                     if (showCustomReadPermissionDialog) {
                         showAppSettingsDialogFragment("Storage 1")
