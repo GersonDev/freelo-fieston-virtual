@@ -103,7 +103,7 @@ class GalleryDetailActivity : AppCompatActivity() {
                 }
                 GalleryItem.TYPE_VIDEO -> {
                     galleryDetail_vv_detail.visibility = View.VISIBLE
-                    val vidUri: Uri = Uri.parse("https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4")
+                    val vidUri: Uri = Uri.parse(it.galleryItemList[0].file)
                     galleryDetail_vv_detail.setVideoURI(vidUri)
                     galleryDetail_vv_detail.start()
 
