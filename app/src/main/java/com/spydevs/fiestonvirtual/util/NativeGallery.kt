@@ -376,4 +376,14 @@ object NativeGallery {
         if (rotation == null) rotation = "0"
         return "$width>$height>$duration>$rotation"
     }
+
+    // url = file path or whatever suitable URL you want.
+    fun getMimeType(url: String?): String? {
+        var type: String? = null
+        val extension = MimeTypeMap.getFileExtensionFromUrl(url)
+        if (extension != null) {
+            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)
+        }
+        return type
+    }
 }

@@ -25,9 +25,9 @@ import com.spydevs.fiestonvirtual.domain.models.welcome.Welcome
 import com.spydevs.fiestonvirtual.ui.main.photo.PhotoFragment
 import com.spydevs.fiestonvirtual.ui.main.photo.UploadFileCoroutineWorker
 import com.spydevs.fiestonvirtual.ui.main.welcome.WelcomeDialogFragment
+import com.spydevs.fiestonvirtual.util.extensions.openImageAndVideoGalleryExternalApp
 import com.spydevs.fiestonvirtual.util.ImagesUtil
 import com.spydevs.fiestonvirtual.util.NativeGallery
-import com.spydevs.fiestonvirtual.util.extensions.openGalleryExternalApp
 import com.spydevs.fiestonvirtual.util.extensions.openSettings
 import com.spydevs.fiestonvirtual.util.extensions.setupAlertDialog
 import com.spydevs.fiestonvirtual.util.extensions.setupLoadingAlertDialog
@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity() {
                 if (ContextCompat.checkSelfPermission(this, manifestPermission)
                     == PackageManager.PERMISSION_GRANTED
                 ) {
-                    openGalleryExternalApp()
+                    openImageAndVideoGalleryExternalApp()
                 } else {
                     if (showCustomReadPermissionDialog) {
                         showAppSettingsDialogFragment("Storage 1")
@@ -331,7 +331,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun createInputData(imagePath: String): Data {
         return Data.Builder()
-            .putString("imagePath", imagePath)
+            .putString(UploadFileCoroutineWorker.FILE_PATH_KEY, imagePath)
             .build()
     }
 

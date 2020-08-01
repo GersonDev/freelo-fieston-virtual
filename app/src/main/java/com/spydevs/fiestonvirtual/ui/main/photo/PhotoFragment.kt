@@ -13,7 +13,9 @@ import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.ui.main.MainActivity
+import com.spydevs.fiestonvirtual.ui.main.photo.UploadFileCoroutineWorker.Companion.FILE_PATH_KEY
 import com.spydevs.fiestonvirtual.util.RealPathUtil
+import com.spydevs.fiestonvirtual.util.extensions.loadUrl
 import com.spydevs.fiestonvirtual.util.extensions.setupLoadingAlertDialog
 import kotlinx.android.synthetic.main.fragment_photo.*
 import java.util.concurrent.TimeUnit
@@ -49,7 +51,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo) {
         uri?.let { noNullUri ->
             this.imagePathUri = RealPathUtil.getRealPath(requireActivity(), noNullUri) ?: ""
         }
-        photoImageView.setImageURI(uri)
+        photoImageView.loadUrl(uri.toString())
     }
 
     private fun startWork() {
@@ -84,7 +86,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo) {
 
     private fun createInputData(imagePath: String): Data {
         return Data.Builder()
-            .putString("imagePath", imagePath)
+            .putString(FILE_PATH_KEY, imagePath)
             .build()
     }
 

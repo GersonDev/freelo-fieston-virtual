@@ -13,6 +13,7 @@ import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.domain.repository.UsersRepository
 import com.spydevs.fiestonvirtual.framework.api.FiestonVirtualApi
 import com.spydevs.fiestonvirtual.framework.api.NetworkResponse
+import com.spydevs.fiestonvirtual.util.NativeGallery
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType
@@ -32,10 +33,27 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
         applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
-        val imagePath = inputData.getString("imagePath")
-        if (imagePath == null) Result.failure()
+        val filePath = inputData.getString(FILE_PATH_KEY)
 
-        val file = File(imagePath)
+        val mimeType = NativeGallery.getMimeType(filePath)
+        print(mimeType)
+        val postType: Int
+        postType = when (mimeType) {
+            "video/mp4" -> {
+                2
+            }
+            "image/jpeg" -> {
+                1
+            }
+            else -> {
+                0
+            }
+        }
+
+
+        if (filePath == null) Result.failure()
+
+        val file = File(filePath)
         val requestBody = RequestBody.create(MediaType.parse("image/*"), file)
         val fileUploadMultiPart = MultipartBody.Part.createFormData("file", file.name, requestBody)
         val fileName = RequestBody.create(MediaType.parse("text/plain"), file.name)
@@ -46,7 +64,7 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
         val user = usersRepository.getLocalUser()
 
         when (val uploadImageResponse =
-            fiestonVirtualApi.uploadFile(fileUploadMultiPart, user.id, user.idEvent, 1)) {
+            fiestonVirtualApi.uploadFile(fileUploadMultiPart, user.id, user.idEvent, postType)) {
             is NetworkResponse.Success -> {
                 val data = workDataOf(
                     "KEY_SUCCESS" to "RESPUESTA EXITOSA"
@@ -163,5 +181,6 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
         const val NOTIFICATION_ID = 1
         const val CHANNEL_ID = "inducesmile"
         const val CHANNEL_NAME = "carlos"
+        const val FILE_PATH_KEY = "filePath"
     }
 }
