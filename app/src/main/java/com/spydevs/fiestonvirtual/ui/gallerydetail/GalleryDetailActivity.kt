@@ -1,6 +1,9 @@
 package com.spydevs.fiestonvirtual.ui.gallerydetail
 
+import android.net.Uri
 import android.os.Bundle
+import android.view.View
+import android.widget.MediaController
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -93,7 +96,22 @@ class GalleryDetailActivity : AppCompatActivity() {
 
     private fun subscribeToPostDetails() {
         this.viewModel.postDetail.observe(this, Observer {
-            galleryDetail_iv_detail.loadUrl(it.galleryItemList[0].file)
+            when(it.galleryItemList[0].type) {
+                GalleryItem.TYPE_PHOTO -> {
+                    galleryDetail_iv_detail.visibility = View.VISIBLE
+                    galleryDetail_iv_detail.loadUrl(it.galleryItemList[0].file)
+                }
+                GalleryItem.TYPE_VIDEO -> {
+                    galleryDetail_vv_detail.visibility = View.VISIBLE
+                    val vidUri: Uri = Uri.parse("https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4")
+                    galleryDetail_vv_detail.setVideoURI(vidUri)
+                    galleryDetail_vv_detail.start()
+
+                    val vidControl = MediaController(this)
+                    vidControl.setAnchorView(galleryDetail_vv_detail)
+                    galleryDetail_vv_detail.setMediaController(vidControl)
+                }
+            }
         })
     }
 

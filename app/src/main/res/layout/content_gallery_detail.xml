@@ -8,17 +8,31 @@
     android:paddingHorizontal="16dp"
     tools:showIn="@layout/activity_gallery_detail">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/galleryDetail_iv_detail"
+    <RelativeLayout
+        android:id="@+id/galleryDetail_rl_detail"
         android:layout_width="0dp"
         android:layout_height="400dp"
         android:layout_marginTop="8dp"
-        android:background="@color/white"
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher_round"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/galleryDetail_iv_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher_round"
+            android:visibility="gone"/>
+
+        <VideoView
+            android:id="@+id/galleryDetail_vv_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+    </RelativeLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/galleryDetail_fab_share"
@@ -28,8 +42,8 @@
         android:layout_margin="@dimen/fab_margin"
         android:visibility="gone"
         app:backgroundTint="@color/red_500"
-        app:layout_constraintBottom_toBottomOf="@+id/galleryDetail_iv_detail"
-        app:layout_constraintStart_toStartOf="@+id/galleryDetail_iv_detail"
+        app:layout_constraintBottom_toBottomOf="@+id/galleryDetail_rl_detail"
+        app:layout_constraintStart_toStartOf="@+id/galleryDetail_rl_detail"
         app:srcCompat="@drawable/ic_baseline_share_24"
         app:tint="@color/white" />
 
@@ -41,8 +55,8 @@
         android:layout_margin="@dimen/fab_margin"
         android:visibility="gone"
         app:backgroundTint="@color/red_500"
-        app:layout_constraintBottom_toBottomOf="@+id/galleryDetail_iv_detail"
-        app:layout_constraintEnd_toEndOf="@+id/galleryDetail_iv_detail"
+        app:layout_constraintBottom_toBottomOf="@+id/galleryDetail_rl_detail"
+        app:layout_constraintEnd_toEndOf="@+id/galleryDetail_rl_detail"
         app:srcCompat="@drawable/ic_baseline_favorite_24"
         app:tint="@color/white" />
 
@@ -59,7 +73,7 @@
         app:layout_constraintBottom_toTopOf="@+id/galleryDetail_ib_send"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/galleryDetail_iv_detail"
+        app:layout_constraintTop_toBottomOf="@+id/galleryDetail_rl_detail"
         tools:listitem="@layout/layout_item_comment" />
 
     <androidx.appcompat.widget.AppCompatEditText
