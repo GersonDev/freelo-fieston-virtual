@@ -17,7 +17,7 @@ class GetGalleryUseCaseImpl(
         val user = usersRepository.getLocalUser()
         return galleryRepository.getGallery(
             GalleryRequest(
-                idUser = user.id,
+                idUser = null,
                 idEvent = user.idEvent,
                 postStatus = 1,
                 idPost = null
