@@ -13,6 +13,7 @@ data class GalleryResponseEntity(
         val idPost: Int,
         val postFile: String,
         val postStatus: Int,
-        val postType: Int
+        val postType: Int,
+        val preview: String
     )
 }

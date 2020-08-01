@@ -12,7 +12,8 @@ object GalleryItemListMapper : Mapper<List<GalleryResponseEntity.Post>, List<Gal
                 it.idPost,
                 it.postType,
                 it.postFile,
-                it.postStatus
+                it.postStatus,
+                it.preview
             )
         }
     }
