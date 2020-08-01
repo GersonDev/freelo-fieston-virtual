@@ -25,7 +25,11 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
                     }
                 )
             }, { galleryItem ->
-                //TODO add activity
+                startActivity(
+                    Intent(context, GalleryDetailActivity::class.java).apply {
+                        putExtra(GalleryDetailActivity.OBJECT_GALLERY_ITEM, galleryItem)
+                    }
+                )
             }
         )
     }
