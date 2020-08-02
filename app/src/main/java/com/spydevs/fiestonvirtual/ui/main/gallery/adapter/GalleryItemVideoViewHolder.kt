@@ -19,7 +19,9 @@ class GalleryItemVideoViewHolder(
 
     fun bind(photo: GalleryItem) {
         photo.preview.let {
-            this.view.videoItemLayout_iv.loadUrl(it)
+            it?.let {
+                this.view.videoItemLayout_iv.loadUrl(it)
+            }
         }
     }
 }

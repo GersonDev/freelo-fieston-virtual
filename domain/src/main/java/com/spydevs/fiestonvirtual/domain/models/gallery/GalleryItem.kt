@@ -7,7 +7,7 @@ data class GalleryItem(
     var type: Int,
     var file: String,
     var status: Int,
-    var preview: String
+    var preview: String? = null
 ) : Serializable {
 
     companion object {
