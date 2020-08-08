@@ -35,7 +35,7 @@ val retrofitApiModule = module {
 
     single {
         Retrofit.Builder()
-            .baseUrl("http://www.arpanetapp.com/fieston-virtual/api/")
+            .baseUrl("http://fiestonvirtual.com/app/api/")
             .client(get())
             .addCallAdapterFactory(NetworkResponseAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create(get()))
