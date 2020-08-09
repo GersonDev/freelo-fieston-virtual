@@ -13,7 +13,7 @@ import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.domain.repository.UsersRepository
 import com.spydevs.fiestonvirtual.framework.api.FiestonVirtualApi
 import com.spydevs.fiestonvirtual.framework.api.NetworkResponse
-import com.spydevs.fiestonvirtual.util.NativeGallery
+import com.spydevs.fiestonvirtual.framework.database.dao.UsersDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType
@@ -23,11 +23,12 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.File
 
-class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParameters) :
+class UploadUserProfileImageCoroutineWorker(context: Context, workerParameters: WorkerParameters) :
     CoroutineWorker(context, workerParameters), KoinComponent {
 
     private val fiestonVirtualApi: FiestonVirtualApi by inject()
     private val usersRepository: UsersRepository by inject()
+    private val usersDao: UsersDao by inject()
 
     private var notificationManager: NotificationManager =
         applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -35,24 +36,9 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         val filePath = inputData.getString(FILE_PATH_KEY)
 
-        val mimeType = NativeGallery.getMimeType(filePath)
-        print(mimeType)
-        val postType: Int
-        postType = when (mimeType) {
-            "video/mp4" -> {
-                2
-            }
-            "image/jpeg" -> {
-                1
-            }
-            else -> {
-                0
-            }
-        }
-
         if (filePath == null) Result.failure()
         val file = File(filePath)
-        val requestBody = getRequestBody(postType, file)
+        val requestBody = RequestBody.create(MediaType.parse("image/*"), file)
         val fileUploadMultiPart = MultipartBody.Part.createFormData("file", file.name, requestBody)
         val fileName = RequestBody.create(MediaType.parse("text/plain"), file.name)
 
@@ -62,10 +48,10 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
         val user = usersRepository.getLocalUser()
 
         when (val uploadImageResponse =
-            fiestonVirtualApi.uploadFile(fileUploadMultiPart, user.id, user.idEvent, postType)) {
+            fiestonVirtualApi.uploadUserProfileImage(fileUploadMultiPart, user.id, 1)) {
             is NetworkResponse.Success -> {
                 val data = workDataOf(
-                    SUCCESS_KEY to "RESPUESTA EXITOSA"
+                    SUCCESS_KEY to uploadImageResponse.body.data.post.postFile
                 )
                 notificationManager.notify(
                     2, createSimpleNotification(
@@ -94,14 +80,6 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
                 )
                 Result.failure(data)
             }
-        }
-    }
-
-    private fun getRequestBody(postType: Int, file: File): RequestBody {
-        return if (postType == 1) {
-            RequestBody.create(MediaType.parse("image/*"), file)
-        } else {
-            RequestBody.create(MediaType.parse("video/*"), file)
         }
     }
 

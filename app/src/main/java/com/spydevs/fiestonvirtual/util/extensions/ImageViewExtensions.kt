@@ -15,6 +15,14 @@ fun ImageView.loadUrl(url: String, @DrawableRes drawablePlaceholder: Int = R.dra
         .error(drawablePlaceholder)
         .into(this)
 
+fun ImageView.loadUrlWithCircularCrop(url: String, @DrawableRes drawablePlaceholder: Int = R.drawable.default_placeholder) =
+    Glide.with(this)
+        .load(url)
+        .circleCrop()
+        .error(drawablePlaceholder)
+        .into(this)
+        .clearOnDetach()
+
 fun ImageView.loadUrlWithCorners(url: String, @DrawableRes drawablePlaceholder: Int = R.drawable.default_placeholder) =
     Glide.with(this)
         .load(url)

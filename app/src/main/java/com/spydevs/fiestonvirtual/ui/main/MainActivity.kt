@@ -22,15 +22,13 @@ import androidx.work.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.domain.models.welcome.Welcome
+import com.spydevs.fiestonvirtual.ui.main.home.HomeFragment
 import com.spydevs.fiestonvirtual.ui.main.photo.PhotoFragment
 import com.spydevs.fiestonvirtual.ui.main.photo.UploadFileCoroutineWorker
 import com.spydevs.fiestonvirtual.ui.main.welcome.WelcomeDialogFragment
-import com.spydevs.fiestonvirtual.util.extensions.openImageAndVideoGalleryExternalApp
 import com.spydevs.fiestonvirtual.util.ImagesUtil
 import com.spydevs.fiestonvirtual.util.NativeGallery
-import com.spydevs.fiestonvirtual.util.extensions.openSettings
-import com.spydevs.fiestonvirtual.util.extensions.setupAlertDialog
-import com.spydevs.fiestonvirtual.util.extensions.setupLoadingAlertDialog
+import com.spydevs.fiestonvirtual.util.extensions.*
 import kotlinx.android.synthetic.main.toolbar_main.*
 import org.koin.android.ext.android.inject
 import java.io.File
@@ -59,7 +57,6 @@ class MainActivity : AppCompatActivity() {
 
     private var currentPhotoPath: String = ""
     private var showCustomWritePermissionDialog = false
-
 
 
     private var galleryImageUri: Uri? = null
@@ -125,7 +122,7 @@ class MainActivity : AppCompatActivity() {
      * since we can open an external camera or gallery application but we cannot read or write the pictures or files
      * in current application.
      */
-    fun validatePermission(manifestPermission: String) {
+    fun validatePermission(manifestPermission: String, openOnlyImages: Boolean = false) {
         when (manifestPermission) {
             Manifest.permission.WRITE_EXTERNAL_STORAGE -> {
                 if (ContextCompat.checkSelfPermission(this, manifestPermission)
@@ -144,7 +141,11 @@ class MainActivity : AppCompatActivity() {
                 if (ContextCompat.checkSelfPermission(this, manifestPermission)
                     == PackageManager.PERMISSION_GRANTED
                 ) {
-                    openImageAndVideoGalleryExternalApp()
+                    if(openOnlyImages) {
+                        openImageGalleryExternalApp()
+                    } else {
+                        openImageAndVideoGalleryExternalApp()
+                    }
                 } else {
                     if (showCustomReadPermissionDialog) {
                         showAppSettingsDialogFragment("Storage 1")
@@ -238,8 +239,16 @@ class MainActivity : AppCompatActivity() {
                 val navHostFragment =
                     supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
                 navHostFragment?.let {
-                    it.childFragmentManager.fragments[0] as PhotoFragment
-                }?.setImage(galleryImageUri)
+                    print(it.childFragmentManager.fragments[0])
+                    when (val currentFragment = it.childFragmentManager.fragments[0]) {
+                        is HomeFragment -> {
+                            currentFragment.setImage(galleryImageUri)
+                        }
+                        is PhotoFragment -> {
+                            currentFragment.setImage(galleryImageUri)
+                        }
+                    }
+                }
 
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 Toast.makeText(
@@ -317,12 +326,20 @@ class MainActivity : AppCompatActivity() {
             when (it.state) {
                 WorkInfo.State.SUCCEEDED -> {
                     val successOutputData = it.outputData
-                    Toast.makeText(this, successOutputData.getString("KEY_SUCCESS"), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        successOutputData.getString("KEY_SUCCESS"),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     dialogProgress.dismiss()
                 }
                 WorkInfo.State.FAILED -> {
                     val failureOutputData = it.outputData
-                    Toast.makeText(this, failureOutputData.getString("KEY_ERROR"), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        failureOutputData.getString("KEY_ERROR"),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     dialogProgress.dismiss()
                 }
             }
