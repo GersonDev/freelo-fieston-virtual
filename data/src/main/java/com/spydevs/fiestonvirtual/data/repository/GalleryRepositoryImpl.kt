@@ -4,6 +4,8 @@ import com.spydevs.fiestonvirtual.data.datasource.GalleryDataSource
 import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryItem
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryRequest
+import com.spydevs.fiestonvirtual.domain.models.gallery.GetGalleryDetailRequest
+import com.spydevs.fiestonvirtual.domain.models.gallery.GetGalleryDetailResponse
 import com.spydevs.fiestonvirtual.domain.models.photo.Photo
 import com.spydevs.fiestonvirtual.domain.repository.GalleryRepository
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
@@ -20,6 +22,12 @@ class GalleryRepositoryImpl(
 
     override suspend fun getGallery(galleryRequest: GalleryRequest): ResultType<List<GalleryItem>, ErrorResponse> {
         return galleryDataSource.getGallery(galleryRequest)
+    }
+
+    override suspend fun getGalleryDetail(
+        getGalleryDetailRequest: GetGalleryDetailRequest
+    ): ResultType<GetGalleryDetailResponse, ErrorResponse> {
+        return galleryDataSource.getGalleryDetail(getGalleryDetailRequest)
     }
 
 }
