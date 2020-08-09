@@ -1,7 +1,7 @@
 package com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery
 
 import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
-import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryItem
+import com.spydevs.fiestonvirtual.domain.models.gallery.GetGalleryDetailResponse
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 
 /**
@@ -12,6 +12,6 @@ interface GetPostDetailUseCase {
     /**
      * @return [ResultType] This contains the images and videos from the gallery.
      */
-    suspend operator fun invoke(postId: Int): ResultType<List<GalleryItem>, ErrorResponse>
+    suspend operator fun invoke(postId: Int): ResultType<GetGalleryDetailResponse, ErrorResponse>
 
 }

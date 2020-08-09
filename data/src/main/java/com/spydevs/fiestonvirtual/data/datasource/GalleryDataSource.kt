@@ -3,6 +3,8 @@ package com.spydevs.fiestonvirtual.data.datasource
 import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryItem
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryRequest
+import com.spydevs.fiestonvirtual.domain.models.gallery.GetGalleryDetailRequest
+import com.spydevs.fiestonvirtual.domain.models.gallery.GetGalleryDetailResponse
 import com.spydevs.fiestonvirtual.domain.models.photo.Photo
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import okhttp3.MultipartBody
@@ -20,4 +22,8 @@ interface GalleryDataSource {
         galleryRequest: GalleryRequest
     ): ResultType<List<GalleryItem>, ErrorResponse>
 
+
+    suspend fun getGalleryDetail(
+        getGalleryDetailRequest: GetGalleryDetailRequest
+    ): ResultType<GetGalleryDetailResponse, ErrorResponse>
 }

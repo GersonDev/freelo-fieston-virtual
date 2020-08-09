@@ -18,6 +18,6 @@ val viewModelsModule = module {
     viewModel { MainViewModel(get()) }
     viewModel { CodeVerificationViewModel(get()) }
     viewModel { TriviaViewModel(get(), get()) }
-    viewModel { GalleryDetailViewModel(get(), get(), get()) }
+    viewModel { GalleryDetailViewModel(get(), get(), get(), get()) }
 
 }

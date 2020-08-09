@@ -8,6 +8,27 @@
     android:paddingHorizontal="16dp"
     tools:showIn="@layout/activity_gallery_detail">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/galleryDetail_iv_user"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@mipmap/ic_launcher_round" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/galleryDetail_tv_nameUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/galleryDetail_iv_user"
+        app:layout_constraintStart_toEndOf="@+id/galleryDetail_iv_user"
+        app:layout_constraintTop_toTopOf="@+id/galleryDetail_iv_user"
+        tools:text="Andres sanchez" />
+
     <RelativeLayout
         android:id="@+id/galleryDetail_rl_detail"
         android:layout_width="0dp"
@@ -17,7 +38,7 @@
         android:src="@mipmap/ic_launcher_round"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/galleryDetail_iv_user">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/galleryDetail_iv_detail"
@@ -25,41 +46,57 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher_round"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <VideoView
             android:id="@+id/galleryDetail_vv_detail"
-            android:layout_centerInParent="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"/>
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
     </RelativeLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/galleryDetail_fab_share"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/galleryDetail_iv_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_margin="@dimen/fab_margin"
-        android:visibility="gone"
-        app:backgroundTint="@color/red_500"
-        app:layout_constraintBottom_toBottomOf="@+id/galleryDetail_rl_detail"
-        app:layout_constraintStart_toStartOf="@+id/galleryDetail_rl_detail"
-        app:srcCompat="@drawable/ic_baseline_share_24"
-        app:tint="@color/white" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/galleryDetail_rl_detail"
+        app:srcCompat="@drawable/ic_baseline_favorite_border_36" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/galleryDetail_fab_favorite"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/galleryDetail_tv_likes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_margin="@dimen/fab_margin"
-        android:visibility="gone"
-        app:backgroundTint="@color/red_500"
-        app:layout_constraintBottom_toBottomOf="@+id/galleryDetail_rl_detail"
-        app:layout_constraintEnd_toEndOf="@+id/galleryDetail_rl_detail"
-        app:srcCompat="@drawable/ic_baseline_favorite_24"
-        app:tint="@color/white" />
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/galleryDetail_iv_favorite"
+        app:layout_constraintStart_toEndOf="@+id/galleryDetail_iv_favorite"
+        tools:text="12" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/galleryDetail_tv_nameUser2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/galleryDetail_iv_favorite"
+        tools:text="Andres sanchez" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/galleryDetail_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/galleryDetail_tv_nameUser2"
+        app:layout_constraintTop_toTopOf="@+id/galleryDetail_tv_nameUser2"
+        tools:text="Excelente foto!!" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/galleryDetail_rv"
@@ -74,7 +111,7 @@
         app:layout_constraintBottom_toTopOf="@+id/galleryDetail_ib_send"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/galleryDetail_rl_detail"
+        app:layout_constraintTop_toBottomOf="@+id/galleryDetail_tv_title"
         tools:listitem="@layout/layout_item_comment" />
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -83,11 +120,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:background="@color/white"
-        android:textColorHint="@color/grey_500"
-        android:textColor="@color/grey_500"
         android:hint="@string/comment"
         android:inputType="textPersonName"
         android:padding="8dp"
+        android:textColor="@color/grey_500"
+        android:textColorHint="@color/grey_500"
         app:layout_constraintBottom_toBottomOf="@+id/galleryDetail_ib_send"
         app:layout_constraintEnd_toStartOf="@+id/galleryDetail_ib_send"
         app:layout_constraintStart_toStartOf="parent"

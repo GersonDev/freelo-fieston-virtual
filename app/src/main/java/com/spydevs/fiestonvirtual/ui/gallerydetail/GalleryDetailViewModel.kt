@@ -10,6 +10,7 @@ import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.comment.AddCommentUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.comment.GetCommentsUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.GetPostDetailUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.like.MakeLikeUseCase
 import com.spydevs.fiestonvirtual.ui.main.gallery.GalleryResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,11 +18,12 @@ import kotlinx.coroutines.launch
 class GalleryDetailViewModel(
     private val getCommentsUseCase: GetCommentsUseCase,
     private val getPostDetailUseCase: GetPostDetailUseCase,
-    private val addCommentUseCase: AddCommentUseCase
+    private val addCommentUseCase: AddCommentUseCase,
+    private val makeLikeUseCase: MakeLikeUseCase
 ) : ViewModel() {
 
-    private val _commentResult = MutableLiveData<CommentsResult>()
-    val commentResult: LiveData<CommentsResult>
+    private val _commentResult = MutableLiveData<GalleryDetailResult>()
+    val commentResult: LiveData<GalleryDetailResult>
         get() = _commentResult
 
     private val _error = MutableLiveData<ErrorResponse>()
@@ -32,51 +34,71 @@ class GalleryDetailViewModel(
     val loading: LiveData<GalleryResult.Loading>
         get() = _loading
 
-    private val _postDetail = MutableLiveData<GalleryResult.GetGallerySuccessful>()
-    val postDetail: LiveData<GalleryResult.GetGallerySuccessful> = _postDetail
+    private val _postDetail = MutableLiveData<GalleryDetailResult.GetGalleryDetail>()
+    val postDetail: LiveData<GalleryDetailResult.GetGalleryDetail> = _postDetail
+
+    private val _makeLike = MutableLiveData<GalleryDetailResult.MakeLike>()
+    val makeLike: LiveData<GalleryDetailResult.MakeLike> = _makeLike
 
     fun getComments(idPost: Int) {
         viewModelScope.launch(Dispatchers.Main) {
-            _commentResult.value = CommentsResult.GetComments.Loading(true)
+            _commentResult.value = GalleryDetailResult.GetComments.Loading(true)
             when (val result = getCommentsUseCase(CommentRequest(idPost))) {
                 is ResultType.Success -> {
-                    _commentResult.value = CommentsResult.GetComments.Success(result.value)
+                    _commentResult.value = GalleryDetailResult.GetComments.Success(result.value)
                 }
                 is ResultType.Error -> {
                     _error.value = result.value
                 }
             }
-            _commentResult.value = CommentsResult.GetComments.Loading(false)
+            _commentResult.value = GalleryDetailResult.GetComments.Loading(false)
         }
     }
 
     fun getPostDetail(postId: Int) {
         viewModelScope.launch(Dispatchers.Main) {
-            _loading.value = GalleryResult.Loading(true)
+            _postDetail.value = GalleryDetailResult.GetGalleryDetail.Loading(true)
             when (val result = getPostDetailUseCase(postId)) {
                 is ResultType.Success -> {
-                    _postDetail.value = GalleryResult.GetGallerySuccessful(result.value)
+                    _postDetail.value = GalleryDetailResult.GetGalleryDetail.Success(result.value)
                 }
                 is ResultType.Error -> {
                     _error.value = result.value
                 }
             }
-            _loading.value = GalleryResult.Loading(false)
+            _postDetail.value = GalleryDetailResult.GetGalleryDetail.Loading(false)
         }
     }
 
     fun addComment(postId: Int, comment: String) {
         viewModelScope.launch(Dispatchers.Main) {
-            _commentResult.value = CommentsResult.AddComment.Loading(true)
+            _commentResult.value = GalleryDetailResult.AddComment.Loading(true)
             when (val result = addCommentUseCase(postId, comment)) {
                 is ResultType.Success -> {
-                    _commentResult.value = CommentsResult.AddComment.Success(result.value)
+                    _commentResult.value = GalleryDetailResult.AddComment.Success(result.value)
                 }
                 is ResultType.Error -> {
                     _error.value = result.value
                 }
             }
-            _commentResult.value = CommentsResult.AddComment.Loading(false)
+            _commentResult.value = GalleryDetailResult.AddComment.Loading(false)
+        }
+    }
+
+    fun makeLike(postId: Int) {
+        viewModelScope.launch(Dispatchers.Main) {
+            _makeLike.value = GalleryDetailResult.MakeLike.Loading(true)
+            when (val result = makeLikeUseCase(postId)) {
+                is ResultType.Success -> {
+                    _makeLike.value = GalleryDetailResult.MakeLike.Success(
+                        result.value.likes
+                    )
+                }
+                is ResultType.Error -> {
+                    _error.value = result.value
+                }
+            }
+            _makeLike.value = GalleryDetailResult.MakeLike.Loading(false)
         }
     }
 
