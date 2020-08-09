@@ -131,9 +131,10 @@ class GalleryDetailActivity : AppCompatActivity() {
         this.viewModel.makeLike.observe(this, Observer {
             when (it) {
                 is CommentsResult.MakeLike.Success -> {
-                    galleryDetail_tv_likes.text = it.likesPhotos.toString()
+                    galleryDetail_tv_likes.text = it.likes.toString()
                     galleryDetail_iv_favorite.background =
                         resources.getDrawable(R.drawable.ic_baseline_favorite_36, null)
+                    galleryDetail_iv_favorite.setOnClickListener(null)
                 }
                 is CommentsResult.MakeLike.Loading -> {
                     this.makeLikeLoadingDialog.show(it.loading)

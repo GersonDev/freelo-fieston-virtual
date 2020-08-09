@@ -5,7 +5,6 @@ data class MakeLikeResponseEntity(
     val message: String
 ) {
     data class Data(
-        val userLikesPhotos: Int,
-        val userLikesVideos: Int
+        val userLikes: Int
     )
 }

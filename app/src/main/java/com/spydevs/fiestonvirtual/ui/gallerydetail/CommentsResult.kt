@@ -16,8 +16,7 @@ sealed class CommentsResult {
 
     sealed class MakeLike : CommentsResult() {
         data class Success(
-            var likesPhotos: Int,
-            var likesVideos: Int
+            var likes: Int
         ) : MakeLike()
 
         data class Loading(var loading: Boolean) : MakeLike()

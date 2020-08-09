@@ -91,8 +91,7 @@ class GalleryDetailViewModel(
             when (val result = makeLikeUseCase(postId)) {
                 is ResultType.Success -> {
                     _makeLike.value = CommentsResult.MakeLike.Success(
-                        result.value.likesPhotos,
-                        result.value.likesVideos
+                        result.value.likes
                     )
                 }
                 is ResultType.Error -> {

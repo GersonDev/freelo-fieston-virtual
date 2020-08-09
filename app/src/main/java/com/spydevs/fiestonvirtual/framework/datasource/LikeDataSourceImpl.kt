@@ -20,8 +20,7 @@ class LikeDataSourceImpl(
             is NetworkResponse.Success -> {
                 ResultType.Success(
                     MakeLikeResponse(
-                        result.body.data.userLikesPhotos,
-                        result.body.data.userLikesVideos
+                        result.body.data.userLikes
                     )
                 )
             }
