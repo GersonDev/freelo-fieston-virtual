@@ -1,11 +1,8 @@
 package com.spydevs.fiestonvirtual.domain.repository
 
 import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
-import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImage
-import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryImageRequest
-import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryItem
+import com.spydevs.fiestonvirtual.domain.models.gallery.*
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
-import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryRequest
 import com.spydevs.fiestonvirtual.domain.models.photo.Photo
 import okhttp3.MultipartBody
 
@@ -29,4 +26,9 @@ interface GalleryRepository {
     suspend fun getGallery(
         galleryRequest: GalleryRequest
     ): ResultType<List<GalleryItem>, ErrorResponse>
+
+    suspend fun getGalleryDetail(
+        getGalleryDetailRequest: GetGalleryDetailRequest
+    ): ResultType<GetGalleryDetailResponse, ErrorResponse>
+
 }
