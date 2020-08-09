@@ -27,5 +27,6 @@
     <string name="choose">Elegir</string>
     <string name="comment">Comentar...</string>
     <string name="publish">PUBLICAR</string>
+    <string name="change_photo">Cambiar foto</string>
 
 </resources>

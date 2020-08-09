@@ -52,6 +52,20 @@ interface FiestonVirtualApi {
     ): NetworkResponse<UploadFileResponseEntity, String>
 
     /**
+     * Upload any file to server in form-data
+     * @param [file] an image, video or whatever media file
+     * @param [name] name of the file
+     * @return response about uploaded file
+     */
+    @Multipart
+    @POST("selfie.php")
+    suspend fun uploadUserProfileImage(
+        @Part file: MultipartBody.Part?,
+        @Part("idUser") userId: Int,
+        @Part("postType") postType: Int
+    ): NetworkResponse<UploadUserProfileImageResponseEntity, String>
+
+    /**
      * Get event welcome
      * @param [welcomeRequest] a request object for event welcome
      * @return response about event welcome
