@@ -34,8 +34,8 @@ class GalleryDetailViewModel(
     val loading: LiveData<GalleryResult.Loading>
         get() = _loading
 
-    private val _postDetail = MutableLiveData<GalleryResult.GetGallerySuccessful>()
-    val postDetail: LiveData<GalleryResult.GetGallerySuccessful> = _postDetail
+    private val _postDetail = MutableLiveData<CommentsResult.GetGalleryDetail>()
+    val postDetail: LiveData<CommentsResult.GetGalleryDetail> = _postDetail
 
     private val _makeLike = MutableLiveData<CommentsResult.MakeLike>()
     val makeLike: LiveData<CommentsResult.MakeLike> = _makeLike
@@ -57,16 +57,16 @@ class GalleryDetailViewModel(
 
     fun getPostDetail(postId: Int) {
         viewModelScope.launch(Dispatchers.Main) {
-            _loading.value = GalleryResult.Loading(true)
+            _postDetail.value = CommentsResult.GetGalleryDetail.Loading(true)
             when (val result = getPostDetailUseCase(postId)) {
                 is ResultType.Success -> {
-                    _postDetail.value = GalleryResult.GetGallerySuccessful(result.value)
+                    _postDetail.value = CommentsResult.GetGalleryDetail.Success(result.value)
                 }
                 is ResultType.Error -> {
                     _error.value = result.value
                 }
             }
-            _loading.value = GalleryResult.Loading(false)
+            _postDetail.value = CommentsResult.GetGalleryDetail.Loading(false)
         }
     }
 

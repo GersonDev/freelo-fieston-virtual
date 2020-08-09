@@ -108,23 +108,62 @@ class GalleryDetailActivity : AppCompatActivity() {
 
     private fun subscribeToPostDetails() {
         this.viewModel.postDetail.observe(this, Observer {
-            when (it.galleryItemList[0].type) {
-                GalleryItem.TYPE_PHOTO -> {
-                    galleryDetail_iv_detail.visibility = View.VISIBLE
-                    galleryDetail_iv_detail.loadUrl(it.galleryItemList[0].file)
-                }
-                GalleryItem.TYPE_VIDEO -> {
-                    galleryDetail_vv_detail.visibility = View.VISIBLE
-                    val vidUri: Uri = Uri.parse(it.galleryItemList[0].file)
-                    galleryDetail_vv_detail.setVideoURI(vidUri)
-                    galleryDetail_vv_detail.start()
+            when (it) {
+                is CommentsResult.GetGalleryDetail.Success -> {
+                    showNameUser(
+                        it.galleryDetailResponse.userImage,
+                        it.galleryDetailResponse.userName
+                    )
+                    showLikes(
+                        it.galleryDetailResponse.postLike,
+                        it.galleryDetailResponse.postLikeCount
+                    )
 
-                    val vidControl = MediaController(this)
-                    vidControl.setAnchorView(galleryDetail_vv_detail)
-                    galleryDetail_vv_detail.setMediaController(vidControl)
+                    showTitlePost(
+                        it.galleryDetailResponse.userName,
+                        it.galleryDetailResponse.postTitle
+                    )
+                    when (it.galleryDetailResponse.postType) {
+                        GalleryItem.TYPE_PHOTO -> {
+                            galleryDetail_iv_detail.visibility = View.VISIBLE
+                            galleryDetail_iv_detail.loadUrl(it.galleryDetailResponse.postFile)
+                        }
+                        GalleryItem.TYPE_VIDEO -> {
+                            galleryDetail_vv_detail.visibility = View.VISIBLE
+                            val vidUri: Uri = Uri.parse(it.galleryDetailResponse.postFile)
+                            galleryDetail_vv_detail.setVideoURI(vidUri)
+                            galleryDetail_vv_detail.start()
+
+                            val vidControl = MediaController(this)
+                            vidControl.setAnchorView(galleryDetail_vv_detail)
+                            galleryDetail_vv_detail.setMediaController(vidControl)
+                        }
+                    }
                 }
             }
         })
+    }
+
+    private fun showLikes(showLike: Boolean, countLike: Int) {
+        if (showLike) {
+            galleryDetail_iv_favorite.background =
+                resources.getDrawable(R.drawable.ic_baseline_favorite_36, null)
+            galleryDetail_iv_favorite.setOnClickListener(null)
+        } else {
+            galleryDetail_iv_favorite.background =
+                resources.getDrawable(R.drawable.ic_baseline_favorite_border_36, null)
+        }
+        galleryDetail_tv_likes.text = countLike.toString()
+    }
+
+    private fun showNameUser(avatarLink: String, nameUser: String) {
+        galleryDetail_iv_user.loadUrl(avatarLink)
+        galleryDetail_tv_nameUser.text = nameUser
+    }
+
+    private fun showTitlePost(nameUser: String, title: String) {
+        galleryDetail_tv_nameUser2.text = nameUser
+        galleryDetail_tv_title.text = title
     }
 
     private fun subscribeToMakeLike() {

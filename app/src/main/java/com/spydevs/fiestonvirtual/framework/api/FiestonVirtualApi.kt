@@ -7,6 +7,7 @@ import com.spydevs.fiestonvirtual.domain.models.comment.CommentRequest
 import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.models.trivia.TriviaRequest
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryRequest
+import com.spydevs.fiestonvirtual.domain.models.gallery.GetGalleryDetailRequest
 import com.spydevs.fiestonvirtual.domain.models.like.MakeLikeRequest
 import com.spydevs.fiestonvirtual.domain.models.trivia.AnswerTriviaRequest
 import com.spydevs.fiestonvirtual.domain.models.user.GetRemoteUserRequest
@@ -112,5 +113,10 @@ interface FiestonVirtualApi {
     suspend fun makeLike(
         @Body makeLikeRequest: MakeLikeRequest
     ): NetworkResponse<MakeLikeResponseEntity, ErrorResponse>
+
+    @POST("detalle_publicacion.php")
+    suspend fun getGalleryDetail(
+        @Body getGalleryDetailRequest: GetGalleryDetailRequest
+    ): NetworkResponse<GetGalleryDetailResponseEntity, ErrorResponse>
 
 }

@@ -58,7 +58,7 @@ val useCasesModule = module {
     }
 
     single<GetPostDetailUseCase> {
-        GetPostDetailUseCaseImpl(get())
+        GetPostDetailUseCaseImpl(get(), get())
     }
 
     single<AddCommentUseCase> {

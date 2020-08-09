@@ -1,6 +1,7 @@
 package com.spydevs.fiestonvirtual.ui.gallerydetail
 
 import com.spydevs.fiestonvirtual.domain.models.comment.Comment
+import com.spydevs.fiestonvirtual.domain.models.gallery.GetGalleryDetailResponse
 
 sealed class CommentsResult {
 
@@ -20,6 +21,14 @@ sealed class CommentsResult {
         ) : MakeLike()
 
         data class Loading(var loading: Boolean) : MakeLike()
+    }
+
+    sealed class GetGalleryDetail : CommentsResult() {
+        data class Success(
+            var galleryDetailResponse: GetGalleryDetailResponse
+        ) : GetGalleryDetail()
+
+        data class Loading(var loading: Boolean) : GetGalleryDetail()
     }
 
 }
