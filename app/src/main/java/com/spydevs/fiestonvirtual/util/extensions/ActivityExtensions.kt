@@ -1,12 +1,15 @@
 package com.spydevs.fiestonvirtual.util.extensions
 
 import android.app.Activity
+import android.content.DialogInterface
 import android.content.Intent
 import android.provider.MediaStore
 import androidx.appcompat.app.AlertDialog
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.ui.main.MainActivity.Companion.REQUEST_TO_MEDIA
 
+
+//TODO change the name of this method to simething like "simpleAcceptAlertDialog"
 fun Activity.setupAlertDialog(
     title: String? = null,
     message: String,
@@ -33,6 +36,27 @@ fun Activity.setupAlertDialog(
         .create()
         .show()
 }
+
+fun Activity.showAlertDialogWithMessageAndTwoButtons(
+    message: String,
+    textPositiveButton: String? = getString(R.string.alertDialog_ok),
+    onPositiveButtonClick: (() -> Unit)? = null
+) {
+    AlertDialog.Builder(this)
+        .setMessage(message)
+        .setCancelable(false)
+        .setNegativeButton(getString(R.string.alertDialog_cancel)) { dialogInterface, _ ->
+            dialogInterface.dismiss()
+        }
+        .setPositiveButton(
+            textPositiveButton
+        ) { _, _ ->
+            onPositiveButtonClick?.let { it() }
+        }
+        .create()
+        .show()
+}
+
 
 fun Activity.openImageGalleryExternalApp() {
     val intent = Intent(Intent.ACTION_PICK).apply {

@@ -31,7 +31,11 @@
         android:id="@+id/navigation_photos"
         android:name="com.spydevs.fiestonvirtual.ui.main.photo.PhotoFragment"
         android:label="@string/title_photo"
-        tools:layout="@layout/fragment_photo" />
+        tools:layout="@layout/fragment_photo" >
+        <action
+            android:id="@+id/action_navigation_photos_to_navigation_gallery"
+            app:destination="@id/navigation_gallery" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_chat"

@@ -26,5 +26,6 @@
     <string name="upload">Subir</string>
     <string name="choose">Elegir</string>
     <string name="comment">Comentar...</string>
+    <string name="publish">PUBLICAR</string>
 
 </resources>

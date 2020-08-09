@@ -50,11 +50,9 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
             }
         }
 
-
         if (filePath == null) Result.failure()
-
         val file = File(filePath)
-        val requestBody = RequestBody.create(MediaType.parse("image/*"), file)
+        val requestBody = getRequestBody(postType, file)
         val fileUploadMultiPart = MultipartBody.Part.createFormData("file", file.name, requestBody)
         val fileName = RequestBody.create(MediaType.parse("text/plain"), file.name)
 
@@ -67,32 +65,43 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
             fiestonVirtualApi.uploadFile(fileUploadMultiPart, user.id, user.idEvent, postType)) {
             is NetworkResponse.Success -> {
                 val data = workDataOf(
-                    "KEY_SUCCESS" to "RESPUESTA EXITOSA"
+                    SUCCESS_KEY to "RESPUESTA EXITOSA"
                 )
-                notificationManager.notify(2, createSimpleNotification("Image",
-                uploadImageResponse.body.message))
-
+                notificationManager.notify(
+                    2, createSimpleNotification(
+                        "Image",
+                        uploadImageResponse.body.message
+                    )
+                )
 
                 Result.success(data)
             }
             is NetworkResponse.ApiError -> {
                 val data = workDataOf(
-                    "KEY_ERROR" to uploadImageResponse.body
+                    ERROR_KEY to uploadImageResponse.body
                 )
                 Result.failure(data)
             }
             is NetworkResponse.NetworkError -> {
                 val data = workDataOf(
-                    "KEY_ERROR" to uploadImageResponse.error.message
+                    ERROR_KEY to uploadImageResponse.error.message
                 )
                 Result.failure(data)
             }
             is NetworkResponse.UnknownError -> {
                 val data = workDataOf(
-                    "KEY_ERROR" to uploadImageResponse.error.message
+                    ERROR_KEY to uploadImageResponse.error.message
                 )
                 Result.failure(data)
             }
+        }
+    }
+
+    private fun getRequestBody(postType: Int, file: File): RequestBody {
+        return if (postType == 1) {
+            RequestBody.create(MediaType.parse("image/*"), file)
+        } else {
+            RequestBody.create(MediaType.parse("video/*"), file)
         }
     }
 
@@ -182,5 +191,7 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
         const val CHANNEL_ID = "inducesmile"
         const val CHANNEL_NAME = "carlos"
         const val FILE_PATH_KEY = "filePath"
+        const val SUCCESS_KEY = "SUCCESS_KEY"
+        const val ERROR_KEY = "ERROR_KEY"
     }
 }
