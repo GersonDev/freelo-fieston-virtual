@@ -89,17 +89,17 @@ class GalleryDetailActivity : AppCompatActivity() {
     private fun subscribeToCommentsResult() {
         this.viewModel.commentResult.observe(this, Observer {
             when (it) {
-                is CommentsResult.GetComments.Success -> {
+                is GalleryDetailResult.GetComments.Success -> {
                     this.commentAdapter.addData(it.comments)
                 }
-                is CommentsResult.GetComments.Loading -> {
+                is GalleryDetailResult.GetComments.Loading -> {
                     this.getCommentsLoadingDialog.show(it.loading)
                 }
-                is CommentsResult.AddComment.Success -> {
+                is GalleryDetailResult.AddComment.Success -> {
                     this.commentAdapter.addData(it.comment)
                     this.galleryDetail_et_comment.text?.clear()
                 }
-                is CommentsResult.AddComment.Loading -> {
+                is GalleryDetailResult.AddComment.Loading -> {
                     this.addCommentLoadingDialog.show(it.loading)
                 }
             }
@@ -109,7 +109,7 @@ class GalleryDetailActivity : AppCompatActivity() {
     private fun subscribeToPostDetails() {
         this.viewModel.postDetail.observe(this, Observer {
             when (it) {
-                is CommentsResult.GetGalleryDetail.Success -> {
+                is GalleryDetailResult.GetGalleryDetail.Success -> {
                     showNameUser(
                         it.galleryDetailResponse.userImage,
                         it.galleryDetailResponse.userName
@@ -169,13 +169,13 @@ class GalleryDetailActivity : AppCompatActivity() {
     private fun subscribeToMakeLike() {
         this.viewModel.makeLike.observe(this, Observer {
             when (it) {
-                is CommentsResult.MakeLike.Success -> {
+                is GalleryDetailResult.MakeLike.Success -> {
                     galleryDetail_tv_likes.text = it.likes.toString()
                     galleryDetail_iv_favorite.background =
                         resources.getDrawable(R.drawable.ic_baseline_favorite_36, null)
                     galleryDetail_iv_favorite.setOnClickListener(null)
                 }
-                is CommentsResult.MakeLike.Loading -> {
+                is GalleryDetailResult.MakeLike.Loading -> {
                     this.makeLikeLoadingDialog.show(it.loading)
                 }
             }
