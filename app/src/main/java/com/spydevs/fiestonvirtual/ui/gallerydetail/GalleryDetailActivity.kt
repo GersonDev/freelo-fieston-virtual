@@ -27,24 +27,36 @@ class GalleryDetailActivity : AppCompatActivity() {
         setupLoadingAlertDialog()
     }
 
+    private val makeLikeLoadingDialog by lazy {
+        setupLoadingAlertDialog()
+    }
+
     private val viewModel: GalleryDetailViewModel by inject()
     private val commentAdapter: CommentAdapter by lazy {
         CommentAdapter()
     }
 
-    private var postId  = 0
+    private var postId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gallery_detail)
         setUpIntentExtras()
         setUpViews()
+        setUpLikeView()
         setUpViewListeners()
         subscribeToAnyError()
         subscribeToPostDetails()
         subscribeToCommentsResult()
+        subscribeToMakeLike()
         viewModel.getComments(postId)
         viewModel.getPostDetail(postId)
+    }
+
+    private fun setUpLikeView() {
+        galleryDetail_iv_favorite.setOnClickListener {
+            viewModel.makeLike(postId)
+        }
     }
 
     private fun setUpIntentExtras() {
@@ -76,7 +88,7 @@ class GalleryDetailActivity : AppCompatActivity() {
 
     private fun subscribeToCommentsResult() {
         this.viewModel.commentResult.observe(this, Observer {
-            when(it) {
+            when (it) {
                 is CommentsResult.GetComments.Success -> {
                     this.commentAdapter.addData(it.comments)
                 }
@@ -96,7 +108,7 @@ class GalleryDetailActivity : AppCompatActivity() {
 
     private fun subscribeToPostDetails() {
         this.viewModel.postDetail.observe(this, Observer {
-            when(it.galleryItemList[0].type) {
+            when (it.galleryItemList[0].type) {
                 GalleryItem.TYPE_PHOTO -> {
                     galleryDetail_iv_detail.visibility = View.VISIBLE
                     galleryDetail_iv_detail.loadUrl(it.galleryItemList[0].file)
@@ -110,6 +122,21 @@ class GalleryDetailActivity : AppCompatActivity() {
                     val vidControl = MediaController(this)
                     vidControl.setAnchorView(galleryDetail_vv_detail)
                     galleryDetail_vv_detail.setMediaController(vidControl)
+                }
+            }
+        })
+    }
+
+    private fun subscribeToMakeLike() {
+        this.viewModel.makeLike.observe(this, Observer {
+            when (it) {
+                is CommentsResult.MakeLike.Success -> {
+                    galleryDetail_tv_likes.text = it.likesPhotos.toString()
+                    galleryDetail_iv_favorite.background =
+                        resources.getDrawable(R.drawable.ic_baseline_favorite_36, null)
+                }
+                is CommentsResult.MakeLike.Loading -> {
+                    this.makeLikeLoadingDialog.show(it.loading)
                 }
             }
         })

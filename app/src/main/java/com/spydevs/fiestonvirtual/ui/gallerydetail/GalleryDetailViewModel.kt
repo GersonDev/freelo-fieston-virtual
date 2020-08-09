@@ -10,6 +10,7 @@ import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.comment.AddCommentUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.comment.GetCommentsUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.GetPostDetailUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.like.MakeLikeUseCase
 import com.spydevs.fiestonvirtual.ui.main.gallery.GalleryResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,7 +18,8 @@ import kotlinx.coroutines.launch
 class GalleryDetailViewModel(
     private val getCommentsUseCase: GetCommentsUseCase,
     private val getPostDetailUseCase: GetPostDetailUseCase,
-    private val addCommentUseCase: AddCommentUseCase
+    private val addCommentUseCase: AddCommentUseCase,
+    private val makeLikeUseCase: MakeLikeUseCase
 ) : ViewModel() {
 
     private val _commentResult = MutableLiveData<CommentsResult>()
@@ -34,6 +36,9 @@ class GalleryDetailViewModel(
 
     private val _postDetail = MutableLiveData<GalleryResult.GetGallerySuccessful>()
     val postDetail: LiveData<GalleryResult.GetGallerySuccessful> = _postDetail
+
+    private val _makeLike = MutableLiveData<CommentsResult.MakeLike>()
+    val makeLike: LiveData<CommentsResult.MakeLike> = _makeLike
 
     fun getComments(idPost: Int) {
         viewModelScope.launch(Dispatchers.Main) {
@@ -77,6 +82,24 @@ class GalleryDetailViewModel(
                 }
             }
             _commentResult.value = CommentsResult.AddComment.Loading(false)
+        }
+    }
+
+    fun makeLike(postId: Int) {
+        viewModelScope.launch(Dispatchers.Main) {
+            _makeLike.value = CommentsResult.MakeLike.Loading(true)
+            when (val result = makeLikeUseCase(postId)) {
+                is ResultType.Success -> {
+                    _makeLike.value = CommentsResult.MakeLike.Success(
+                        result.value.likesPhotos,
+                        result.value.likesVideos
+                    )
+                }
+                is ResultType.Error -> {
+                    _error.value = result.value
+                }
+            }
+            _makeLike.value = CommentsResult.MakeLike.Loading(false)
         }
     }
 
