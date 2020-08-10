@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:gravity="center"
-        android:text="El video debe durar como\n máximo 30 segundos"
+        android:text="El video debe durar como\n máximo 20 segundos"
         android:textColor="@color/amber_600"
         android:textSize="16sp" />
 
