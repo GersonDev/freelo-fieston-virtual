@@ -16,6 +16,7 @@ import androidx.work.WorkManager
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.ui.main.MainActivity
 import com.spydevs.fiestonvirtual.ui.main.photo.UploadFileCoroutineWorker.Companion.FILE_PATH_KEY
+import com.spydevs.fiestonvirtual.ui.main.photo.UploadFileCoroutineWorker.Companion.TITLE_MESSAGE
 import com.spydevs.fiestonvirtual.util.NativeGallery
 import com.spydevs.fiestonvirtual.util.RealPathUtil
 import com.spydevs.fiestonvirtual.util.extensions.*
@@ -63,7 +64,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo) {
     private fun startWork() {
         val oneTimeWorkRequest =
             OneTimeWorkRequest.Builder(UploadFileCoroutineWorker::class.java)
-                .setInputData(createInputData(filePathUri))
+                .setInputData(createInputData(filePathUri, photoFragment_et_title.text.toString()))
                 .setInitialDelay(DURATION_TIME_IN_SECONDS, TimeUnit.SECONDS).build()
 
         val workManager = WorkManager.getInstance(requireActivity())
@@ -96,9 +97,10 @@ class PhotoFragment : Fragment(R.layout.fragment_photo) {
             })
     }
 
-    private fun createInputData(imagePath: String): Data {
+    private fun createInputData(imagePath: String, title: String = ""): Data {
         return Data.Builder()
             .putString(FILE_PATH_KEY, imagePath)
+            .putString(TITLE_MESSAGE, title)
             .build()
     }
 

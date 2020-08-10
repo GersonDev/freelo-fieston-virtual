@@ -50,6 +50,9 @@ class UploadUserProfileImageCoroutineWorker(context: Context, workerParameters: 
         when (val uploadImageResponse =
             fiestonVirtualApi.uploadUserProfileImage(fileUploadMultiPart, user.id, 1)) {
             is NetworkResponse.Success -> {
+
+                usersDao.updateAvatar(user.id, uploadImageResponse.body.data.post.postFile)
+
                 val data = workDataOf(
                     SUCCESS_KEY to uploadImageResponse.body.data.post.postFile
                 )

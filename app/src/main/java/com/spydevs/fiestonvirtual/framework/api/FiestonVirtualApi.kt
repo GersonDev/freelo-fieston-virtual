@@ -50,7 +50,8 @@ interface FiestonVirtualApi {
         @Part file: MultipartBody.Part?,
         @Part("idUser") userId: Int,
         @Part("idEvent") eventId: Int,
-        @Part("postType") postType: Int
+        @Part("postType") postType: Int,
+        @Part("postTitle") postTitle: String = ""
     ): NetworkResponse<UploadFileResponseEntity, String>
 
     /**

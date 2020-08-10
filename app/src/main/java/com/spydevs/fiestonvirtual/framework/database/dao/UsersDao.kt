@@ -38,4 +38,10 @@ interface UsersDao {
         totalScore: Int
     )
 
+    @Query("UPDATE users SET avatar=:avatar WHERE id=:idUser")
+    suspend fun updateAvatar(
+        idUser: Int,
+        avatar: String
+    )
+
 }

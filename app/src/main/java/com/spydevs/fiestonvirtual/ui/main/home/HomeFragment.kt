@@ -17,6 +17,7 @@ import com.spydevs.fiestonvirtual.ui.main.MainActivity
 import com.spydevs.fiestonvirtual.ui.main.photo.PhotoFragment
 import com.spydevs.fiestonvirtual.ui.main.photo.UploadUserProfileImageCoroutineWorker
 import com.spydevs.fiestonvirtual.util.RealPathUtil
+import com.spydevs.fiestonvirtual.util.extensions.loadUrl
 import com.spydevs.fiestonvirtual.util.extensions.loadUrlWithCircularCrop
 import com.spydevs.fiestonvirtual.util.extensions.setupAlertDialog
 import com.spydevs.fiestonvirtual.util.extensions.setupLoadingAlertDialog
@@ -81,6 +82,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             nameTextView.text = user.name.plus(" ").plus(user.lastName)
             textView4.text = user.totalScore.toString()
             textView6.text = user.ranking.toString()
+            homeFragment_iv_userProfile.loadUrlWithCircularCrop(user.avatar)
         })
     }
 

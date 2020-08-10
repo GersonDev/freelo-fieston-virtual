@@ -13,7 +13,8 @@ object UserEntityMapper : Mapper<UserEntity, User>() {
             lastName = i.lastName,
             totalScore = i.totalScore,
             ranking = i.ranking,
-            idEvent = i.idEvent
+            idEvent = i.idEvent,
+            avatar = i.avatar
         )
     }
 
