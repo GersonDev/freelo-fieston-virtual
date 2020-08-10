@@ -19,6 +19,7 @@ data class DataUserResponseEntity(
         var userCell: String,
         var userTotalScore: Int,
         var userStatus: Int,
+        var avatar: String,
         var userLikesPhotos: Int,
         var userLikesVideos: Int,
         var userRanking: Int

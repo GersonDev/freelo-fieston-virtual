@@ -34,6 +34,7 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         val filePath = inputData.getString(FILE_PATH_KEY)
+        val postTitle = inputData.getString(TITLE_MESSAGE) ?: ""
 
         val mimeType = NativeGallery.getMimeType(filePath)
         print(mimeType)
@@ -62,7 +63,7 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
         val user = usersRepository.getLocalUser()
 
         when (val uploadImageResponse =
-            fiestonVirtualApi.uploadFile(fileUploadMultiPart, user.id, user.idEvent, postType)) {
+            fiestonVirtualApi.uploadFile(fileUploadMultiPart, user.id, user.idEvent, postType, postTitle)) {
             is NetworkResponse.Success -> {
                 val data = workDataOf(
                     SUCCESS_KEY to "RESPUESTA EXITOSA"
@@ -191,6 +192,7 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
         const val CHANNEL_ID = "inducesmile"
         const val CHANNEL_NAME = "carlos"
         const val FILE_PATH_KEY = "filePath"
+        const val TITLE_MESSAGE = "titleMessage"
         const val SUCCESS_KEY = "SUCCESS_KEY"
         const val ERROR_KEY = "ERROR_KEY"
     }

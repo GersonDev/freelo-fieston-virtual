@@ -6,5 +6,6 @@ data class User(
     var lastName: String,
     var totalScore: Int,
     var ranking: Int,
-    var idEvent: Int
+    var idEvent: Int,
+    var avatar: String
 )

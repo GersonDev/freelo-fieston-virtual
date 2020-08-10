@@ -13,7 +13,8 @@ object UserResponseEntityMapper : Mapper<DataUserResponseEntity.UserEntity, User
             lastName = i.userLastName,
             totalScore = i.userTotalScore,
             ranking = i.userRanking,
-            idEvent = i.idEvent
+            idEvent = i.idEvent,
+            avatar = i.avatar
         )
     }
 
