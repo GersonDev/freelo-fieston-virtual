@@ -163,7 +163,11 @@ class GalleryDetailActivity : AppCompatActivity() {
 
     private fun showTitlePost(nameUser: String, title: String) {
         galleryDetail_tv_nameUser2.text = nameUser
-        galleryDetail_tv_title.text = title
+        if (title.isEmpty()) {
+            galleryDetail_tv_title.visibility = View.GONE
+        } else {
+            galleryDetail_tv_title.text = title
+        }
     }
 
     private fun subscribeToMakeLike() {
