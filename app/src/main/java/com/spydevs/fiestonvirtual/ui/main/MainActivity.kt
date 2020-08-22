@@ -22,6 +22,7 @@ import androidx.work.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.domain.models.welcome.Welcome
+import com.spydevs.fiestonvirtual.ui.codeverification.CodeVerificationActivity
 import com.spydevs.fiestonvirtual.ui.main.home.HomeFragment
 import com.spydevs.fiestonvirtual.ui.main.photo.PhotoFragment
 import com.spydevs.fiestonvirtual.ui.main.photo.UploadFileCoroutineWorker
@@ -58,7 +59,6 @@ class MainActivity : AppCompatActivity() {
     private var currentPhotoPath: String = ""
     private var showCustomWritePermissionDialog = false
 
-
     private var galleryImageUri: Uri? = null
     private var showCustomReadPermissionDialog = false
 
@@ -74,13 +74,14 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(tlbGeneral)
         setUpViews()
         setUpViewListeners()
+        setUpSignOutView()
 //        subscribeToGetCart()
 //        shoppingCartViewModel.requestCart()
 //        initBadge()
 
         subscribeToWelcome()
         subscribeToAnyError()
-
+        subscribeToSignOut()
         mainViewModel.getWelcome()
     }
 
@@ -88,6 +89,40 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.mainBottomNavigationView)
         val navController = findNavController(R.id.nav_host_fragment)
         navView.setupWithNavController(navController)
+    }
+
+    private fun setUpSignOutView() {
+        signOutImageButton.setOnClickListener {
+            this.setupAlertDialog(
+                message = getString(R.string.main_sign_out),
+                onPositiveButtonClick = { mainViewModel.signOut() },
+                textNegativeButton = getString(R.string.alertDialog_cancel)
+            )
+        }
+    }
+
+    private fun subscribeToSignOut() {
+        mainViewModel.signOut.observe(this, Observer {
+            when (val result = it as MainResult.SignOut) {
+                MainResult.SignOut.Success -> {
+                    startActivity(Intent(this, CodeVerificationActivity::class.java))
+                    finish()
+                }
+                is MainResult.SignOut.Error -> {
+                    this.setupAlertDialog(
+                        title = result.errorResponse.title,
+                        message = result.errorResponse.message
+                    )
+                }
+                is MainResult.SignOut.Loading -> {
+                    if (result.show) {
+                        dialogProgress.show()
+                    } else {
+                        dialogProgress.dismiss()
+                    }
+                }
+            }
+        })
     }
 
     private fun setUpViewListeners() {
@@ -141,7 +176,7 @@ class MainActivity : AppCompatActivity() {
                 if (ContextCompat.checkSelfPermission(this, manifestPermission)
                     == PackageManager.PERMISSION_GRANTED
                 ) {
-                    if(openOnlyImages) {
+                    if (openOnlyImages) {
                         openImageGalleryExternalApp()
                     } else {
                         openImageAndVideoGalleryExternalApp()
