@@ -2,6 +2,7 @@ package com.spydevs.fiestonvirtual.domain.repository
 
 import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.models.user.GetRemoteUserRequest
+import com.spydevs.fiestonvirtual.domain.models.user.SignOutRequest
 import com.spydevs.fiestonvirtual.domain.models.user.User
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 
@@ -21,4 +22,9 @@ interface UsersRepository {
         totalScore: Int
     )
 
+    suspend fun signOut(
+        signOutRequest: SignOutRequest
+    ): ResultType<Boolean, ErrorResponse>
+
+    suspend fun deleteLocalAllUsers()
 }
