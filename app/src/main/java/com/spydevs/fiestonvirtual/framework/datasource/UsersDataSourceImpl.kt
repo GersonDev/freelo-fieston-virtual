@@ -82,4 +82,10 @@ class UsersDataSourceImpl(
         usersDao.deleteAllUsers()
     }
 
+    override suspend fun getLocalUsers(): List<User> {
+        return usersDao.getUsers().map {
+            UserEntityMapper.convertFromInitial(it)
+        }
+    }
+
 }

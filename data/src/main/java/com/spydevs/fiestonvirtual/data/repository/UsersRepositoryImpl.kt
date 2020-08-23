@@ -39,4 +39,8 @@ class UsersRepositoryImpl(
         return usersDataSource.deleteLocalAllUsers()
     }
 
+    override suspend fun getLocalUsers(): List<User> {
+        return usersDataSource.getLocalUsers()
+    }
+
 }

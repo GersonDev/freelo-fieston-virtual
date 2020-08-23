@@ -16,7 +16,7 @@ val viewModelsModule = module {
     viewModel { PhotoViewModel() }
     viewModel { GalleryViewModel(get()) }
     viewModel { MainViewModel(get(), get()) }
-    viewModel { CodeVerificationViewModel(get()) }
+    viewModel { CodeVerificationViewModel(get(), get()) }
     viewModel { TriviaViewModel(get(), get()) }
     viewModel { GalleryDetailViewModel(get(), get(), get(), get()) }
 
