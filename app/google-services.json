@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "265599899286",
+    "firebase_url": "https://fiestonvirtual-7d3a0.firebaseio.com",
+    "project_id": "fiestonvirtual-7d3a0",
+    "storage_bucket": "fiestonvirtual-7d3a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265599899286:android:f1fd1004c9366c0ab1d4b7",
+        "android_client_info": {
+          "package_name": "com.spydevs.fiestonvirtual"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "265599899286-7ibeq2u7h6k4icm2166hvonh3u1jkrll.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo_N86eJfrJ8rZfvOUsRubQpCNBpqSs5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "265599899286-7ibeq2u7h6k4icm2166hvonh3u1jkrll.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
