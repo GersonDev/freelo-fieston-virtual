@@ -16,6 +16,7 @@ class FiestonVirtualApplication : Application() {
             androidContext(this@FiestonVirtualApplication)
             modules(
                 listOf(
+                    socketsApiModule,
                     retrofitApiModule,
                     databaseModule,
                     dataSourcesModule,

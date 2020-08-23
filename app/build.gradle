@@ -88,6 +88,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
 
+    //chat
+    implementation 'com.github.nkzawa:socket.io-client:0.6.0'
+
     //JUnit
     testImplementation 'junit:junit:4.12'
 
