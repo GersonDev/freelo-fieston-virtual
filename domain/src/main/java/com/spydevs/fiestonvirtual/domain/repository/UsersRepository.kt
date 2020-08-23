@@ -27,4 +27,7 @@ interface UsersRepository {
     ): ResultType<Boolean, ErrorResponse>
 
     suspend fun deleteLocalAllUsers()
+
+    suspend fun getLocalUsers(): List<User>
+
 }
