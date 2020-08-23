@@ -53,7 +53,7 @@ class CodeVerificationViewModel(
         }
     }
 
-    fun verificationSession() {
+    fun verifySession() {
         viewModelScope.launch(Dispatchers.Main) {
             _verificationSession.value = CodeVerificationResult.VerificationSession.Loading(true)
             when (val result =

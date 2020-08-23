@@ -25,8 +25,8 @@ class CodeVerificationActivity : AppCompatActivity() {
         subscribeToError()
         subscribeToLoading()
         setUpCodeButton()
-        subscribeToVerificationSession()
-        viewModel.verificationSession()
+        subscribeToVerifySession()
+        viewModel.verifySession()
     }
 
     private fun subscribeToSuccessCode() {
@@ -39,7 +39,7 @@ class CodeVerificationActivity : AppCompatActivity() {
         )
     }
 
-    private fun subscribeToVerificationSession() {
+    private fun subscribeToVerifySession() {
         viewModel.verificationSession.observe(
             this,
             Observer {
