@@ -12,6 +12,8 @@ import com.spydevs.fiestonvirtual.domain.usecases.abstractions.welcome.GetWelcom
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.welcome.GetWelcomeUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.GetLocalUserUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.LoginUserUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.SignOutUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.user.VerificationSessionUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.comment.AddCommentUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.comment.GetCommentsUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.trivia.GetTriviaUseCaseImpl
@@ -22,6 +24,8 @@ import com.spydevs.fiestonvirtual.domain.usecases.implementations.like.MakeLikeU
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.trivia.AnswerTriviaUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.user.GetLocalUserUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.user.LoginUserUseCaseImpl
+import com.spydevs.fiestonvirtual.domain.usecases.implementations.user.SignOutUseCaseImpl
+import com.spydevs.fiestonvirtual.domain.usecases.implementations.user.VerificationSessionUseCaseImpl
 import org.koin.dsl.module
 
 val useCasesModule = module {
@@ -71,5 +75,12 @@ val useCasesModule = module {
 
     single<MakeLikeUseCase> {
         MakeLikeUseCaseImpl(get(), get())
+    }
+
+    single<SignOutUseCase> {
+        SignOutUseCaseImpl(get())
+    }
+    single<VerificationSessionUseCase> {
+        VerificationSessionUseCaseImpl(get())
     }
 }

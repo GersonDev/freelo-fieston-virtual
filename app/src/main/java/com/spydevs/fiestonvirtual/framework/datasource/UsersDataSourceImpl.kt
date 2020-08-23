@@ -3,6 +3,7 @@ package com.spydevs.fiestonvirtual.framework.datasource
 import com.spydevs.fiestonvirtual.data.datasource.UsersDataSource
 import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.models.user.GetRemoteUserRequest
+import com.spydevs.fiestonvirtual.domain.models.user.SignOutRequest
 import com.spydevs.fiestonvirtual.domain.models.user.User
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 import com.spydevs.fiestonvirtual.framework.api.FiestonVirtualApi
@@ -56,5 +57,35 @@ class UsersDataSourceImpl(
         )
     }
 
+    override suspend fun signOut(
+        signOutRequest: SignOutRequest
+    ): ResultType<Boolean, ErrorResponse> {
+        return when (val result = fiestonVirtualApi.signOut(signOutRequest)) {
+            is NetworkResponse.Success -> {
+                ResultType.Success(
+                    result.body.data.rpta
+                )
+            }
+            is NetworkResponse.ApiError -> {
+                ResultType.Error(ErrorResponse(message = result.body.message))
+            }
+            is NetworkResponse.NetworkError -> {
+                ResultType.Error(ErrorResponse(message = result.error.message ?: ""))
+            }
+            is NetworkResponse.UnknownError -> {
+                ResultType.Error(ErrorResponse(message = result.error.message ?: ""))
+            }
+        }
+    }
+
+    override suspend fun deleteLocalAllUsers() {
+        usersDao.deleteAllUsers()
+    }
+
+    override suspend fun getLocalUsers(): List<User> {
+        return usersDao.getUsers().map {
+            UserEntityMapper.convertFromInitial(it)
+        }
+    }
 
 }

@@ -11,6 +11,7 @@ import com.spydevs.fiestonvirtual.domain.models.gallery.GetGalleryDetailRequest
 import com.spydevs.fiestonvirtual.domain.models.like.MakeLikeRequest
 import com.spydevs.fiestonvirtual.domain.models.trivia.AnswerTriviaRequest
 import com.spydevs.fiestonvirtual.domain.models.user.GetRemoteUserRequest
+import com.spydevs.fiestonvirtual.domain.models.user.SignOutRequest
 import com.spydevs.fiestonvirtual.domain.models.welcome.WelcomeRequest
 import okhttp3.MultipartBody
 import retrofit2.http.*
@@ -133,5 +134,10 @@ interface FiestonVirtualApi {
     suspend fun getGalleryDetail(
         @Body getGalleryDetailRequest: GetGalleryDetailRequest
     ): NetworkResponse<GetGalleryDetailResponseEntity, ErrorResponse>
+
+    @POST("signOut.php")
+    suspend fun signOut(
+        @Body signOutRequest: SignOutRequest
+    ): NetworkResponse<SignOutResponseEntity, ErrorResponse>
 
 }
