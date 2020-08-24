@@ -44,4 +44,7 @@ interface UsersDao {
         avatar: String
     )
 
+    @Query("UPDATE users SET token=:token WHERE id=:idUser")
+    suspend fun updateLocalToken(idUser: Int, token: String)
+
 }
