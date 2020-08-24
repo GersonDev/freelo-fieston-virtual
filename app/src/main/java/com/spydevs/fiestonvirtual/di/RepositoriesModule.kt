@@ -12,4 +12,5 @@ val repositoryModule = module {
     single<GalleryRepository> { GalleryRepositoryImpl(get()) }
     single<CommentRepository> { CommentRepositoryImpl(get()) }
     single<LikeRepository> { LikeRepositoryImpl(get()) }
+    single<FcmRepository> { FcmRepositoryImpl(get()) }
 }
