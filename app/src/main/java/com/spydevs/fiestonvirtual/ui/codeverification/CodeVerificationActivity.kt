@@ -4,7 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
+import com.google.firebase.iid.FirebaseInstanceId
 import com.spydevs.fiestonvirtual.R
+import com.spydevs.fiestonvirtual.services.fcm.SendTokenWorker
 import com.spydevs.fiestonvirtual.util.extensions.setupLoadingAlertDialog
 import com.spydevs.fiestonvirtual.ui.main.MainActivity
 import com.spydevs.fiestonvirtual.util.extensions.setupAlertDialog
@@ -33,10 +38,30 @@ class CodeVerificationActivity : AppCompatActivity() {
         viewModel.isSuccessCode.observe(
             this@CodeVerificationActivity,
             Observer {
+                sendRegistrationToServer()
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
         )
+    }
+
+    //TODO send to MainActivity
+    private fun sendRegistrationToServer() {
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener {
+                val oneTimeWorkRequest = OneTimeWorkRequest
+                    .Builder(SendTokenWorker::class.java)
+                    .setInputData(
+                        Data.Builder()
+                            .putString(SendTokenWorker.TOKEN, it.result?.token)
+                            .build()
+                    )
+                    .build()
+                WorkManager
+                    .getInstance(applicationContext)
+                    .beginWith(oneTimeWorkRequest)
+                    .enqueue()
+            }
     }
 
     private fun subscribeToVerifySession() {
