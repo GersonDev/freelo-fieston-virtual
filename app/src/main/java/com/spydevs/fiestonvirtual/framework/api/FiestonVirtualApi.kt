@@ -136,7 +136,7 @@ interface FiestonVirtualApi {
         @Body getGalleryDetailRequest: GetGalleryDetailRequest
     ): NetworkResponse<GetGalleryDetailResponseEntity, ErrorResponse>
 
-    @POST("signOut.php")
+    @POST("logout.php")
     suspend fun signOut(
         @Body signOutRequest: SignOutRequest
     ): NetworkResponse<SignOutResponseEntity, ErrorResponse>
