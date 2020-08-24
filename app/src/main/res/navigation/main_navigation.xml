@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_gallery"
             app:destination="@id/navigation_gallery" />
+        <action
+            android:id="@+id/action_navigation_home_to_playListActivity"
+            app:destination="@id/playListActivity" />
     </fragment>
 
     <fragment
@@ -48,5 +51,10 @@
         android:name="com.spydevs.fiestonvirtual.ui.main.trivia.TriviaFragment"
         android:label="@string/title_trivia"
         tools:layout="@layout/fragment_trivia" />
+    <activity
+        android:id="@+id/playListActivity"
+        android:name="com.spydevs.fiestonvirtual.ui.playlist.PlayListActivity"
+        android:label="activity_play_list"
+        tools:layout="@layout/activity_play_list" />
 
 </navigation>

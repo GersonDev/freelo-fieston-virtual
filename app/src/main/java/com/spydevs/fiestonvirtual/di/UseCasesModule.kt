@@ -7,6 +7,8 @@ import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.GetGaller
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.GetPostDetailUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.UploadImageUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.like.MakeLikeUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.playlist.GetPlayListUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.playlist.RequestSongUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.trivia.AnswerTriviaUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.welcome.GetWelcomeUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.welcome.GetWelcomeUseCaseImpl
@@ -21,6 +23,8 @@ import com.spydevs.fiestonvirtual.domain.usecases.implementations.gallery.GetGal
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.gallery.GetPostDetailUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.gallery.UploadImageUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.like.MakeLikeUseCaseImpl
+import com.spydevs.fiestonvirtual.domain.usecases.implementations.playlist.GetPlaylistUseCaseImpl
+import com.spydevs.fiestonvirtual.domain.usecases.implementations.playlist.RequestSongUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.trivia.AnswerTriviaUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.user.GetLocalUserUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.user.LoginUserUseCaseImpl
@@ -80,7 +84,16 @@ val useCasesModule = module {
     single<SignOutUseCase> {
         SignOutUseCaseImpl(get())
     }
+
     single<VerificationSessionUseCase> {
         VerificationSessionUseCaseImpl(get())
+    }
+
+    single<RequestSongUseCase> {
+        RequestSongUseCaseImpl(get(), get())
+    }
+
+    single<GetPlayListUseCase> {
+        GetPlaylistUseCaseImpl(get(), get())
     }
 }

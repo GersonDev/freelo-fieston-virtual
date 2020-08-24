@@ -13,5 +13,6 @@ val dataSourcesModule = module {
     single<GalleryDataSource> { GalleryDataSourceImpl(get()) }
     single<CommentDataSource> { CommentDataSourceImpl(get()) }
     single<LikeDataSource> { LikeDataSourceImpl(get()) }
+    single<PlayListDataSource> { PlayListDataSourceImpl(get()) }
 
 }
