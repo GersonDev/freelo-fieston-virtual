@@ -20,8 +20,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.work.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.iid.FirebaseInstanceId
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.domain.models.welcome.Welcome
+import com.spydevs.fiestonvirtual.services.fcm.SendTokenWorker
 import com.spydevs.fiestonvirtual.ui.codeverification.CodeVerificationActivity
 import com.spydevs.fiestonvirtual.ui.main.home.HomeFragment
 import com.spydevs.fiestonvirtual.ui.main.photo.PhotoFragment
@@ -55,7 +57,6 @@ class MainActivity : AppCompatActivity() {
         const val INDEX_WRITE_PERMISSION = 0
     }
 
-
     private var currentPhotoPath: String = ""
     private var showCustomWritePermissionDialog = false
 
@@ -70,18 +71,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //getValuesFromIntent()
         setSupportActionBar(tlbGeneral)
         setUpViews()
         setUpViewListeners()
         setUpSignOutView()
-//        subscribeToGetCart()
-//        shoppingCartViewModel.requestCart()
-//        initBadge()
-
         subscribeToWelcome()
         subscribeToAnyError()
         subscribeToSignOut()
+        sendTokenToServer()
         mainViewModel.getWelcome()
     }
 
@@ -385,6 +382,26 @@ class MainActivity : AppCompatActivity() {
         return Data.Builder()
             .putString(UploadFileCoroutineWorker.FILE_PATH_KEY, imagePath)
             .build()
+    }
+
+    private fun sendTokenToServer() {
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener {
+                it.result?.token?.let {token->
+                    val oneTimeWorkRequest = OneTimeWorkRequest
+                        .Builder(SendTokenWorker::class.java)
+                        .setInputData(
+                            Data.Builder()
+                                .putString(SendTokenWorker.TOKEN, token)
+                                .build()
+                        )
+                        .build()
+                    WorkManager
+                        .getInstance(applicationContext)
+                        .beginWith(oneTimeWorkRequest)
+                        .enqueue()
+                }
+            }
     }
 
 }
