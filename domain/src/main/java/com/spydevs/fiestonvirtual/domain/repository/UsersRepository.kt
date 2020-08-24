@@ -30,4 +30,9 @@ interface UsersRepository {
 
     suspend fun getLocalUsers(): List<User>
 
+    suspend fun updateLocalToken(
+        idUser: Int,
+        token: String
+    )
+
 }

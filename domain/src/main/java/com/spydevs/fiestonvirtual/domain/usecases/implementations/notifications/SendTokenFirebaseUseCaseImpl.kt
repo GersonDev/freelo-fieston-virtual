@@ -12,22 +12,31 @@ class SendTokenFirebaseUseCaseImpl(
     private val fcmRepository: FcmRepository
 ) : SendTokenFirebaseUseCase {
 
-    override suspend fun invoke(token: String): ResultType<Boolean, ErrorResponse> {
+    override suspend fun invoke(
+        token: String
+    ): ResultType<Boolean, ErrorResponse> {
         return if (usersRepository.getLocalUsers().isNotEmpty()) {
             val user = usersRepository.getLocalUser()
-            when (fcmRepository.sendToken(
-                SendTokenRequest(
-                    idUser = user.id,
-                    token = token
-                )
-            )) {
-                is ResultType.Success -> {
-                    ResultType.Success(true)
-
+            if (user.token != token) {
+                when (fcmRepository.sendToken(
+                    SendTokenRequest(
+                        idUser = user.id,
+                        token = token
+                    )
+                )) {
+                    is ResultType.Success -> {
+                        usersRepository.updateLocalToken(
+                            idUser = user.id,
+                            token = token
+                        )
+                        ResultType.Success(true)
+                    }
+                    is ResultType.Error -> {
+                        ResultType.Success(false)
+                    }
                 }
-                is ResultType.Error -> {
-                    ResultType.Success(false)
-                }
+            } else {
+                ResultType.Success(false)
             }
         } else {
             ResultType.Success(false)
