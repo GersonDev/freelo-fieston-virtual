@@ -28,4 +28,9 @@ interface UsersDataSource {
     suspend fun deleteLocalAllUsers()
 
     suspend fun getLocalUsers(): List<User>
+
+    suspend fun updateLocalToken(
+        idUser: Int,
+        token: String
+    )
 }

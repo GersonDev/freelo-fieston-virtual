@@ -43,4 +43,11 @@ class UsersRepositoryImpl(
         return usersDataSource.getLocalUsers()
     }
 
+    override suspend fun updateLocalToken(idUser: Int, token: String) {
+        usersDataSource.updateLocalToken(
+            idUser,
+            token
+        )
+    }
+
 }
