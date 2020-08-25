@@ -6,6 +6,9 @@ data class RequestSongResponseEntity(
 ) {
     data class Data(
         val idPlaylist: Int,
+        val playlistBand: String,
+        val playlistRegistrationDate: String,
+        val playlistSong: String,
         val playlistStatus: Boolean
     )
 }
