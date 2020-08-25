@@ -100,7 +100,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService(), KoinComponent {
         return NotificationCompat
             .Builder(this, channelId)
             .apply {
-                setSmallIcon(R.mipmap.ic_launcher)
+                setSmallIcon(R.drawable.ic_icon_round_notification)
                 setContentTitle(title)
                 setContentText(messageBody)
                 setStyle(NotificationCompat.BigTextStyle().bigText(messageBody))
