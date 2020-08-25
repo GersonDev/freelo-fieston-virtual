@@ -8,7 +8,7 @@ val socketsApiModule = module {
 
     single {
         try {
-            IO.socket("http://192.168.0.103:3000/")
+            IO.socket("http://www.fiestonvirtual.com:8090")
         } catch (e: URISyntaxException) {
             throw  RuntimeException(e)
         }

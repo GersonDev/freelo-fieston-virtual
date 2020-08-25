@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.spydevs.fiestonvirtual.R
-import com.spydevs.fiestonvirtual.ui.main.chat.modelll.ChatMessageViewType
 import kotlinx.android.synthetic.main.item_incoming_message.view.*
 import kotlinx.android.synthetic.main.item_outgoing_message.view.*
 

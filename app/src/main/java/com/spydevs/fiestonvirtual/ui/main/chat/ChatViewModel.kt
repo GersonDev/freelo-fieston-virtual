@@ -6,8 +6,17 @@ import androidx.lifecycle.ViewModel
 
 class ChatViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is user Fragment"
+    private val _chatResult = MutableLiveData<ChatResult>()
+    val chatResult: LiveData<ChatResult>
+        get() = _chatResult
+
+    fun sendMessage(message: String) {
+        if (message.isEmpty()) {
+            _chatResult.value = (ChatResult.SendOutgoingMessage.Error("Mensaje Vacío"))
+            return
+        }
+        val outgoingMessage = ChatMessage(message, ChatMessageViewType.OUTGOING)
+        _chatResult.value = (ChatResult.SendOutgoingMessage.Success(outgoingMessage))
     }
-    val text: LiveData<String> = _text
+
 }
