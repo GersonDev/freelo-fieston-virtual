@@ -74,8 +74,8 @@ class SocketIOViewModel(
         val username: String
         val message: String
         try {
-            username = data.getString("userName")
-            message = data.getString("message")
+            username = data.getString("messageText")
+            message = data.getString("userMessage")
         } catch (e: JSONException) {
             throw e
         }
@@ -89,7 +89,7 @@ class SocketIOViewModel(
 
     fun sendMessage(message: String) {
         viewModelScope.launch(Dispatchers.Main) {
-            socket.emit("message", 5, message)
+            socket.emit("message", usersRepository.getLocalUser().id, message)
         }
     }
 }
