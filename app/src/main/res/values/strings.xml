@@ -29,8 +29,5 @@
     <string name="publish">PUBLICAR</string>
     <string name="change_photo">Cambiar foto</string>
     <string name="enter_a_title">Ingrese un título (opcional)</string>
-    <string name="title_activity_play_list">Playlist</string>
-
-    <string name="request">pedir</string>
 
 </resources>
