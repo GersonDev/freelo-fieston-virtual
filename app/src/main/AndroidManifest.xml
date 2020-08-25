@@ -4,11 +4,7 @@
     package="com.spydevs.fiestonvirtual">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <!--READ FILES-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-    <!--CREATE FILES SUCH AS FOLDERS-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-feature
@@ -24,6 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.playlist.PlayListActivity"
+            android:label="@string/title_activity_play_list"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -44,12 +44,6 @@
         </provider>
 
         <activity
-            android:name=".ui.main.camera.CameraActivity"
-            android:label="@string/title_activity_camera"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
             android:name=".ui.codeverification.CodeVerificationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -64,7 +58,6 @@
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".ui.gallerydetail.GalleryDetailActivity"
             android:screenOrientation="portrait"
