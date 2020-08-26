@@ -34,6 +34,7 @@
             android:id="@+id/chatFragment_tv_externalUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/grey_700"
             tools:text="Carlos Vargas Huaman" />
 
         <androidx.appcompat.widget.AppCompatTextView

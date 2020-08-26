@@ -51,7 +51,6 @@ class SocketIOViewModel(
 
                 socket.emit(
                     "join",
-                    eventId,
                     userId
                 )
                 isUserConnected = true
@@ -76,12 +75,12 @@ class SocketIOViewModel(
     private val onUpdateChat = Emitter.Listener { args ->
         val data = args[0] as JSONObject
         val messageText: String
-        val userMessage: String
+        val userName: String
         val idUserMessage: Int
         val userImage: String
         try {
             messageText = data.getString("messageText")
-            userMessage = data.getString("userMessage")
+            userName = data.getString("userName")
             idUserMessage = data.getInt("idUserMessage")
             userImage = data.getString("userImage")
         } catch (e: JSONException) {
@@ -91,7 +90,7 @@ class SocketIOViewModel(
         val chatMessage =
             ChatMessage(
                 messageText = messageText,
-                userName = userMessage,
+                userName = userName,
                 userId = idUserMessage,
                 userImage = userImage,
                 viewType = ChatMessageViewType.INCOMING

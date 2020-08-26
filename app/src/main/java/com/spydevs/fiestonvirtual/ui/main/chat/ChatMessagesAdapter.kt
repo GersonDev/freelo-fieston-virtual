@@ -7,10 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.domain.models.message.ChatMessage
 import com.spydevs.fiestonvirtual.domain.models.message.ChatMessageViewType
+import com.spydevs.fiestonvirtual.util.extensions.loadUrl
+import com.spydevs.fiestonvirtual.util.extensions.loadUrlWithCircularCrop
 import kotlinx.android.synthetic.main.item_incoming_message.view.*
 import kotlinx.android.synthetic.main.item_outgoing_message.view.*
 
-class ChatMessagesAdapter(private val chatMessages: MutableList<ChatMessage> = mutableListOf()): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ChatMessagesAdapter(private val chatMessages: MutableList<ChatMessage> = mutableListOf()) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return chatMessages[position].viewType.value
@@ -20,7 +23,7 @@ class ChatMessagesAdapter(private val chatMessages: MutableList<ChatMessage> = m
         val inflater = LayoutInflater.from(parent.context)
         val viewHolder: RecyclerView.ViewHolder
         val view: View
-        when(viewType) {
+        when (viewType) {
             ChatMessageViewType.INCOMING.value -> {
                 view = inflater.inflate(R.layout.item_incoming_message, parent, false)
                 viewHolder = IncomingMessageViewHolder(view)
@@ -58,10 +61,10 @@ class ChatMessagesAdapter(private val chatMessages: MutableList<ChatMessage> = m
 
         fun bind(chatMessage: ChatMessage) {
             this.chatMessage = chatMessage
-//            itemView.categoryForegroundImageView.setImageResource(category.image)
+            itemView.chatFragment_tv_externalUserName.text = chatMessage.userName
             itemView.chatFragment_tv_externalUserComment.text = chatMessage.messageText
-//            itemView.descriptionTextView.text = category.description
-//            itemView.moreDescriptionTextView.text = category.subDescription
+            if (chatMessage.userImage.isNotEmpty())
+                itemView.chatFragment_iv_externalUserPhoto.loadUrlWithCircularCrop(chatMessage.userImage)
         }
     }
 
@@ -71,10 +74,10 @@ class ChatMessagesAdapter(private val chatMessages: MutableList<ChatMessage> = m
 
         fun bind(chatMessage: ChatMessage) {
             this.chatMessage = chatMessage
-//            itemView.categoryForegroundImageView.setImageResource(category.image)
+            itemView.chatFragment_tv_internalUserName.text = chatMessage.userName
             itemView.chatFragment_tv_internalUserComment.text = chatMessage.messageText
-//            itemView.descriptionTextView.text = category.description
-//            itemView.moreDescriptionTextView.text = category.subDescription
+            if (chatMessage.userImage.isNotEmpty())
+                itemView.chatFragment_iv_internalUserPhoto.loadUrlWithCircularCrop(chatMessage.userImage)
         }
     }
 
