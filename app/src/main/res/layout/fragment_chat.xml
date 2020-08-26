@@ -28,7 +28,6 @@
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:layout_marginBottom="?actionBarSize"
         android:tint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

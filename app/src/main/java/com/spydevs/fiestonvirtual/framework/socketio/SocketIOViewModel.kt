@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.github.nkzawa.emitter.Emitter
 import com.github.nkzawa.socketio.client.Socket
 import com.spydevs.fiestonvirtual.domain.repository.UsersRepository
-import com.spydevs.fiestonvirtual.ui.main.chat.ChatMessage
-import com.spydevs.fiestonvirtual.ui.main.chat.ChatMessageViewType
+import com.spydevs.fiestonvirtual.domain.models.message.ChatMessage
+import com.spydevs.fiestonvirtual.domain.models.message.ChatMessageViewType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONException
@@ -45,10 +45,14 @@ class SocketIOViewModel(
     private var onConnect = Emitter.Listener {
         viewModelScope.launch(Dispatchers.Main) {
             if (!isUserConnected) {
+
+                val eventId = usersRepository.getLocalUser().idEvent
+                val userId = usersRepository.getLocalUser().id
+
                 socket.emit(
                     "join",
-                    usersRepository.getLocalUser().idEvent,
-                    usersRepository.getLocalUser().id
+                    eventId,
+                    userId
                 )
                 isUserConnected = true
             }
@@ -71,25 +75,34 @@ class SocketIOViewModel(
 
     private val onUpdateChat = Emitter.Listener { args ->
         val data = args[0] as JSONObject
-        val username: String
-        val message: String
+        val messageText: String
+        val userMessage: String
+        val idUserMessage: Int
+        val userImage: String
         try {
-            username = data.getString("messageText")
-            message = data.getString("userMessage")
+            messageText = data.getString("messageText")
+            userMessage = data.getString("userMessage")
+            idUserMessage = data.getInt("idUserMessage")
+            userImage = data.getString("userImage")
         } catch (e: JSONException) {
             throw e
         }
 
-        val chatMessage = ChatMessage(
-            message,
-            ChatMessageViewType.INCOMING
-        )
+        val chatMessage =
+            ChatMessage(
+                messageText = messageText,
+                userName = userMessage,
+                userId = idUserMessage,
+                userImage = userImage,
+                viewType = ChatMessageViewType.INCOMING
+            )
         _socketIOResult.postValue(SocketIOResult.ReceiveIncomingMessage.Success(chatMessage))
     }
 
     fun sendMessage(message: String) {
         viewModelScope.launch(Dispatchers.Main) {
-            socket.emit("message", usersRepository.getLocalUser().id, message)
+            val userId = usersRepository.getLocalUser().id
+            socket.emit("message", userId, message)
         }
     }
 }

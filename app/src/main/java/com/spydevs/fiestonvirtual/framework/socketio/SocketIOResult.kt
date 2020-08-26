@@ -1,6 +1,6 @@
 package com.spydevs.fiestonvirtual.framework.socketio
 
-import com.spydevs.fiestonvirtual.ui.main.chat.ChatMessage
+import com.spydevs.fiestonvirtual.domain.models.message.ChatMessage
 
 sealed class SocketIOResult {
 

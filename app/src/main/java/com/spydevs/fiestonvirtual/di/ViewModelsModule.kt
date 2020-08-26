@@ -21,7 +21,7 @@ val viewModelsModule = module {
     viewModel { CodeVerificationViewModel(get()) }
     viewModel { TriviaViewModel(get(), get()) }
     viewModel { GalleryDetailViewModel(get(), get(), get(), get()) }
-    viewModel { ChatViewModel() }
+    viewModel { ChatViewModel(get(), get()) }
     viewModel { SocketIOViewModel(get(), get()) }
 
 }

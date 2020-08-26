@@ -22,9 +22,10 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        socketIOViewModel.startListeners()
         subscribeToChatViewModel()
         subscribeToSocketIOViewModel()
+        socketIOViewModel.startListeners()
+        chatViewModel.getMessages()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,12 +50,21 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         }
     }
 
+    private fun scrollToBottom() {
+        chatFragment_rv_chat.scrollToPosition(chatMessagesAdapter.itemCount - 1)
+    }
+
     private fun subscribeToChatViewModel() {
         chatViewModel.chatResult.observe(this, Observer {
             when(it) {
+                is ChatResult.GetMessages.Success -> {
+                    chatMessagesAdapter.addAllData(it.messages)
+                    scrollToBottom()
+                }
                 is ChatResult.SendOutgoingMessage.Success -> {
                     chatFragment_et_comment.text?.clear()
                     chatMessagesAdapter.addData(it.chatMessage)
+                    scrollToBottom()
                     socketIOViewModel.sendMessage(it.chatMessage.messageText)
                 }
                 is ChatResult.SendOutgoingMessage.Error -> {
@@ -67,67 +77,21 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
     private fun subscribeToSocketIOViewModel() {
         socketIOViewModel.socketIOResult.observe(this, Observer {
             when(it) {
+                is SocketIOResult.Connection.Success -> {
+                    Toast.makeText(activity, "Connected", Toast.LENGTH_SHORT).show()
+                }
+                is SocketIOResult.Connection.Error -> {
+                    Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show()
+                }
+                is SocketIOResult.Connection.Disconnect -> {
+                    Toast.makeText(activity, "Disconnect", Toast.LENGTH_SHORT).show()
+                }
                 is SocketIOResult.ReceiveIncomingMessage.Success -> {
                     chatMessagesAdapter.addData(it.chatMessage)
+                    scrollToBottom()
                 }
             }
         })
     }
 
-//    private var onConnect = Emitter.Listener {
-//        activity?.runOnUiThread(
-//            Runnable {
-//                Toast.makeText(activity, "onConnect", Toast.LENGTH_SHORT).show()
-//
-//                if (!isUserConnected) {
-//                    mSocket.emit(
-//                        "join",
-//                        3,
-//                        5
-//                    )
-//                    isUserConnected = true
-//                }
-//            }
-//        )
-//    }
-//
-//    private val onConnectTimeout = Emitter.Listener {
-//        activity?.runOnUiThread(
-//            Runnable {
-//                Toast.makeText(activity, "onConnectTimeout", Toast.LENGTH_SHORT).show()
-//            })
-//    }
-//
-//    private val onConnectError = Emitter.Listener {
-//        activity?.runOnUiThread(
-//            Runnable {
-//                Log.e("veamos", "carlos $it")
-//                Toast.makeText(activity, "onConnectError", Toast.LENGTH_SHORT).show()
-//            })
-//    }
-//
-//    private val onDisconnect = Emitter.Listener {
-//        activity?.runOnUiThread(
-//            Runnable {
-//                Toast.makeText(activity, "onDisconnect", Toast.LENGTH_SHORT).show()
-//                isUserConnected = false
-//            })
-//    }
-//
-//    private val onUpdateChat = Emitter.Listener { args ->
-//        activity?.runOnUiThread(Runnable {
-//            val data = args[0] as JSONObject
-//            val username: String
-//            val message: String
-//            try {
-//                username = data.getString("userName")
-//                message = data.getString("message")
-//            } catch (e: JSONException) {
-//                return@Runnable
-//            }
-//            // add the message to view
-//            val chatMessage = ChatMessage(message, ChatMessageViewType.INCOMING)
-//            chatMessagesAdapter.addData(chatMessage)
-//        })
-//    }
 }

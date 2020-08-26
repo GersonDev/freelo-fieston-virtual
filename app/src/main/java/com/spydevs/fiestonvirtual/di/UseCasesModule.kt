@@ -7,6 +7,8 @@ import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.GetGaller
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.GetPostDetailUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.UploadImageUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.like.MakeLikeUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.message.GetChatMessagesUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.message.SendChatMessageUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.trivia.AnswerTriviaUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.welcome.GetWelcomeUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.welcome.GetWelcomeUseCaseImpl
@@ -19,6 +21,8 @@ import com.spydevs.fiestonvirtual.domain.usecases.implementations.gallery.GetGal
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.gallery.GetPostDetailUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.gallery.UploadImageUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.like.MakeLikeUseCaseImpl
+import com.spydevs.fiestonvirtual.domain.usecases.implementations.message.GetChatMessagesUseCaseImpl
+import com.spydevs.fiestonvirtual.domain.usecases.implementations.message.SendChatMessageUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.trivia.AnswerTriviaUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.user.GetLocalUserUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.user.LoginUserUseCaseImpl
@@ -71,5 +75,13 @@ val useCasesModule = module {
 
     single<MakeLikeUseCase> {
         MakeLikeUseCaseImpl(get(), get())
+    }
+
+    single<GetChatMessagesUseCase> {
+        GetChatMessagesUseCaseImpl(get(), get())
+    }
+
+    single<SendChatMessageUseCase> {
+        SendChatMessageUseCaseImpl(get())
     }
 }
