@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginVertical="8dp"
     android:orientation="horizontal">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -25,15 +26,15 @@
             android:id="@+id/name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
             tools:text="Omar Ramirez" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/score_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/colorAccent"
             android:textSize="16sp"
             tools:text="50 pts" />
 
@@ -41,12 +42,14 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/position_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textColor="@color/white"
-        android:textSize="60sp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:textColor="@color/deep_purple_intense"
+        android:textSize="40sp"
         android:textStyle="bold"
-        tools:text="1" />
+        tools:text="12" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

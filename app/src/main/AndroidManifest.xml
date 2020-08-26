@@ -64,7 +64,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".ui.main.ranking.RankingActivity"
+            android:name=".ui.ranking.RankingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 

@@ -39,7 +39,7 @@
             android:layout_width="45dp"
             android:layout_height="match_parent"
             android:contentDescription="@null"
-            app:srcCompat="@drawable/ic_baseline_exit_to_app_24" />
+            app:srcCompat="@drawable/ic_cup_color_white" />
 
         <ImageButton
             android:id="@+id/signOutImageButton"

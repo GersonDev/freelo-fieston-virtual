@@ -10,6 +10,7 @@ import com.spydevs.fiestonvirtual.domain.usecases.abstractions.like.MakeLikeUseC
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.playlist.GetPlayListUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.playlist.RequestSongUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.notifications.SendTokenFirebaseUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.ranking.GetRankingUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.trivia.AnswerTriviaUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.welcome.GetWelcomeUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.welcome.GetWelcomeUseCaseImpl
@@ -27,6 +28,7 @@ import com.spydevs.fiestonvirtual.domain.usecases.implementations.like.MakeLikeU
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.playlist.GetPlaylistUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.playlist.RequestSongUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.notifications.SendTokenFirebaseUseCaseImpl
+import com.spydevs.fiestonvirtual.domain.usecases.implementations.ranking.GetRankingUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.trivia.AnswerTriviaUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.user.GetLocalUserUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.user.LoginUserUseCaseImpl
@@ -101,6 +103,10 @@ val useCasesModule = module {
 
     single<SendTokenFirebaseUseCase> {
         SendTokenFirebaseUseCaseImpl(get(), get())
+    }
+
+    single<GetRankingUseCase> {
+        GetRankingUseCaseImpl(get(), get())
     }
 
 }

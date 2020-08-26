@@ -1,4 +1,4 @@
-package com.spydevs.fiestonvirtual.ui.main.ranking.adapter
+package com.spydevs.fiestonvirtual.ui.ranking.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.domain.models.ranking.Ranking
 
-class RankingItemAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RankingItemAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var rankings: List<Ranking> = mutableListOf()
 

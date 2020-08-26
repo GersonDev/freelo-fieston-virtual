@@ -14,4 +14,5 @@ val repositoryModule = module {
     single<LikeRepository> { LikeRepositoryImpl(get()) }
     single<PlaylistRepository> { PlaylistRepositoryImpl(get()) }
     single<FcmRepository> { FcmRepositoryImpl(get()) }
+    single<RankingRepository> { RankingRepositoryImpl(get()) }
 }

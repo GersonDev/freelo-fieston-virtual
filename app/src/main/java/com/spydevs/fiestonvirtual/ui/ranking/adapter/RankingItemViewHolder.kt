@@ -1,4 +1,4 @@
-package com.spydevs.fiestonvirtual.ui.main.ranking.adapter
+package com.spydevs.fiestonvirtual.ui.ranking.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -15,15 +15,14 @@ class RankingItemViewHolder(
         itemView.apply {
             userLogo_iv.loadUrl(ranking.userLogo)
             name_tv.text = ranking.userName
-            score_tv.text = ranking.totalScore.toString()
+            score_tv.text = ranking.totalScore.toString().plus("pts")
             position_tv.text = ranking.position.toString()
 
             if (ranking.position == 1) {
-                position_tv.highlightColor = resources.getColor(R.color.yellow_600, null)
+                position_tv.setBackgroundColor(resources.getColor(R.color.yellow_600, null))
             }
 
         }
-
 
     }
 }

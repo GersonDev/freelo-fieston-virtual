@@ -28,7 +28,7 @@ import com.spydevs.fiestonvirtual.ui.codeverification.CodeVerificationActivity
 import com.spydevs.fiestonvirtual.ui.main.home.HomeFragment
 import com.spydevs.fiestonvirtual.ui.main.photo.PhotoFragment
 import com.spydevs.fiestonvirtual.ui.main.photo.UploadFileCoroutineWorker
-import com.spydevs.fiestonvirtual.ui.main.ranking.RankingActivity
+import com.spydevs.fiestonvirtual.ui.ranking.RankingActivity
 import com.spydevs.fiestonvirtual.ui.main.welcome.WelcomeDialogFragment
 import com.spydevs.fiestonvirtual.util.ImagesUtil
 import com.spydevs.fiestonvirtual.util.NativeGallery
