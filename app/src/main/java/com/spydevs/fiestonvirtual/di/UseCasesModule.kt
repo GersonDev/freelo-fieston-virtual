@@ -9,6 +9,7 @@ import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.UploadIma
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.like.MakeLikeUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.playlist.GetPlayListUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.playlist.RequestSongUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.notifications.SendTokenFirebaseUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.trivia.AnswerTriviaUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.welcome.GetWelcomeUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.welcome.GetWelcomeUseCaseImpl
@@ -25,6 +26,7 @@ import com.spydevs.fiestonvirtual.domain.usecases.implementations.gallery.Upload
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.like.MakeLikeUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.playlist.GetPlaylistUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.playlist.RequestSongUseCaseImpl
+import com.spydevs.fiestonvirtual.domain.usecases.implementations.notifications.SendTokenFirebaseUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.trivia.AnswerTriviaUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.user.GetLocalUserUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.user.LoginUserUseCaseImpl
@@ -96,4 +98,9 @@ val useCasesModule = module {
     single<GetPlayListUseCase> {
         GetPlaylistUseCaseImpl(get(), get())
     }
+
+    single<SendTokenFirebaseUseCase> {
+        SendTokenFirebaseUseCaseImpl(get(), get())
+    }
+
 }

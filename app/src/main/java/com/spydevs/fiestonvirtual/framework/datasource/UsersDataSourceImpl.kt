@@ -88,4 +88,8 @@ class UsersDataSourceImpl(
         }
     }
 
+    override suspend fun updateLocalToken(idUser: Int, token: String) {
+        usersDao.updateLocalToken(idUser, token)
+    }
+
 }
