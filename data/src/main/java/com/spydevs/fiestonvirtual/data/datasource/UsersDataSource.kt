@@ -2,6 +2,7 @@ package com.spydevs.fiestonvirtual.data.datasource
 
 import com.spydevs.fiestonvirtual.domain.models.error.ErrorResponse
 import com.spydevs.fiestonvirtual.domain.models.user.GetRemoteUserRequest
+import com.spydevs.fiestonvirtual.domain.models.user.SignOutRequest
 import com.spydevs.fiestonvirtual.domain.models.user.User
 import com.spydevs.fiestonvirtual.domain.resource.ResultType
 
@@ -20,4 +21,16 @@ interface UsersDataSource {
         totalScore: Int
     )
 
+    suspend fun signOut(
+        signOutRequest: SignOutRequest
+    ): ResultType<Boolean, ErrorResponse>
+
+    suspend fun deleteLocalAllUsers()
+
+    suspend fun getLocalUsers(): List<User>
+
+    suspend fun updateLocalToken(
+        idUser: Int,
+        token: String
+    )
 }

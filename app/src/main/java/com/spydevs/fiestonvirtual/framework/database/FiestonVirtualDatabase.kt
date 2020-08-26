@@ -14,7 +14,7 @@ abstract class FiestonVirtualDatabase : RoomDatabase() {
 
     companion object {
 
-        const val DATABASE_VERSION: Int = 1
+        const val DATABASE_VERSION: Int = 2
         const val DATABASE_NAME = "FiestonVirtual"
 
         fun buildDatabase(context: Context) =

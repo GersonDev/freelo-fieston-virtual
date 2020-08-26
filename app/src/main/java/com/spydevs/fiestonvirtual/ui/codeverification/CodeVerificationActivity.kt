@@ -25,7 +25,8 @@ class CodeVerificationActivity : AppCompatActivity() {
         subscribeToError()
         subscribeToLoading()
         setUpCodeButton()
-
+        subscribeToVerifySession()
+        viewModel.verifySession()
     }
 
     private fun subscribeToSuccessCode() {
@@ -34,6 +35,35 @@ class CodeVerificationActivity : AppCompatActivity() {
             Observer {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
+            }
+        )
+    }
+
+    private fun subscribeToVerifySession() {
+        viewModel.verificationSession.observe(
+            this,
+            Observer {
+                when (val result = it as CodeVerificationResult.VerificationSession) {
+                    is CodeVerificationResult.VerificationSession.Success -> {
+                        if (result.inSession) {
+                            startActivity(Intent(this, MainActivity::class.java))
+                            finish()
+                        }
+                    }
+                    is CodeVerificationResult.VerificationSession.Loading -> {
+                        if (result.show) {
+                            dialogProgress.show()
+                        } else {
+                            dialogProgress.dismiss()
+                        }
+                    }
+                    is CodeVerificationResult.VerificationSession.Error -> {
+                        this.setupAlertDialog(
+                            title = result.errorResponse.title,
+                            message = result.errorResponse.message
+                        )
+                    }
+                }
             }
         )
     }

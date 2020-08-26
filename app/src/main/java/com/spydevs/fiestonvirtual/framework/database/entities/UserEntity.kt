@@ -12,5 +12,7 @@ data class UserEntity(
     @ColumnInfo(name = "total_score") var totalScore: Int,
     @ColumnInfo(name = "ranking") var ranking: Int,
     @ColumnInfo(name = "id_event") var idEvent: Int,
-    @ColumnInfo(name = "avatar") var avatar: String
+    @ColumnInfo(name = "avatar") var avatar: String,
+    @ColumnInfo(name = "token") var token: String = ""
+
 )

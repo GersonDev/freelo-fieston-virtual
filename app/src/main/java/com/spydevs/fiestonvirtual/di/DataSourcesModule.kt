@@ -14,5 +14,7 @@ val dataSourcesModule = module {
     single<CommentDataSource> { CommentDataSourceImpl(get()) }
     single<LikeDataSource> { LikeDataSourceImpl(get()) }
     single<ChatMessageDataSource> { ChatMessageDataSourceImpl(get()) }
+    single<PlayListDataSource> { PlayListDataSourceImpl(get()) }
+    single<FcmDataSource> { FcmDataSourceImpl(get()) }
 
 }

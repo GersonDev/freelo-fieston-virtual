@@ -52,6 +52,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     val navController = findNavController()
                     navController.navigate(R.id.action_navigation_home_to_navigation_trivia)
                 }
+                CATEGORY_NAME_PLAY_LIST -> {
+                    val navController = findNavController()
+                    navController.navigate(R.id.action_navigation_home_to_playListActivity)
+                }
             }
         }
     }

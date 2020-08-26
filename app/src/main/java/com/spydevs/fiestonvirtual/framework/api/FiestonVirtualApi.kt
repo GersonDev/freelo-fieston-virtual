@@ -10,8 +10,10 @@ import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryRequest
 import com.spydevs.fiestonvirtual.domain.models.gallery.GetGalleryDetailRequest
 import com.spydevs.fiestonvirtual.domain.models.like.MakeLikeRequest
 import com.spydevs.fiestonvirtual.domain.models.message.MessageRequest
+import com.spydevs.fiestonvirtual.domain.models.notifications.SendTokenRequest
 import com.spydevs.fiestonvirtual.domain.models.trivia.AnswerTriviaRequest
 import com.spydevs.fiestonvirtual.domain.models.user.GetRemoteUserRequest
+import com.spydevs.fiestonvirtual.domain.models.user.SignOutRequest
 import com.spydevs.fiestonvirtual.domain.models.welcome.WelcomeRequest
 import okhttp3.MultipartBody
 import retrofit2.http.*
@@ -139,5 +141,15 @@ interface FiestonVirtualApi {
     suspend fun getMessages(
         @Body messageRequest: MessageRequest
     ): NetworkResponse<MessagesResponseEntity, ErrorResponse>
+
+    @POST("logout.php")
+    suspend fun signOut(
+        @Body signOutRequest: SignOutRequest
+    ): NetworkResponse<SignOutResponseEntity, ErrorResponse>
+
+    @POST("registrar_tokens.php")
+    suspend fun sendToken(
+        @Body sendTokenRequest: SendTokenRequest
+    ): NetworkResponse<SendTokenResponseEntity, ErrorResponse>
 
 }
