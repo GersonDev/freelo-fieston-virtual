@@ -10,6 +10,7 @@ import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryRequest
 import com.spydevs.fiestonvirtual.domain.models.gallery.GetGalleryDetailRequest
 import com.spydevs.fiestonvirtual.domain.models.like.MakeLikeRequest
 import com.spydevs.fiestonvirtual.domain.models.notifications.SendTokenRequest
+import com.spydevs.fiestonvirtual.domain.models.ranking.GetRankingRequest
 import com.spydevs.fiestonvirtual.domain.models.trivia.AnswerTriviaRequest
 import com.spydevs.fiestonvirtual.domain.models.user.GetRemoteUserRequest
 import com.spydevs.fiestonvirtual.domain.models.user.SignOutRequest
@@ -145,5 +146,10 @@ interface FiestonVirtualApi {
     suspend fun sendToken(
         @Body sendTokenRequest: SendTokenRequest
     ): NetworkResponse<SendTokenResponseEntity, ErrorResponse>
+
+    @POST("ranking.php")
+    suspend fun getRanking(
+        @Body sendTokenRequest: GetRankingRequest
+    ): NetworkResponse<GetRankingResponseEntity, ErrorResponse>
 
 }
