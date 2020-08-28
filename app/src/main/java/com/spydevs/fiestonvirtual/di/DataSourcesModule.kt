@@ -15,5 +15,6 @@ val dataSourcesModule = module {
     single<LikeDataSource> { LikeDataSourceImpl(get()) }
     single<PlayListDataSource> { PlayListDataSourceImpl(get()) }
     single<FcmDataSource> { FcmDataSourceImpl(get()) }
+    single<RankingDataSource> { RankingDataSourceImpl(get()) }
 
 }

@@ -23,7 +23,7 @@
         <activity
             android:name=".ui.playlist.PlayListActivity"
             android:label="@string/title_activity_play_list"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -60,6 +60,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.gallerydetail.GalleryDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.ranking.RankingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 

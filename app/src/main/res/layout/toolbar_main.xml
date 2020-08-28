@@ -34,6 +34,14 @@
             android:src="@drawable/ic_logo_fieston_virtual" />
 
         <ImageButton
+            android:id="@+id/ranking_ib"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            app:srcCompat="@drawable/ic_cup_color_white" />
+
+        <ImageButton
             android:id="@+id/signOutImageButton"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="45dp"

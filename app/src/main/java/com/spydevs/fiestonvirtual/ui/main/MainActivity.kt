@@ -28,6 +28,7 @@ import com.spydevs.fiestonvirtual.ui.codeverification.CodeVerificationActivity
 import com.spydevs.fiestonvirtual.ui.main.home.HomeFragment
 import com.spydevs.fiestonvirtual.ui.main.photo.PhotoFragment
 import com.spydevs.fiestonvirtual.ui.main.photo.UploadFileCoroutineWorker
+import com.spydevs.fiestonvirtual.ui.ranking.RankingActivity
 import com.spydevs.fiestonvirtual.ui.main.welcome.WelcomeDialogFragment
 import com.spydevs.fiestonvirtual.util.ImagesUtil
 import com.spydevs.fiestonvirtual.util.NativeGallery
@@ -79,7 +80,14 @@ class MainActivity : AppCompatActivity() {
         subscribeToAnyError()
         subscribeToSignOut()
         sendTokenToServer()
+        setUpRanking()
         mainViewModel.getWelcome()
+    }
+
+    private fun setUpRanking() {
+        ranking_ib.setOnClickListener {
+            startActivity(Intent(this, RankingActivity::class.java))
+        }
     }
 
     private fun setUpViews() {
@@ -387,7 +395,7 @@ class MainActivity : AppCompatActivity() {
     private fun sendTokenToServer() {
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener {
-                it.result?.token?.let {token->
+                it.result?.token?.let { token ->
                     val oneTimeWorkRequest = OneTimeWorkRequest
                         .Builder(SendTokenWorker::class.java)
                         .setInputData(
