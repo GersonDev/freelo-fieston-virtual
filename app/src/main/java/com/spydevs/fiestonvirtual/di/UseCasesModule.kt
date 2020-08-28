@@ -7,6 +7,8 @@ import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.GetGaller
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.GetPostDetailUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.gallery.UploadImageUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.like.MakeLikeUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.message.GetChatMessagesUseCase
+import com.spydevs.fiestonvirtual.domain.usecases.abstractions.message.SendChatMessageUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.playlist.GetPlayListUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.playlist.RequestSongUseCase
 import com.spydevs.fiestonvirtual.domain.usecases.abstractions.notifications.SendTokenFirebaseUseCase
@@ -25,6 +27,8 @@ import com.spydevs.fiestonvirtual.domain.usecases.implementations.gallery.GetGal
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.gallery.GetPostDetailUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.gallery.UploadImageUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.like.MakeLikeUseCaseImpl
+import com.spydevs.fiestonvirtual.domain.usecases.implementations.message.GetChatMessagesUseCaseImpl
+import com.spydevs.fiestonvirtual.domain.usecases.implementations.message.SendChatMessageUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.playlist.GetPlaylistUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.playlist.RequestSongUseCaseImpl
 import com.spydevs.fiestonvirtual.domain.usecases.implementations.notifications.SendTokenFirebaseUseCaseImpl
@@ -83,6 +87,14 @@ val useCasesModule = module {
 
     single<MakeLikeUseCase> {
         MakeLikeUseCaseImpl(get(), get())
+    }
+
+    single<GetChatMessagesUseCase> {
+        GetChatMessagesUseCaseImpl(get(), get())
+    }
+
+    single<SendChatMessageUseCase> {
+        SendChatMessageUseCaseImpl(get())
     }
 
     single<SignOutUseCase> {

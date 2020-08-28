@@ -9,6 +9,7 @@ import com.spydevs.fiestonvirtual.domain.models.trivia.TriviaRequest
 import com.spydevs.fiestonvirtual.domain.models.gallery.GalleryRequest
 import com.spydevs.fiestonvirtual.domain.models.gallery.GetGalleryDetailRequest
 import com.spydevs.fiestonvirtual.domain.models.like.MakeLikeRequest
+import com.spydevs.fiestonvirtual.domain.models.message.MessageRequest
 import com.spydevs.fiestonvirtual.domain.models.notifications.SendTokenRequest
 import com.spydevs.fiestonvirtual.domain.models.ranking.GetRankingRequest
 import com.spydevs.fiestonvirtual.domain.models.trivia.AnswerTriviaRequest
@@ -136,6 +137,11 @@ interface FiestonVirtualApi {
     suspend fun getGalleryDetail(
         @Body getGalleryDetailRequest: GetGalleryDetailRequest
     ): NetworkResponse<GetGalleryDetailResponseEntity, ErrorResponse>
+
+    @POST("mensajes_chat.php")
+    suspend fun getMessages(
+        @Body messageRequest: MessageRequest
+    ): NetworkResponse<MessagesResponseEntity, ErrorResponse>
 
     @POST("logout.php")
     suspend fun signOut(
