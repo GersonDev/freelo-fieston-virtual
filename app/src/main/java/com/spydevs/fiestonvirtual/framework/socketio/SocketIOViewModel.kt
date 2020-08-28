@@ -30,7 +30,7 @@ class SocketIOViewModel(
         socket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectTimeout)
         socket.on(Socket.EVENT_CONNECT, onConnect)
         socket.on(Socket.EVENT_DISCONNECT, onDisconnect)
-        socket.on("message", onUpdateChat)
+        socket.on(MESSAGE_EVENT, onUpdateChat)
         if (!socket.connected()) {
             socket.connect()
         }
@@ -50,7 +50,7 @@ class SocketIOViewModel(
                 val userId = usersRepository.getLocalUser().id
 
                 socket.emit(
-                    "join",
+                    JOIN_EVENT,
                     userId
                 )
                 isUserConnected = true
@@ -79,10 +79,10 @@ class SocketIOViewModel(
         val idUserMessage: Int
         val userImage: String
         try {
-            messageText = data.getString("messageText")
-            userName = data.getString("userName")
-            idUserMessage = data.getInt("idUserMessage")
-            userImage = data.getString("userImage")
+            messageText = data.getString(MESSAGE_KEY)
+            userName = data.getString(USERNAME_KEY)
+            idUserMessage = data.getInt(ID_USER_KEY)
+            userImage = data.getString(USER_IMAGE_KEY)
         } catch (e: JSONException) {
             throw e
         }
@@ -101,7 +101,17 @@ class SocketIOViewModel(
     fun sendMessage(message: String) {
         viewModelScope.launch(Dispatchers.Main) {
             val userId = usersRepository.getLocalUser().id
-            socket.emit("message", userId, message)
+            socket.emit(MESSAGE_EVENT, userId, message)
         }
+    }
+
+    companion object {
+        const val MESSAGE_EVENT = "message"
+        const val JOIN_EVENT = "join"
+
+        const val MESSAGE_KEY = "messageText"
+        const val USERNAME_KEY = "userName"
+        const val ID_USER_KEY = "idUserMessage"
+        const val USER_IMAGE_KEY = "userImage"
     }
 }

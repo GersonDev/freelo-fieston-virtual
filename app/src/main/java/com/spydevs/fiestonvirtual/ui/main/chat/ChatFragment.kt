@@ -78,13 +78,13 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         socketIOViewModel.socketIOResult.observe(this, Observer {
             when(it) {
                 is SocketIOResult.Connection.Success -> {
-                    Toast.makeText(activity, "Connected", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, CONNECTED, Toast.LENGTH_SHORT).show()
                 }
                 is SocketIOResult.Connection.Error -> {
-                    Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, ERROR, Toast.LENGTH_SHORT).show()
                 }
                 is SocketIOResult.Connection.Disconnect -> {
-                    Toast.makeText(activity, "Disconnect", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, DISCONNECT, Toast.LENGTH_SHORT).show()
                 }
                 is SocketIOResult.ReceiveIncomingMessage.Success -> {
                     chatMessagesAdapter.addData(it.chatMessage)
@@ -92,6 +92,12 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
                 }
             }
         })
+    }
+
+    companion object {
+        const val CONNECTED = "Connected"
+        const val ERROR = "Error"
+        const val DISCONNECT = "Disconnect"
     }
 
 }

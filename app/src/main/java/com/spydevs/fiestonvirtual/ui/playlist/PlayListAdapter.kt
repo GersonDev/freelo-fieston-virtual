@@ -51,8 +51,8 @@ class PlayListAdapter(
         notifyDataSetChanged()
     }
 
-    fun updateData(position: Int) {
-        this.songs[position].requested = true
+    fun updateData(position: Int, song: Song) {
+        this.songs[position].requested = song.requested
         notifyDataSetChanged()
     }
 

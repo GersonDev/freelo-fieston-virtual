@@ -67,7 +67,7 @@ class PlayListActivity : AppCompatActivity() {
                     Toast.makeText(this, it.error, Toast.LENGTH_SHORT).show()
                 }
                 is PlaylistResult.RequestSong.Success -> {
-                    this.playListAdapter.updateData(songPosition)
+                    this.playListAdapter.updateData(songPosition, it.song)
                     Toast.makeText(this, "Música solicitada", Toast.LENGTH_SHORT).show()
                 }
                 is PlaylistResult.RequestSong.Loading -> {

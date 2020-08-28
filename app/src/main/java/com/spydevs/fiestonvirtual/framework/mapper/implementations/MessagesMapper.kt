@@ -10,7 +10,7 @@ fun MessagesResponseEntity.toMessages(): List<ChatMessage> {
             messageText = it.messageText,
             userName = it.userMessage,
             userId = it.idUserMessage,
-            userImage = "http://fiestonvirtual.com/app/images/users/5/tn_7fb06461-44ea-4150-ac06-de1c637b8ac2.jpg",
+            userImage = it.userImage,
             viewType = ChatMessageViewType.INCOMING
         )
     }
