@@ -101,7 +101,7 @@ class SocketIOViewModel(
     fun sendMessage(message: String) {
         viewModelScope.launch(Dispatchers.Main) {
             val userId = usersRepository.getLocalUser().id
-            socket.emit(MESSAGE_EVENT, userId, message)
+            socket.emit(MESSAGE_EVENT, message)
         }
     }
 
