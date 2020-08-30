@@ -368,7 +368,7 @@ class MainActivity : AppCompatActivity() {
                     val successOutputData = it.outputData
                     Toast.makeText(
                         this,
-                        successOutputData.getString("KEY_SUCCESS"),
+                        successOutputData.getString(UploadFileCoroutineWorker.SUCCESS_KEY),
                         Toast.LENGTH_SHORT
                     ).show()
                     dialogProgress.dismiss()
@@ -377,7 +377,7 @@ class MainActivity : AppCompatActivity() {
                     val failureOutputData = it.outputData
                     Toast.makeText(
                         this,
-                        failureOutputData.getString("KEY_ERROR"),
+                        failureOutputData.getString(UploadFileCoroutineWorker.ERROR_KEY),
                         Toast.LENGTH_SHORT
                     ).show()
                     dialogProgress.dismiss()

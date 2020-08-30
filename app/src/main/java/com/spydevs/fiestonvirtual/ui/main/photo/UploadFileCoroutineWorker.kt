@@ -66,7 +66,7 @@ class UploadFileCoroutineWorker(context: Context, workerParameters: WorkerParame
             fiestonVirtualApi.uploadFile(fileUploadMultiPart, user.id, user.idEvent, postType, postTitle)) {
             is NetworkResponse.Success -> {
                 val data = workDataOf(
-                    SUCCESS_KEY to "RESPUESTA EXITOSA"
+                    SUCCESS_KEY to uploadImageResponse.body.message
                 )
                 notificationManager.notify(
                     2, createSimpleNotification(
