@@ -3,6 +3,7 @@ package com.spydevs.fiestonvirtual.ui.playlist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.spydevs.fiestonvirtual.R
 import com.spydevs.fiestonvirtual.domain.models.playlist.Song
@@ -15,8 +16,8 @@ class PlayListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val categoryNormalView =
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_play_list, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_play_list, parent, false)
         return SongViewHolder(categoryNormalView)
     }
 
@@ -42,7 +43,9 @@ class PlayListAdapter(
             this.song = song
             itemView.playList_tv_title.text = song.title
             itemView.playList_tv_author.text = song.band
-            itemView.playList_btn_requested.isEnabled = !song.requested
+            if (song.requested) itemView.playList_btn_requested.backgroundTintList =
+                ContextCompat.getColorStateList(itemView.context, R.color.grey_500)
+            else ContextCompat.getColorStateList(itemView.context, R.color.amber_500)
         }
     }
 

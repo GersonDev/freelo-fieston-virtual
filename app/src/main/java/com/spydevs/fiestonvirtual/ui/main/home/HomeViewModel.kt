@@ -20,7 +20,7 @@ class HomeViewModel(
             Category(
                 HomeFragment.CATEGORY_NAME_PHOTO,
                 R.drawable.ic_home_fotos,
-                "GALERIA DE FOTOS Y",
+                "GALERÍA DE FOTOS Y",
                 "VIDEOS"
             ),
             Category(
@@ -33,12 +33,12 @@ class HomeViewModel(
                 HomeFragment.CATEGORY_NAME_PLAY_LIST,
                 R.drawable.ic_home_playlist,
                 "Participa de la fiesta",
-                "PIDE UNA CANCION"
+                "PIDE UNA CANCIÓN"
             ),
             Category(
                 HomeFragment.CATEGORY_NAME_TRIVIA,
                 R.drawable.ic_home_trivia,
-                "GANA PUNTOS CON LAS TRIVIAS AHORA",
+                "GANA PUNTOS",
                 "JUGAR AHORA"
             )
         )

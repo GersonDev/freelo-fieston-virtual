@@ -53,7 +53,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="VIDEOS"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/primary"  />
 
