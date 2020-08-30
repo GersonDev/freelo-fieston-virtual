@@ -15,7 +15,10 @@ class RankingItemViewHolder(
         itemView.apply {
             userLogo_iv.loadUrl(ranking.userLogo)
             name_tv.text = ranking.userName
-            score_tv.text = ranking.totalScore.toString().plus("pts")
+            score_tv.text = resources.getString(
+                R.string.ranking_item_total_score,
+                ranking.totalScore.toString()
+            )
             position_tv.text = ranking.position.toString()
 
             if (ranking.position == 1) {

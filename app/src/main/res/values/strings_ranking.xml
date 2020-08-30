@@ -1,6 +1,7 @@
 <resources>
 
     <string name="ranking_title">Ranking</string>
-    <string name="ranking_total_score">Tienes %s pts. </string>
+    <string name="ranking_total_score">Tienes %s pts.</string>
+    <string name="ranking_item_total_score">%s pts</string>
 
 </resources>
