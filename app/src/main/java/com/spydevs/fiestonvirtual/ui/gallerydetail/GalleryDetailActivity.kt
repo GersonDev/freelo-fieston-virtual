@@ -98,6 +98,7 @@ class GalleryDetailActivity : AppCompatActivity() {
                 is GalleryDetailResult.AddComment.Success -> {
                     this.commentAdapter.addData(it.comment)
                     this.galleryDetail_et_comment.text?.clear()
+                    galleryDetail_rv.scrollToPosition(commentAdapter.itemCount - 1)
                 }
                 is GalleryDetailResult.AddComment.Loading -> {
                     this.addCommentLoadingDialog.show(it.loading)
